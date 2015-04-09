@@ -1,0 +1,81 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class Fireball : MonoBehaviour
+{
+	[HideInInspector]
+	public GameObject target;
+	[HideInInspector]
+	public SpellFireball.Loadout loadout;
+	
+	
+	void Start()
+	{
+		rigidbody.velocity = transform.forward * loadout.speed;
+		Destroy (gameObject, loadout.lifetime);
+	}
+	
+	
+	void FixedUpdate()
+	{
+		Vector3 accel = Vector3.zero;
+		
+		if(target)
+		{
+			// seek to target
+			accel = target.transform.position - transform.position;
+			accel.Normalize();
+			accel *= loadout.acceleration * Time.fixedDeltaTime;
+		}
+		
+		rigidbody.velocity += accel;
+		rigidbody.velocity = Vector3.ClampMagnitude(rigidbody.velocity, loadout.speed);
+	}
+	
+	
+	void OnTriggerEnter(Collider other)
+	{
+		if(!other.CompareTag("Player"))
+		{
+			if(other.CompareTag("Enemy"))
+			{
+				Enemy enemy = other.GetComponent<Enemy>();
+				if(enemy)
+				{
+					enemy.ApplyKnockback(other.transform.position - transform.position);
+					enemy.TakeDamage(loadout.type, loadout.damage);
+				}
+			}
+			
+			if(loadout.isExplosive)
+			{
+				Explode();
+			}
+			
+			Debug.Log("[Fireball] Hit gameObject " + other.name);
+			Destroy(gameObject);
+		}
+	}
+	
+	
+	private void Explode()
+	{
+		Debug.Log("[Fireball] Exploded!!!");
+		Collider[] cols = Physics.OverlapSphere (transform.position, loadout.explodeRadius, LayerMask.NameToLayer("Enemy"));
+		foreach(Collider col in cols)
+		{
+			if(col.CompareTag("Enemy"))
+			{
+				Enemy enemy = col.GetComponent<Enemy>();
+				if(enemy)
+				{
+					//Debug.Log("[Fireball] Explosion hit an enemy");
+					enemy.TakeDamage(loadout.type, loadout.explodeDamage);
+				}
+			}
+		}
+	}
+	
+	
+	
+}

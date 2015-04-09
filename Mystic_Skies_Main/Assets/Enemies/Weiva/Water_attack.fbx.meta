@@ -1,0 +1,409 @@
+fileFormatVersion: 2
+guid: 755d9278ef1b4aa44babbe0a123a658a
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: joint10
+    100002: joint11
+    100004: joint12
+    100006: joint13
+    100008: joint15
+    100010: joint16
+    100012: joint17
+    100014: joint18
+    100016: joint19
+    100018: joint2
+    100020: joint3
+    100022: joint4
+    100024: joint5
+    100026: joint6
+    100028: joint7
+    100030: joint9
+    100032: LArm
+    100034: left
+    100036: pCube10
+    100038: pCube11
+    100040: pCube12
+    100042: pCube13
+    100044: pCube14
+    100046: pCube15
+    100048: pCube16
+    100050: pCube17
+    100052: pCube18
+    100054: pCube19
+    100056: pCube20
+    100058: pCube21
+    100060: pCube22
+    100062: pCube23
+    100064: pCube24
+    100066: pCube25
+    100068: pCube26
+    100070: pCube27
+    100072: pCube28
+    100074: pCube29
+    100076: pCube30
+    100078: pCube31
+    100080: pCube32
+    100082: pCube6
+    100084: pCube7
+    100086: pCube8
+    100088: pCube9
+    100090: RArm
+    100092: Root
+    100094: transform1
+    100096: transform10
+    100098: transform11
+    100100: transform12
+    100102: transform13
+    100104: transform14
+    100106: transform15
+    100108: transform16
+    100110: transform17
+    100112: transform18
+    100114: transform19
+    100116: transform2
+    100118: transform20
+    100120: transform21
+    100122: transform22
+    100124: transform23
+    100126: transform24
+    100128: transform25
+    100130: transform26
+    100132: transform27
+    100134: transform28
+    100136: transform29
+    100138: transform3
+    100140: transform4
+    100142: transform5
+    100144: transform6
+    100146: transform7
+    100148: transform8
+    100150: transform9
+    100152: Water
+    100154: Water1
+    100156: Water2
+    100158: //RootNode
+    400000: joint10
+    400002: joint11
+    400004: joint12
+    400006: joint13
+    400008: joint15
+    400010: joint16
+    400012: joint17
+    400014: joint18
+    400016: joint19
+    400018: joint2
+    400020: joint3
+    400022: joint4
+    400024: joint5
+    400026: joint6
+    400028: joint7
+    400030: joint9
+    400032: LArm
+    400034: left
+    400036: pCube10
+    400038: pCube11
+    400040: pCube12
+    400042: pCube13
+    400044: pCube14
+    400046: pCube15
+    400048: pCube16
+    400050: pCube17
+    400052: pCube18
+    400054: pCube19
+    400056: pCube20
+    400058: pCube21
+    400060: pCube22
+    400062: pCube23
+    400064: pCube24
+    400066: pCube25
+    400068: pCube26
+    400070: pCube27
+    400072: pCube28
+    400074: pCube29
+    400076: pCube30
+    400078: pCube31
+    400080: pCube32
+    400082: pCube6
+    400084: pCube7
+    400086: pCube8
+    400088: pCube9
+    400090: RArm
+    400092: Root
+    400094: transform1
+    400096: transform10
+    400098: transform11
+    400100: transform12
+    400102: transform13
+    400104: transform14
+    400106: transform15
+    400108: transform16
+    400110: transform17
+    400112: transform18
+    400114: transform19
+    400116: transform2
+    400118: transform20
+    400120: transform21
+    400122: transform22
+    400124: transform23
+    400126: transform24
+    400128: transform25
+    400130: transform26
+    400132: transform27
+    400134: transform28
+    400136: transform29
+    400138: transform3
+    400140: transform4
+    400142: transform5
+    400144: transform6
+    400146: transform7
+    400148: transform8
+    400150: transform9
+    400152: Water
+    400154: Water1
+    400156: Water2
+    400158: //RootNode
+    4300000: pCube32
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: pCube32
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 110
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: left
+        weight: 1
+      - path: pCube6
+        weight: 1
+      - path: pCube6/transform25
+        weight: 1
+      - path: pCube7
+        weight: 1
+      - path: pCube7/transform23
+        weight: 1
+      - path: pCube8
+        weight: 1
+      - path: pCube8/transform24
+        weight: 1
+      - path: pCube9
+        weight: 1
+      - path: pCube9/transform14
+        weight: 1
+      - path: pCube10
+        weight: 1
+      - path: pCube10/transform15
+        weight: 1
+      - path: pCube11
+        weight: 1
+      - path: pCube11/transform5
+        weight: 1
+      - path: pCube12
+        weight: 1
+      - path: pCube12/transform16
+        weight: 1
+      - path: pCube13
+        weight: 1
+      - path: pCube13/transform7
+        weight: 1
+      - path: pCube14
+        weight: 1
+      - path: pCube14/transform28
+        weight: 1
+      - path: pCube15
+        weight: 1
+      - path: pCube15/transform6
+        weight: 1
+      - path: pCube16
+        weight: 1
+      - path: pCube16/transform26
+        weight: 1
+      - path: pCube17
+        weight: 1
+      - path: pCube17/transform22
+        weight: 1
+      - path: pCube18
+        weight: 1
+      - path: pCube18/transform4
+        weight: 1
+      - path: pCube19
+        weight: 1
+      - path: pCube19/transform8
+        weight: 1
+      - path: pCube20
+        weight: 1
+      - path: pCube20/transform18
+        weight: 1
+      - path: pCube21
+        weight: 1
+      - path: pCube21/transform27
+        weight: 1
+      - path: pCube22
+        weight: 1
+      - path: pCube22/transform17
+        weight: 1
+      - path: pCube23
+        weight: 1
+      - path: pCube23/transform13
+        weight: 1
+      - path: pCube24
+        weight: 1
+      - path: pCube24/transform12
+        weight: 1
+      - path: pCube25
+        weight: 1
+      - path: pCube25/transform9
+        weight: 1
+      - path: pCube26
+        weight: 1
+      - path: pCube26/transform11
+        weight: 1
+      - path: pCube27
+        weight: 1
+      - path: pCube27/transform10
+        weight: 1
+      - path: pCube28
+        weight: 1
+      - path: pCube28/transform19
+        weight: 1
+      - path: pCube29
+        weight: 1
+      - path: pCube29/transform21
+        weight: 1
+      - path: pCube30
+        weight: 1
+      - path: pCube30/transform20
+        weight: 1
+      - path: pCube31
+        weight: 1
+      - path: pCube31/transform29
+        weight: 1
+      - path: pCube32
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/joint2
+        weight: 1
+      - path: Root/joint2/joint3
+        weight: 1
+      - path: Root/joint2/joint3/joint4
+        weight: 1
+      - path: Root/joint2/joint3/joint4/joint5
+        weight: 1
+      - path: Root/joint2/joint3/joint4/joint5/joint6
+        weight: 1
+      - path: Root/joint2/joint3/joint4/joint5/joint6/joint7
+        weight: 1
+      - path: Root/joint2/joint3/joint4/LArm
+        weight: 1
+      - path: Root/joint2/joint3/joint4/LArm/joint15
+        weight: 1
+      - path: Root/joint2/joint3/joint4/LArm/joint15/joint16
+        weight: 1
+      - path: Root/joint2/joint3/joint4/LArm/joint15/joint16/joint17
+        weight: 1
+      - path: Root/joint2/joint3/joint4/LArm/joint15/joint16/joint17/joint18
+        weight: 1
+      - path: Root/joint2/joint3/joint4/LArm/joint15/joint16/joint17/joint18/joint19
+        weight: 1
+      - path: Root/joint2/joint3/joint4/RArm
+        weight: 1
+      - path: Root/joint2/joint3/joint4/RArm/joint9
+        weight: 1
+      - path: Root/joint2/joint3/joint4/RArm/joint9/joint10
+        weight: 1
+      - path: Root/joint2/joint3/joint4/RArm/joint9/joint10/joint11
+        weight: 1
+      - path: Root/joint2/joint3/joint4/RArm/joint9/joint10/joint11/joint12
+        weight: 1
+      - path: Root/joint2/joint3/joint4/RArm/joint9/joint10/joint11/joint12/joint13
+        weight: 1
+      - path: Water
+        weight: 1
+      - path: Water/transform2
+        weight: 1
+      - path: Water1
+        weight: 1
+      - path: Water1/transform1
+        weight: 1
+      - path: Water2
+        weight: 1
+      - path: Water2/transform3
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
