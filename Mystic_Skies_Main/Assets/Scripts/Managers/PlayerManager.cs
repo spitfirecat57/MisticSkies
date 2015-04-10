@@ -82,6 +82,9 @@ public class PlayerManager : MonoBehaviour
 				DontDestroyOnLoad(cameraObject);
 				cameraScript = cameraObject.GetComponent<Camera>();
 				cameraControllerScript = cameraObject.GetComponent<CameraController>();
+
+				playerObject.SetActive(true);
+				cameraObject.SetActive(true);
 			}
 			else
 			{

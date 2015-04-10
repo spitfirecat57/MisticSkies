@@ -5,7 +5,19 @@ using System.Collections.Generic;
 public class InteractableSaysHello : Interactable
 {
 	//public List<ModalWindowData> windowData;
-	private GameObject speechBubble = null;
+	//private GameObject speechBubble = null;
+	private string[] thingsToSay;
+	private const int numThingsToSay = 4;
+	private int indexOfWhatToSay = 0;
+
+	void Start()
+	{
+		thingsToSay = new string[numThingsToSay];
+		thingsToSay [0] = "First thing";
+		thingsToSay [1] = "Second thing";
+		thingsToSay [2] = "One More Thing";
+		thingsToSay [3] = "Last Thing";
+	}
 
 
 	public override void OnEnter()
@@ -16,31 +28,26 @@ public class InteractableSaysHello : Interactable
 	{
 		if(!isInteracted)
 		{
-			if(speechBubble == null)
-			{
-				print ("[RequestsASpeechBubble] Requesting speech bubble");
-				speechBubble = UIManager.CreateSpeechBubble("Hello World", gameObject, Vector3.up * 2.0f, true);
-			}
-			else
-			{
-				SpeechBubbleController speechBubbleController = speechBubble.GetComponent<SpeechBubbleController>();
-				speechBubbleController.SetText("Hello again");
-			}
+			InputManager.SetAcceptingInput(false);
 			isInteracted = true;
+		}
+
+		UIManager.NewDialogueBox(thingsToSay[indexOfWhatToSay]);
+		indexOfWhatToSay = (indexOfWhatToSay + 1) % numThingsToSay;
+
+		if(indexOfWhatToSay == 0)
+		{
+			InputManager.SetAcceptingInput(true);
+			UIManager.CloseDialogueBox ();
+			isInteracted = false;
 		}
 	}
 
 	public override void OnExit()
 	{
-		if(speechBubble)
-		{
-			Destroy(speechBubble);
-			speechBubble = null;
-		}
 		isInteracted = false;
 	}
-
-
+	
 
 
 

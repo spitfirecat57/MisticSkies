@@ -40,7 +40,7 @@ public class Interaction : MonoBehaviour
 	
 	void Update()
 	{
-		if(Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.Interact)))
+		if(Input.GetKeyDown(InputManager.GetUIKeyCode(InputKeys.Interact)))
 		{
 			foreach(Interactable i in interactablesList)
 			{

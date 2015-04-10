@@ -27,6 +27,15 @@ public class GameManager : Singleton<GameManager>
 			Debug.Log("[GameManager] Taking screenshot");
 			TakeScreenshot();
 		}
+
+		if(Input.GetKeyDown(KeyCode.Return))
+		{
+			UIManager.NewDialogueBox("Dialogue Test");
+		}
+		else if(Input.GetKeyDown(KeyCode.Backspace))
+		{
+			UIManager.CloseDialogueBox();
+		}
 	}
 	
 	public static void TakeScreenshot()

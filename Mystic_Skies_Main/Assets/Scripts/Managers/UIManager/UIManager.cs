@@ -26,7 +26,7 @@ public class UIManager : Singleton<UIManager>
 	public GameObject pauseCanvas;
 	public GameObject dialogueBox;
 	private static GameObject dialogueBoxObject;
-	private static SpeechBubbleController dialogueBoxController;
+	private static DialogueBoxController dialogueBoxController;
 	
 	private static GameObject[] canvases;
 	private static CanvasController[] canvasControllers;
@@ -50,7 +50,7 @@ public class UIManager : Singleton<UIManager>
 
 		speechBubbleObject = speechBubblePrefab;
 		dialogueBoxObject = dialogueBox;
-		dialogueBoxController = dialogueBox.GetComponent<SpeechBubbleController>();
+		dialogueBoxController = dialogueBox.GetComponent<DialogueBoxController>();
 		
 		UIImageObject = UIImagePrefab;
 
@@ -90,8 +90,11 @@ public class UIManager : Singleton<UIManager>
 
 	public static void NewDialogueBox(string text)
 	{
+		if(dialogueBoxObject.activeInHierarchy == false)
+		{
+			dialogueBoxObject.SetActive(true);
+		}
 		dialogueBoxController.SetText (text);
-		dialogueBoxController.Activate();
 	}
 
 	public static void CloseDialogueBox ()

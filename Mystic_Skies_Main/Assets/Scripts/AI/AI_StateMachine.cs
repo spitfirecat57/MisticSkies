@@ -2,22 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 
-[System.Serializable]
-public class NavAgentLoadout
+//[System.Serializable]
+//public class NavAgentLoadout
+//{
+//
+//}
+
+public class AI_StateMachine : MonoBehaviour
 {
+	//The important variables for States->
+	public float alertDistance = 10.0f;
+	public float pursueDistance = 15.0f;
+	//public NavAgentLoadout navAgentLoadout;
+	// NavMeshAgent variables
 	public float acceleration;
 	public float speed;
 	public float turnSpeed;
 	public float stoppingDistance;
-}
-
-public class AI_StateMachine : MonoBehaviour
-{
-	// <~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ !IMPORTANT! Properly encapsulate code (get/set), ALL PUBLIC ATM!!
-	//The important variables for States->
-	public float alertDistance = 10.0f;
-	public float pursueDistance = 15.0f;
-	public NavAgentLoadout navAgentLoadout;
 	
 	private Vector3 spawnPosition;
 	private GameObject target;
@@ -56,10 +57,10 @@ public class AI_StateMachine : MonoBehaviour
 		
 		// get NavMeshAgent component reference
 		navAgent = GetComponent<NavMeshAgent>();
-		navAgent.acceleration 		= navAgentLoadout.acceleration;
-		navAgent.speed 				= navAgentLoadout.speed;
-		navAgent.angularSpeed 		= navAgentLoadout.turnSpeed;
-		navAgent.stoppingDistance 	= navAgentLoadout.stoppingDistance;
+		navAgent.acceleration 		= acceleration;
+		navAgent.speed 				= speed;
+		navAgent.angularSpeed 		= turnSpeed;
+		navAgent.stoppingDistance 	= stoppingDistance;
 		
 		// default target is player
 		target = PlayerManager.GetPlayerObject();
