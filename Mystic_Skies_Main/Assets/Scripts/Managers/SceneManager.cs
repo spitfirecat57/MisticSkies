@@ -6,6 +6,8 @@ public enum Scenes
 {
 	Frontend,
 	Level1,
+	test_1,
+	test_2,
 	COUNT
 }
 

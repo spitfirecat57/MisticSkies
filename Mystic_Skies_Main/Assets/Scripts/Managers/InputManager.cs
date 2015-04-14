@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InputManager : Singleton<InputManager>
+public class InputManager : MonoBehaviour
 {
 	public InputLayout defaultLayout;
 	public InputLayout defaultLayoutAlt;
@@ -69,6 +69,11 @@ public class InputManager : Singleton<InputManager>
 	public static void SetAcceptingInput(bool accept)
 	{
 		acceptingInput = accept;
+	}
+	public void SetAcceptingInputBool(bool accept)
+	{
+		acceptingInput = accept;
+		Debug.Log ("[InputManager] acceptingInput = " + acceptingInput);
 	}
 	public static bool IsAcceptingInput()
 	{

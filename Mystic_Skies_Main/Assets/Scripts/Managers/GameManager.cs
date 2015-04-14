@@ -2,8 +2,22 @@
 using UnityEditor;
 using System.Collections;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : MonoBehaviour
 {
+	private static GameManager instance = null;
+	void Awake()
+	{
+		if(instance == null)
+		{
+			instance = this;
+			DontDestroyOnLoad(gameObject);
+		}
+		else if(instance != this)
+		{
+			Destroy(gameObject);
+		}
+	}
+
 	private static int currentFileIndex = 0;
 	private static string screenshotsFolderPath = Application.dataPath + "/Screenshots";
 	private static int screenshotIndex = 1;
@@ -96,11 +110,20 @@ public class GameManager : Singleton<GameManager>
 		Time.timeScale = 0.0f;
 		InputManager.SetAcceptingInput(false);
 	}
+	public void PauseGame()
+	{
+		Time.timeScale = 0.0f;
+		InputManager.SetAcceptingInput(false);
+	}
 	public static void UnPauseGameplay()
 	{
 		Time.timeScale = 1.0f;
 		InputManager.SetAcceptingInput(true);
 	}
-	
+	public void UnPauseGame()
+	{
+		Time.timeScale = 1.0f;
+		InputManager.SetAcceptingInput(true);
+	}
 	
 }

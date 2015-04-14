@@ -94,6 +94,17 @@ public class UIManager : Singleton<UIManager>
 		{
 			dialogueBoxObject.SetActive(true);
 		}
+		dialogueBoxController.SetName ("Kessho");
+		dialogueBoxController.SetText (text);
+	}
+
+	public static void NewDialogueBox(string name, string text)
+	{
+		if(dialogueBoxObject.activeInHierarchy == false)
+		{
+			dialogueBoxObject.SetActive(true);		
+		}
+		dialogueBoxController.SetName (name);
 		dialogueBoxController.SetText (text);
 	}
 

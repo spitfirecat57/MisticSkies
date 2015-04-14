@@ -6,28 +6,7 @@ public class DialogueBoxController : CanvasController
 {
 	private Image background = null;
 	public Text textbox;
-
-	public Sprite backgroundDefault;
-	public string textDefault;
-
-	void Start()
-	{
-		background = gameObject.GetComponentInChildren<Image>();
-		//textbox = gameObject.GetComponentInChildren<Text>();
-		if(textbox == null)
-		{
-			Debug.Log("[DialogueBoxController] could not find Text object in children");
-		}
-
-		if(backgroundDefault != null)
-		{
-			background.sprite = backgroundDefault;
-		}
-		if(textDefault.Length > 0)
-		{
-			textbox.text = textDefault;
-		}
-	}
+	public Text namebox;
 
 	public void SetBackground(Sprite sprite)
 	{
@@ -36,13 +15,11 @@ public class DialogueBoxController : CanvasController
 
 	public void SetText(string txt)
 	{
-		if(textbox)
-		{
-			textbox.text = txt;
-		}
-		else
-		{
-			Debug.Log("[DialogueBoxController] textbox is null");
-		}
+		textbox.text = txt;
+	}
+
+	public void SetName(string name)
+	{
+		namebox.text = name;
 	}
 }
