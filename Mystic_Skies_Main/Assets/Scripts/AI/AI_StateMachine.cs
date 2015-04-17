@@ -18,7 +18,7 @@ public class AI_StateMachine : MonoBehaviour
 	public float acceleration;
 	public float speed;
 	public float turnSpeed;
-	public float stoppingDistance;
+	public float attackDistance;
 	
 	private Vector3 spawnPosition;
 	private GameObject target;
@@ -60,7 +60,7 @@ public class AI_StateMachine : MonoBehaviour
 		navAgent.acceleration 		= acceleration;
 		navAgent.speed 				= speed;
 		navAgent.angularSpeed 		= turnSpeed;
-		navAgent.stoppingDistance 	= stoppingDistance;
+		//navAgent.stoppingDistance 	= attackDistance;
 		
 		// default target is player
 		target = PlayerManager.GetPlayerObject();

@@ -19,11 +19,11 @@ public class LOSTranslucency : MonoBehaviour
 		//StartCoroutine("FadeIn");
 	}
 
-	void OnEnable()
-	{
-		StartCoroutine("CastRay");
-		StartCoroutine("FadeOut");
-	}
+//	void OnEnable()
+//	{
+//		StartCoroutine("CastRay");
+//		StartCoroutine("FadeOut");
+//	}
 
 	IEnumerator CastRay()
 	{
@@ -31,12 +31,12 @@ public class LOSTranslucency : MonoBehaviour
 		{
 			Vector3 toPlayer = playerTransform.position - transform.position;
 			Ray ray = new Ray(transform.position, toPlayer.normalized);
-			RaycastHit[] hitInfos = Physics.RaycastAll(ray, toPlayer.magnitude);
+			RaycastHit[] hitInfos = Physics.RaycastAll(ray, toPlayer.magnitude - 1.0f);
 			MeshRenderer mrenderer = null;
 
 			foreach(RaycastHit hit in hitInfos)
 			{
-				if(!hit.collider.CompareTag("Player") && !hit.collider.CompareTag("Enemy"))
+				if(!hit.collider.CompareTag("Player") && !hit.collider.CompareTag("Enemy") && !hit.collider.CompareTag("InteractionBox"))
 				{
 					mrenderer = hit.collider.GetComponent<MeshRenderer>();
 

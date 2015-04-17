@@ -24,7 +24,7 @@ public class SpellMeteor : Spell
 		}
 	}
 
-	override public void Cast()
+	public override void Cast()
 	{
 		Vector3 playerPos = PlayerManager.GetPlayerPosition();
 		Vector3 launchPos = playerPos + (Vector3.up * loadout.launchOffsetHeight);

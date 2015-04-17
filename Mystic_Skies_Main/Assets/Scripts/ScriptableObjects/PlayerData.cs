@@ -8,10 +8,10 @@ using System.Collections.Generic;
 [System.Serializable]
 public class PlayerData : ScriptableObject
 {
-	public int health;
-	public int maxHealth;
-	public int mana;
-	public int maxMana;
+	public float health;
+	public float maxHealth;
+	public float mana;
+	public float maxMana;
 	
 	public List<int> potions;
 	public List<int> inventory;

@@ -10,7 +10,7 @@ public class AI_Seeker_Idle : AI_State
 
 		//------MARCO WAS HERE------
 		
-		Animator anim = GetComponent<Animator>();
+		//Animator anim = GetComponent<Animator>();
 
 		//anim.SetTrigger("idle");
 		//animmm.CrossFade ("Idle", 0f);

@@ -35,7 +35,7 @@ public class Fireball : MonoBehaviour
 	
 	void OnTriggerEnter(Collider other)
 	{
-		if(!other.CompareTag("Player"))
+		if(!other.CompareTag("Player") && !other.CompareTag("InteractionBox"))
 		{
 			if(other.CompareTag("Enemy"))
 			{

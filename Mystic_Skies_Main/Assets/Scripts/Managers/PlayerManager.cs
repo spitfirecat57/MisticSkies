@@ -182,19 +182,19 @@ public class PlayerManager : MonoBehaviour
 	{
 		return playerScript;
 	}
-	public static int GetPlayerHealth()
+	public static float GetPlayerHealth()
 	{
 		return playerScript.health;
 	}
-	public static int GetPlayerMaxHealth()
+	public static float GetPlayerMaxHealth()
 	{
 		return playerScript.maxHealth;
 	}
-	public static int GetPlayerMana()
+	public static float GetPlayerMana()
 	{
 		return playerScript.mana;
 	}
-	public static int  GetPlayerMaxMana()
+	public static float  GetPlayerMaxMana()
 	{
 		return playerScript.maxMana;
 	}
@@ -238,7 +238,7 @@ public class PlayerManager : MonoBehaviour
 	
 	
 	// Save File Stuff
-	public static int GetSaveFileHealth(int fileIndex)
+	public static float GetSaveFileHealth(int fileIndex)
 	{
 		return instance.playerData[fileIndex].health;
 	}

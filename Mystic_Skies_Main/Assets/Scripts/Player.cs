@@ -19,10 +19,10 @@ public class NameValue
 [RequireComponent(typeof(PlayerController))]
 public class Player : MonoBehaviour
 {
-	public int health;
-	public int maxHealth;
-	public int mana;
-	public int maxMana;
+	public float health;
+	public float maxHealth;
+	public float mana;
+	public float maxMana;
 	public float speedEpsilon;
 	public float friction;
 	public List<NameValue> potions;
@@ -92,11 +92,11 @@ public class Player : MonoBehaviour
 		}
 	}
 	
-	public void TakeDamage(int damage)
+	public void TakeDamage(float damage)
 	{
 		health -= damage;
 		
-		if(health < 1)
+		if(health <= 0.0f)
 		{
 			// play animation?
 			

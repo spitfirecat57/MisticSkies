@@ -47,12 +47,15 @@ public class DialogueDriver : Interactable
 			InputManager.SetAcceptingInput(true);
 			UIManager.CloseDialogueBox ();
 			isInteracted = false;
+			dialogueIndex = 0;
 		}
 
 	}
 
 	public override void OnExit()
 	{
+		isInteracted = false;
+		dialogueIndex = 0;
 	}
 
 
