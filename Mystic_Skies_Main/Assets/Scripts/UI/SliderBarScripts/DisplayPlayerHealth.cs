@@ -15,7 +15,6 @@ public class DisplayPlayerHealth : MonoBehaviour
 
 	void Update()
 	{
-		slider.maxValue = PlayerManager.GetPlayerMaxHealth();
-		slider.value = PlayerManager.GetPlayerHealth ();
+		slider.value = PlayerManager.GetPlayerHealth () / PlayerManager.GetPlayerMaxHealth();
 	}
 }

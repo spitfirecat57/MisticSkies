@@ -15,7 +15,6 @@ public class DisplayPlayerMana : MonoBehaviour
 	
 	void Update()
 	{
-		slider.maxValue = PlayerManager.GetPlayerMaxMana();
-		slider.value = PlayerManager.GetPlayerMana();
+		slider.value = PlayerManager.GetPlayerMana() / PlayerManager.GetPlayerMaxMana();
 	}
 }
