@@ -3,6 +3,11 @@ using System.Collections;
 
 public class SpellController : MonoBehaviour
 {
+	private float attackTimer = 0.0f;
+	public  float LQkDelayTime = 0.5f;
+	public  float HQDelayTime = 1.0f;
+	public int HQAttackManaCost = -50;
+
 	public Transform spellSpawnTransform;
 	
 	public Spell spellFire1;
@@ -43,51 +48,72 @@ public class SpellController : MonoBehaviour
 	
 	void Update()
 	{
+		attackTimer -= Time.deltaTime;
+
+
 		// switch between low and high magic
 		if(Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.MagicMode)))
 		{
 			HQMagic = !HQMagic;
 		}
-		
-		
-		// left click == fire spells
-		if(Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.FireSpell)))
+
+		if(PlayerManager.GetPlayerMana() < 50)
 		{
-			if(HQMagic)
+			HQMagic = false;
+		}
+
+
+
+		if(attackTimer < 0.0f)
+		{			
+			// left click == fire spells
+			if(Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.FireSpell)))
 			{
-				mSpells[(int)Spells.Fire2].Cast ();
+				if(HQMagic)
+				{
+					mSpells[(int)Spells.Fire2].Cast ();
+					PlayerManager.GetPlayerScript().IncreaseMana(HQAttackManaCost);
+					attackTimer = HQDelayTime;
+				}
+				else
+				{
+					mSpells[(int)Spells.Fire1].Cast ();
+					attackTimer = LQkDelayTime;
+				}
 			}
-			else
+			
+			// right click == water spells
+			if(Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.WaterSpell)))
 			{
-				mSpells[(int)Spells.Fire1].Cast ();
+				if(HQMagic)
+				{
+					mSpells[(int)Spells.Water2].Cast ();
+					PlayerManager.GetPlayerScript().IncreaseMana(HQAttackManaCost);
+					attackTimer = HQDelayTime;
+				}
+				else
+				{
+					mSpells[(int)Spells.Water1].Cast ();
+					attackTimer = LQkDelayTime;
+				}
+			}
+			
+			// middle click == rock spells
+			if(Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.RockSpell)))
+			{
+				if(HQMagic)
+				{
+					mSpells[(int)Spells.Rock2].Cast ();
+					PlayerManager.GetPlayerScript().IncreaseMana(HQAttackManaCost);
+					attackTimer = HQDelayTime;
+				}
+				else
+				{
+					mSpells[(int)Spells.Rock1].Cast ();
+					attackTimer = LQkDelayTime;
+				}
 			}
 		}
-		
-		// right click == water spells
-		if(Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.WaterSpell)))
-		{
-			if(HQMagic)
-			{
-				mSpells[(int)Spells.Water2].Cast ();
-			}
-			else
-			{
-				mSpells[(int)Spells.Water1].Cast ();
-			}
-		}
-		
-		// middle click == rock spells
-		if(Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.RockSpell)))
-		{
-			if(HQMagic)
-			{
-				mSpells[(int)Spells.Rock2].Cast ();
-			}
-			else
-			{
-				mSpells[(int)Spells.Rock1].Cast ();
-			}
-		}		
 	}
 }
 
