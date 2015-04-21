@@ -14,14 +14,10 @@ public class StateGameplay : GameState
 	
 	public override void OnUpdate()
 	{
-		if(Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.Exit)))
+		if(Input.GetKeyDown(InputManager.GetUIKeyCode(InputKeys.Exit)))
 		{
-			//Time.timeScale = 0.0f;
-			
-			GameManager.PauseGameplay();
+			GameManager.PauseUnpauseGameplayStatic();
 			UIManager.Activate(UICanvasTypes.Pause);
-			
-			//currentInputFunc = PauseInput;
 		}
 		else if(Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.Inventory)))
 		{
@@ -31,10 +27,6 @@ public class StateGameplay : GameState
 	
 	public override void OnExit()
 	{
-		//		if(UIManager.IsAnyPanelActive())
-		//		{
-		//			UIManager.CloseActivePanel();
-		//		}
 		UIManager.DeActivate (UICanvasTypes.HUD);
 	}
 	

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SoundManager : Singleton<SoundManager>
+public class SoundManager : MonoBehaviour
 {
 	public enum SoundType
 	{
@@ -11,28 +11,40 @@ public class SoundManager : Singleton<SoundManager>
 		Speech,
 		COUNT
 	}
+	protected static SoundManager instance = null;	
 	
 	private static List<SoundSource>[] soundSources;
 	private static float[] volumes;
 	private static float masterVolume;
-
-	private bool awakeHasBeenCalled = false;
-
+	
 	void Awake()
 	{
-		if(!awakeHasBeenCalled)
+		if(instance == null)
 		{
-			soundSources = new List<SoundSource>[(int)SoundType.COUNT];
-			volumes = new float[(int)SoundType.COUNT];
-			for(int i = 0; i < (int)SoundType.COUNT; ++i)
-			{
-				soundSources[i] = new List<SoundSource>();
-				volumes[i] = 1.0f;
-			}
-			masterVolume = 1.0f;
+			instance = this;
+			DontDestroyOnLoad(gameObject);
 		}
+		else if(instance != this)
+		{
+			Destroy(gameObject);
+			return;
+		}
+		
+		
+		soundSources = new List<SoundSource>[(int)SoundType.COUNT];
+		for(int i = 0; i < (int)SoundType.COUNT; ++i)
+		{
+			soundSources[i] = new List<SoundSource>();
+		}
+		volumes = new float[(int)SoundType.COUNT];
+		// load saved values from playerprefs
+		masterVolume                   = PlayerPrefs.GetFloat ("MasterVolume", 1.0f);
+		volumes[(int)SoundType.Music]  = PlayerPrefs.GetFloat ("MusicVolume", 1.0f);
+		volumes[(int)SoundType.SFX]    = PlayerPrefs.GetFloat ("SFXVolume", 1.0f);
+		volumes[(int)SoundType.Speech] = PlayerPrefs.GetFloat ("SpeechVolume", 1.0f);
 	}
-
+	
+	
 	// Register/Remove audio sources
 	public static void RegisterSoundSource(SoundSource source)
 	{
@@ -44,82 +56,80 @@ public class SoundManager : Singleton<SoundManager>
 		soundSources [(int)source.type].Remove(source);
 	}
 	
-
-	// Set audio source category voume
+	
+	// Set audio source category volume
 	public static void SetVolume(SoundType type, float volume)
 	{
-		// TODO; shouldn't need this because only options menu sliders can control overall sound
-		if (volume < 0.0f)
-		{
-			volume = 0.0f;
-		}
-
+		volume = Mathf.Clamp01 (volume);
+		
 		volumes[(int)type] = volume;
+		
+		print ("[SoundManager] soundSources.length = " + soundSources.Length);
+		
 		foreach(SoundSource source in soundSources[(int)type])
 		{
 			source.source.volume = source.MaxVolume() * volume;
 		}
 	}
-
-	// set master voluume
-	public static void SetMasterVolume(float volume)
+	
+	// set master volume
+	public static void SetMasterVolumeStatic(float volume)
 	{
+		volume = Mathf.Clamp01 (volume);
 		masterVolume = volume;
 		AudioListener.volume = volume;
 	}
-
-
-
-	void Update()
+	
+	// Get audio source category volume
+	public static float GetVolume(SoundType type)
 	{
-		if(Input.GetKey(KeyCode.O))
-		{
-			//float vol = masterVolume;
-			//float vol = volumes[(int)SoundType.Music];
-			float vol = volumes[(int)SoundType.SFX];
-			//float vol = volumes[(int)SoundType.Speech];
-
-			vol -= 0.5f * Time.deltaTime;
-			if(vol < 0.0f)
-			{
-				vol = 0.0f;
-			}
-
-			//SetMasterVolume(masterVolume);
-			//SetVolume(SoundType.Music, vol);
-			SetVolume(SoundType.SFX, vol);
-			//SetVolume(SoundType.Speech, vol);
-
-			print ("[SoundManager] setting volume to " + vol);
-		}
-		else if(Input.GetKey(KeyCode.P))
-		{
-			//float vol = masterVolume;
-			//float vol = volumes[(int)SoundType.Music];
-			float vol = volumes[(int)SoundType.SFX];
-			//float vol = volumes[(int)SoundType.Speech];
-			
-			vol += 0.5f * Time.deltaTime;
-			if(vol > 1.0f)
-			{
-				vol = 1.0f;
-			}
-			
-			//SetMasterVolume(masterVolume);
-			//SetVolume(SoundType.Music, vol);
-			SetVolume(SoundType.SFX, vol);
-			//SetVolume(SoundType.Speech, vol);
-
-			print ("[SoundManager] setting volume to " + vol);
-		}
-
-		//print ("[SoundManager]\t MasterVolume\t" + masterVolume);
-		//print ("[SoundManager]\t MusicVolume\t" + volumes[(int)SoundType.Music]);
-		//print ("[SoundManager]\t SFXVolume\t" + volumes[(int)SoundType.SFX]);
-		//print ("[SoundManager]\t SpeechVolume\t" + volumes[(int)SoundType.Speech]);
+		return volumes[(int)type];
 	}
-
-
+	
+	// Get master volume
+	public static float GetMasterVolume()
+	{
+		return masterVolume;
+	}
+	
+	
+	//	// set master volume
+	//	public void SetMasterVolume(float volume)
+	//	{
+	//		volume = Mathf.Clamp01 (volume);
+	//		masterVolume = volume;
+	//		AudioListener.volume = volume;
+	//	}
+	//	// set music volume
+	//	public void SetMusicVolume(float volume)
+	//	{
+	//		volume = Mathf.Clamp01 (volume);
+	//		volumes[(int)SoundType.Music] = volume;
+	//	}
+	//	// set SFX volume
+	//	public void SetSFXVolume(float volume)
+	//	{
+	//		volume = Mathf.Clamp01 (volume);
+	//		volumes[(int)SoundType.SFX] = volume;
+	//	}
+	//	// set speech volume
+	//	public void SetSpeechVolume(float volume)
+	//	{
+	//		volume = Mathf.Clamp01 (volume);
+	//		volumes[(int)SoundType.Speech] = volume;
+	//	}
+	
+	public void SaveSoundOptions()
+	{
+		PlayerPrefs.SetFloat ("MasterVolume", masterVolume);
+		PlayerPrefs.SetFloat ("MusicVolume",  volumes[(int)SoundType.Music]);
+		PlayerPrefs.SetFloat ("SFXVolume",    volumes[(int)SoundType.SFX]);
+		PlayerPrefs.SetFloat ("SpeechVolume", volumes[(int)SoundType.Speech]);
+		PlayerPrefs.Save();
+	}
+	
+	
+	
 }
 
 

@@ -7,6 +7,6 @@ public class Slot1_continue : MonoBehaviour
 	
 	void OnMouseDown()
 	{
-		GameManager.LoadGame(saveFileIndex);
+		GameManager.LoadGameStatic(saveFileIndex);
 	}
 }

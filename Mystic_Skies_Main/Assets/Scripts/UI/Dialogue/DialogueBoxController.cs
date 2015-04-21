@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class DialogueBoxController : CanvasController
+public class DialogueBoxController : MonoBehaviour
 {
 	private Image background = null;
 	public Text textbox;

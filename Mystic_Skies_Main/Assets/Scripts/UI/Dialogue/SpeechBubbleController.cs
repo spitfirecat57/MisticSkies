@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class SpeechBubbleController : CanvasController
+public class SpeechBubbleController : MonoBehaviour
 {
 	public Canvas bubbleCanvas;
 	private RectTransform rectTransform;

@@ -2,36 +2,16 @@
 using UnityEditor;
 using System.Collections;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-	private static GameManager instance = null;
-	void Awake()
-	{
-		if(instance == null)
-		{
-			instance = this;
-			DontDestroyOnLoad(gameObject);
-		}
-		else if(instance != this)
-		{
-			Destroy(gameObject);
-		}
-	}
-
 	private static int currentFileIndex = 0;
 	private static string screenshotsFolderPath = Application.dataPath + "/Screenshots";
 	private static int screenshotIndex = 1;
+	private static bool isPaused = false;
 	
-
-
 	void Start()
 	{
 		screenshotIndex = PlayerPrefs.GetInt("ScreenshotIndex", 1);
-
-		if(!gameObject.activeSelf || !gameObject.activeInHierarchy)
-		{
-			gameObject.SetActive(true);
-		}
 	}
 	
 	void Update()
@@ -41,14 +21,11 @@ public class GameManager : MonoBehaviour
 			Debug.Log("[GameManager] Taking screenshot");
 			TakeScreenshot();
 		}
-
-		if(Input.GetKeyDown(KeyCode.Return))
+		
+		if(Input.GetKeyDown(KeyCode.Alpha0))
 		{
-			UIManager.NewDialogueBox("Dialogue Test");
-		}
-		else if(Input.GetKeyDown(KeyCode.Backspace))
-		{
-			UIManager.CloseDialogueBox();
+			Debug.Log("[GameManager] Saving Game");
+			SaveGame();
 		}
 	}
 	
@@ -76,24 +53,37 @@ public class GameManager : MonoBehaviour
 	
 	
 	
-	
-	public static void StartNewGame(int fileSlotIndex)
+	public static void StartNewGameStatic()
 	{
-		currentFileIndex = fileSlotIndex;
+		// TODO: change to first level of the game, not testscene
 		SceneManager.SetCurrentScene (Scenes.Level1);
 		StateManager.ChangeState (GameStates.Gameplay);
 	}
-	
-	public static void LoadGame(int fileSlotIndex)
+	public void StartNewGame()
+	{
+		// TODO: change to first level of the game, not testscene
+		SceneManager.SetCurrentScene (Scenes.Level1);
+		StateManager.ChangeState (GameStates.Gameplay);
+	}
+
+	public static void LoadGameStatic(int fileSlotIndex)
 	{
 		currentFileIndex = fileSlotIndex;
-		//TODO: PlayerManager.LoadGame(fileSlotindex);
+		PlayerManager.LoadGame(fileSlotIndex);
 		InputManager.LoadGame (fileSlotIndex);
-		SceneManager.LoadGame(fileSlotIndex);
+		SceneManager.LoadGame (fileSlotIndex);
+		StateManager.ChangeState (GameStates.Gameplay);
+	}
+	public void LoadGame(int fileSlotIndex)
+	{
+		currentFileIndex = fileSlotIndex;
+		PlayerManager.LoadGame(fileSlotIndex);
+		InputManager.LoadGame (fileSlotIndex);
+		SceneManager.LoadGame (fileSlotIndex);
 		StateManager.ChangeState (GameStates.Gameplay);
 	}
 	
-	public static void SaveGame(int fileSlotIndex)
+	public static void SaveGame()
 	{
 		PlayerManager.SaveGame(currentFileIndex);
 		SceneManager.SaveGame(currentFileIndex);
@@ -105,25 +95,50 @@ public class GameManager : MonoBehaviour
 	}
 	
 	
-	public static void PauseGameplay()
+	public static void PauseUnpauseGameplayStatic()
 	{
-		Time.timeScale = 0.0f;
-		InputManager.SetAcceptingInput(false);
-	}
-	public void PauseGame()
-	{
-		Time.timeScale = 0.0f;
-		InputManager.SetAcceptingInput(false);
-	}
-	public static void UnPauseGameplay()
-	{
-		Time.timeScale = 1.0f;
-		InputManager.SetAcceptingInput(true);
-	}
-	public void UnPauseGame()
-	{
-		Time.timeScale = 1.0f;
-		InputManager.SetAcceptingInput(true);
+		if(isPaused)
+		{
+			// unpause
+			Time.timeScale = 1.0f;
+			InputManager.SetAcceptingInput(true);
+			UIManager.DeActivate(UICanvasTypes.Pause);
+			isPaused = false;
+		}
+		else
+		{
+			// pause
+			Time.timeScale = 0.0f;
+			InputManager.SetAcceptingInput(false);
+			UIManager.Activate(UICanvasTypes.Pause);
+			isPaused = true;
+		}
 	}
 	
+	public void PauseUnpauseGameplay()
+	{
+		if(isPaused)
+		{
+			// unpause
+			Time.timeScale = 1.0f;
+			InputManager.SetAcceptingInput(true);
+			UIManager.DeActivate(UICanvasTypes.Pause);
+			isPaused = false;
+		}
+		else
+		{
+			// pause
+			Time.timeScale = 0.0f;
+			InputManager.SetAcceptingInput(false);
+			UIManager.Activate(UICanvasTypes.Pause);
+			isPaused = true;
+		}
+	}
+	
+	
 }
+
+
+
+
+

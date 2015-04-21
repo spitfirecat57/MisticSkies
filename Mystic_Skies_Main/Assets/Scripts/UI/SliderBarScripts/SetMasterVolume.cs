@@ -13,6 +13,6 @@ public class SetMasterVolume : MonoBehaviour
 
 	void Update()
 	{
-		SoundManager.SetMasterVolume (slider.value);
+		SoundManager.SetMasterVolumeStatic (slider.value);
 	}
 }

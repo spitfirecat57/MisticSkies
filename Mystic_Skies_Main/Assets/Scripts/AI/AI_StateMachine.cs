@@ -53,7 +53,7 @@ public class AI_StateMachine : MonoBehaviour
 		// State Variables -------------->
 		
 		// Set spawn position
-		spawnPosition = transform.position;
+		spawnPosition = gameObject.transform.position;
 		
 		// get NavMeshAgent component reference
 		navAgent = GetComponent<NavMeshAgent>();

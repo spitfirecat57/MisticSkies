@@ -29,8 +29,7 @@ public class UIManager : Singleton<UIManager>
 	private static DialogueBoxController dialogueBoxController;
 	
 	private static GameObject[] canvases;
-	private static CanvasController[] canvasControllers;
-	private static UICanvasTypes activeCanvasType;
+	private static bool[] activeCanvases;
 	
 	void Start()
 	{
@@ -39,21 +38,18 @@ public class UIManager : Singleton<UIManager>
 		//canvases[(int)UICanvasTypes.Inventory] 	= inventoryCanvas;
 		canvases[(int)UICanvasTypes.Pause] 		= pauseCanvas;
 		//canvases[(int)UICanvasTypes.Loading] 	= loadingCanvas;
-
-
-		canvasControllers = new CanvasController[(int)UICanvasTypes.COUNT];
-		canvasControllers[(int)UICanvasTypes.HUD] 				= HUDCanvas.GetComponent<CanvasController>();
-		//canvasControllers[(int)UICanvasTypes.Inventory] 		= inventoryCanvas.GetComponent<CanvasController>();
-		canvasControllers[(int)UICanvasTypes.Pause] 			= pauseCanvas.GetComponent<CanvasController>();
-		//		canvasControllers[(int)UICanvasTypes.Pause] 	= loadingCanvas.GetComponent<CanvasController>();
-
-
+		
+		activeCanvases = new bool[(int)UICanvasTypes.COUNT];
+		for(int i = 0; i < activeCanvases.Length; ++i)
+		{
+			activeCanvases[i] = false;
+		}
+		
 		speechBubbleObject = speechBubblePrefab;
 		dialogueBoxObject = dialogueBox;
 		dialogueBoxController = dialogueBox.GetComponent<DialogueBoxController>();
 		
 		UIImageObject = UIImagePrefab;
-
 	}
 	
 	void OnLevelWasLoaded(int level)
@@ -87,55 +83,59 @@ public class UIManager : Singleton<UIManager>
 		
 		return speechBubble;
 	}
-
+	
 	public static void NewDialogueBox(string text)
 	{
-		if(dialogueBoxObject.activeInHierarchy == false)
-		{
-			dialogueBoxObject.SetActive(true);
-		}
-		dialogueBoxController.SetName ("Kessho");
+		//		if(dialogueBoxObject.activeInHierarchy == false)
+		//		{
+		//			dialogueBoxObject.SetActive(true);
+		//		}
+		dialogueBoxObject.SetActive(true);
+		dialogueBoxController.SetName ("Zalda");
 		dialogueBoxController.SetText (text);
 	}
-
+	
 	public static void NewDialogueBox(string name, string text)
 	{
-		if(dialogueBoxObject.activeInHierarchy == false)
-		{
-			dialogueBoxObject.SetActive(true);		
-		}
+		//		if(dialogueBoxObject.activeInHierarchy == false)
+		//		{
+		//			dialogueBoxObject.SetActive(true);		
+		//		}
+		dialogueBoxObject.SetActive(true);
 		dialogueBoxController.SetName (name);
 		dialogueBoxController.SetText (text);
 	}
-
+	
 	public static void CloseDialogueBox ()
 	{
 		dialogueBoxController.SetText ("");
-		dialogueBoxController.DeActivate();
+		dialogueBoxController.SetName ("");
+		dialogueBoxObject.SetActive (false);
 	}
 	
 	public static void Activate(UICanvasTypes type)
 	{
-		canvasControllers[(int)type].Activate();
-		activeCanvasType = type;
+		canvases[(int)type].SetActive(true);
+		activeCanvases [(int)type] = true;
 	}
 	public static void DeActivate(UICanvasTypes type)
 	{
-		print ("De actvate canvas type '" + type.ToString() + "'");
-		canvasControllers[(int)type].DeActivate();
-		if(type != UICanvasTypes.HUD)
+		canvases[(int)type].SetActive(false);
+		activeCanvases [(int)type] = false;
+	}
+	public static void Toggle(UICanvasTypes type)
+	{
+		if(activeCanvases [(int)type] == true)
 		{
-			activeCanvasType = UICanvasTypes.HUD;
+			DeActivate(type);
+		}
+		if(activeCanvases [(int)type] == false)
+		{
+			Activate(type);
 		}
 	}
 	
 	
-	public static void SwitchTo(UICanvasTypes type)
-	{
-		canvasControllers[(int)activeCanvasType].DeActivate();
-		activeCanvasType = type;
-		canvasControllers[(int)activeCanvasType].Activate();
-	}
 	
 	
 	
