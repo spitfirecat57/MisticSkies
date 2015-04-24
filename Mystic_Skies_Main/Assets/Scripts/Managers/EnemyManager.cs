@@ -2,12 +2,30 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[System.Serializable]
+public struct EnemyLoadout
+{
+	public string name;
+	public SpellType mType;
+	public float maxHealth;
+	[HideInInspector]
+	public float health;
+	public float damage;
+	public float knockbackPower;
+	public float speed;
+}
+
 public class EnemyManager : Singleton<EnemyManager>
 {
 	public static List<GameObject> enemies;
 
-	private static bool awakeHasBeenCalled = false;
+	public EnemyLoadout waterEnemyLoadout;
+	public EnemyLoadout fireEnemyLoadout;
+	public EnemyLoadout rockEnemyLoadout;
+	private static EnemyLoadout[] enemyLoadouts;
 
+
+	private static bool awakeHasBeenCalled = false;
 	void Awake()
 	{
 		if(!awakeHasBeenCalled)
@@ -15,6 +33,11 @@ public class EnemyManager : Singleton<EnemyManager>
 			print ("[EnemyManager] Start()");
 			enemies = new List<GameObject>();
 			StartCoroutine ("PurgeEnemyList");
+
+			enemyLoadouts = new EnemyLoadout[3];
+			enemyLoadouts[(int)SpellType.Fire]  = fireEnemyLoadout;
+			enemyLoadouts[(int)SpellType.Water] = waterEnemyLoadout;
+			enemyLoadouts[(int)SpellType.Rock]  = rockEnemyLoadout;
 		}
 	}
 
@@ -70,8 +93,35 @@ public class EnemyManager : Singleton<EnemyManager>
 	{
 		while(true)
 		{
-			yield return new WaitForSeconds(1.0f);
+			yield return new WaitForSeconds(5.0f);
 			enemies.RemoveAll(obj => obj == null);
 		}
 	}
+
+
+	public static void InitEnemy(Enemy e)
+	{
+		foreach(EnemyLoadout el in enemyLoadouts)
+		{
+			if(el.mType == e.type)
+			{
+				e.loadout.name 			 = el.name;
+				e.loadout.maxHealth 	 = el.maxHealth;
+				e.loadout.damage		 = el.damage;
+				e.loadout.knockbackPower = el.knockbackPower;
+				e.loadout.speed 		 = el.speed;
+				return;
+			}
+		}
+	}
+
+	public static EnemyLoadout GetEnemyLoadout(SpellType type)
+	{
+		return enemyLoadouts[(int)type];
+	}
+
+
+
+
+
 }

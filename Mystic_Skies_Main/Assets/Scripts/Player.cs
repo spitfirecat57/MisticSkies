@@ -120,9 +120,8 @@ public class Player : MonoBehaviour
 			rigidbody.velocity *= (1.0f - friction);
 			yield return new WaitForEndOfFrame();
 		}
-		rigidbody.velocity = Vector3.zero;
 		mc.enabled = true;
-		
+		rigidbody.velocity = Vector3.zero;	
 	}
 	
 	public void IncreaseHealth(int val)

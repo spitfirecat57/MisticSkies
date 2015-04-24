@@ -5,31 +5,15 @@ public class AI_Idle : AI_State
 {
 	override public void OnEnter()
 	{
-		Debug.Log ("AI_IDLE");
 		// return home
 		navAgent.SetDestination(spawnPos);
-
-		//------MARCO WAS HERE------
-		
-		Animator anim = GetComponent<Animator>();
-
-		//anim.SetTrigger("idle");
-		//animmm.CrossFade ("Idle", 0f);
-		
-		//------MARCO WAS HERE------
-
-
 	}
 	
 	override public void OnUpdate()
 	{
-		if(target)
+		if((PlayerManager.GetPlayerPosition() - transform.position).sqrMagnitude < owner.alertDistance * owner.alertDistance)
 		{
-			if((target.transform.position - transform.position).sqrMagnitude < owner.alertDistance * owner.alertDistance)
-			{
-				print ("[AI_IDLE] Noticed the player, changing to seek state");
-				owner.ChangeState(AI_StateMachine.AIStates.Seek);
-			}
+			owner.ChangeState(AI_StateMachine.AIStates.Seek);
 		}
 	}
 	

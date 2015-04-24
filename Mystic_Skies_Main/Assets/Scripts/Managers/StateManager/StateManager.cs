@@ -35,6 +35,7 @@ public class StateManager : MonoBehaviour
 			mCurrentGameState = mGameStates[(int)currentState];
 			InputManager.SetAcceptingInput (true);
 			PlayerManager.SetPlayerAndCameraActive(true);
+			UIManager.Activate(UICanvasTypes.HUD);
 		}
 		else
 		{

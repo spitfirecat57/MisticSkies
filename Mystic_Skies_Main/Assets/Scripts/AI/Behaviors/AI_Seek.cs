@@ -5,22 +5,15 @@ public class AI_Seek : AI_State
 {
 	override public void OnEnter()
 	{
-		Debug.Log ("AI_SEEK");
-
-			navAgent.SetDestination(target.transform.position);
-			//------MARCO WAS HERE------
-
-			Animator anim = GetComponent<Animator>();
-
-		//	anim.SetTrigger("seek");
-		//	animm.CrossFade ("Seek", 0f);
-
-			//------MARCO WAS HERE------
+		navAgent.SetDestination(PlayerManager.GetPlayerPosition());
 	}
 	
 	override public void OnUpdate()
 	{
-		float distToTargetSqr = (PlayerManager.GetPlayerPosition() - transform.position).sqrMagnitude;
+		Vector3 playerPos = PlayerManager.GetPlayerPosition ();
+		float distToTargetSqr = (playerPos - transform.position).sqrMagnitude;
+
+		transform.LookAt (new Vector3(playerPos.x, transform.position.y, playerPos.z));
 		
 		if(distToTargetSqr < owner.attackDistance * owner.attackDistance)
 		{
@@ -29,15 +22,7 @@ public class AI_Seek : AI_State
 		else if(distToTargetSqr > owner.pursueDistance * owner.pursueDistance)
 		{
 			owner.ChangeState(AI_StateMachine.AIStates.Idle);
-
 		}
-		else
-		{
-			navAgent.SetDestination(target.transform.position);
-		}
-
-
-		transform.LookAt (new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
 	}
 	
 	override public void OnExit ()

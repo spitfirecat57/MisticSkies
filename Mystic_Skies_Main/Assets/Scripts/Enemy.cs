@@ -5,22 +5,20 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
-	public SpellType mType;
-	
-	public float health;
-	public float maxHealth;
-	public float knockbackDist;
-	
-	private Vector3 vel = Vector3.zero;
-	
-	private NavMeshAgent navAgent;
+	public SpellType type;
+	[HideInInspector]
+	public EnemyLoadout loadout;
+
 	
 	public ItemManager.ConsumableDropChance dropChance;
+	
+	private NavMeshAgent navAgent;
 	
 	
 	void Start()
 	{
 		EnemyManager.RegisterEnemy(gameObject);
+		EnemyManager.InitEnemy(this);
 		
 		navAgent = GetComponent<NavMeshAgent>();
 		
@@ -45,18 +43,13 @@ public class Enemy : MonoBehaviour
 		}
 	}
 	
-	void Update()
-	{
-		transform.position += vel * Time.deltaTime;
-	}
-	
 	public void TakeDamage(SpellType attackType, float damage)
 	{
-		float totalDamage = damage * Spell.GetDamageMultiplier (attackType, mType);
-		health -= totalDamage;
+		float totalDamage = damage * Spell.GetDamageMultiplier (attackType, loadout.mType);
+		loadout.health -= totalDamage;
 		print ("Enemy took " + damage + " damage");
 		
-		if(health < 1)
+		if(loadout.health < 1)
 		{
 			// play animation?
 			
@@ -102,11 +95,17 @@ public class Enemy : MonoBehaviour
 		
 	}
 	
-	public void ApplyKnockback(Vector3 direction)
+	public void Knockback(Vector3 direction)
 	{
-		navAgent.Move(direction * knockbackDist);
+		StartCoroutine ("CoKnockBack", direction);
 	}
-	
+
+	IEnumerator CoKnockBack (Vector3 direction)
+	{
+		navAgent.velocity = direction;
+		yield return new WaitForSeconds (0.5f);
+	}
+
 	private void OnDeath()
 	{
 		//TODO: Enemy Death animations here

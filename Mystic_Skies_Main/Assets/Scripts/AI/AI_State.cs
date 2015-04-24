@@ -7,37 +7,21 @@ public abstract class AI_State: MonoBehaviour
 {
 	protected AI_StateMachine owner;
 	protected NavMeshAgent navAgent;
-	protected GameObject target;
 	protected Vector3 spawnPos;
 	
 	abstract public void OnEnter();
 	abstract public void OnUpdate();	
 	abstract public void OnExit();
 
-	void Start()
+	void Awake()
 	{
 		spawnPos = gameObject.transform.position;
-		print ("Spawn pos = " + spawnPos);
+		navAgent = gameObject.GetComponent<NavMeshAgent> ();
 	}
 
 	public void SetOwner(AI_StateMachine owner)
 	{
 		this.owner = owner;
-	}
-	
-	public void SetNavAgent(NavMeshAgent navAgent)
-	{
-		this.navAgent = navAgent;
-	}
-	
-	public void SetTarget(GameObject target)
-	{
-		this.target = target;
-	}
-	
-	public void SetSpawnPosition(Vector3 spawnPos)
-	{
-		this.spawnPos = spawnPos;
 	}
 	
 	public struct TimeAndState

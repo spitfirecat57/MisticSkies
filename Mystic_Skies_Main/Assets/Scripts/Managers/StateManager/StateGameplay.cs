@@ -24,7 +24,7 @@ public class StateGameplay : GameState
 			//TODO: UIManager.Activate(Panels.Inventory);
 		}
 
-		if(Input.GetKeyDown(InputManager.GetKeyCode(KeyCode.Alpha0)))
+		if(Input.GetKeyDown(KeyCode.Alpha0))
 		{
 			GameManager.SaveGame();
 		}

@@ -2,27 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
-//[System.Serializable]
-//public class NavAgentLoadout
-//{
-//
-//}
 
 public class AI_StateMachine : MonoBehaviour
 {
 	//The important variables for States->
-	public float alertDistance = 10.0f;
-	public float pursueDistance = 15.0f;
-	//public NavAgentLoadout navAgentLoadout;
-	// NavMeshAgent variables
-	public float acceleration;
-	public float speed;
-	public float turnSpeed;
-	public float attackDistance;
-	
-	private Vector3 spawnPosition;
-	private GameObject target;
-	private NavMeshAgent navAgent;
+	public float alertDistance = 20.0f;
+	public float pursueDistance = 25.0f;
+	public float attackDistance = 2.0f;
 	//===================================|
 	
 	//AI FSM Variables ------------------>
@@ -49,22 +35,7 @@ public class AI_StateMachine : MonoBehaviour
 	
 	// Use this for initialization
 	public void Start ()
-	{
-		// State Variables -------------->
-		
-		// Set spawn position
-		spawnPosition = gameObject.transform.position;
-		
-		// get NavMeshAgent component reference
-		navAgent = GetComponent<NavMeshAgent>();
-		navAgent.acceleration 		= acceleration;
-		navAgent.speed 				= speed;
-		navAgent.angularSpeed 		= turnSpeed;
-		//navAgent.stoppingDistance 	= attackDistance;
-		
-		// default target is player
-		target = PlayerManager.GetPlayerObject();
-		
+	{		
 		//AI Initilization -------------->
 		mStates = new AI_State[(int)AIStates.COUNT];
 		mStates[(int)AIStates.Idle]   = mStateIdle;
@@ -75,14 +46,10 @@ public class AI_StateMachine : MonoBehaviour
 		foreach(AI_State s in mStates)
 		{
 			s.SetOwner(this);
-			s.SetNavAgent(navAgent);
-			s.SetTarget(target);
-			//s.SetSpawnPosition(spawnPosition);
 		}
 		
 		// Set current and next states
-		// NOTE: (current != next) forces OnEnter() in first update
-		mCurrentState = AIStates.Seek;
+		mCurrentState = AIStates.Idle;
 		mNextState = AIStates.Idle;
 		
 		mCurrentAI_State = mStates [(int)mCurrentState];
@@ -106,20 +73,6 @@ public class AI_StateMachine : MonoBehaviour
 	public void ChangeState(AIStates state)
 	{
 		mNextState = state;
-	}
-	
-	public void SetTarget(GameObject target)
-	{
-		this.target = target;
-		foreach(AI_State s in mStates)
-		{
-			s.SetTarget(target);
-		}
-	}
-	
-	public Vector3 SpawnPosition()
-	{
-		return spawnPosition;
 	}
 	
 	

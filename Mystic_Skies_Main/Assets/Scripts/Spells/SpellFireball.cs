@@ -12,6 +12,7 @@ public class SpellFireball : Spell
 		public float damage;
 		public float speed;
 		public float acceleration;
+		public float knockBack;
 		
 		public bool isExplosive;
 		public float explodeRadius;

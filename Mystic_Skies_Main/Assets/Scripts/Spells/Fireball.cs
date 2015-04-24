@@ -27,6 +27,10 @@ public class Fireball : MonoBehaviour
 			accel.Normalize();
 			accel *= loadout.acceleration * Time.fixedDeltaTime;
 		}
+		else
+		{
+			target = EnemyManager.GetClosest(transform.position);
+		}
 		
 		rigidbody.velocity += accel;
 		rigidbody.velocity = Vector3.ClampMagnitude(rigidbody.velocity, loadout.speed);
@@ -42,7 +46,7 @@ public class Fireball : MonoBehaviour
 				Enemy enemy = other.GetComponent<Enemy>();
 				if(enemy)
 				{
-					enemy.ApplyKnockback(other.transform.position - transform.position);
+					enemy.Knockback((other.transform.position - transform.position).normalized * loadout.knockBack);
 					enemy.TakeDamage(loadout.type, loadout.damage);
 				}
 			}

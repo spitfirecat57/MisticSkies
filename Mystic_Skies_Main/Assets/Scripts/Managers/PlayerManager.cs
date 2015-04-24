@@ -24,6 +24,9 @@ public class PlayerManager : MonoBehaviour
 
 	public static GameObject target = null;
 	private static bool hasTarget = false;
+
+	public GameObject currentTargetIndicator;
+	private static GameObject CTI;
 	
 	private static bool awakeHasBeenCalled = false;
 	
@@ -90,6 +93,10 @@ public class PlayerManager : MonoBehaviour
 			{
 				Debug.Log("[PlayerManager] playerPrefab or cameraPrefab is null");
 			}
+
+
+			CTI = GameObject.Instantiate(currentTargetIndicator) as GameObject;
+			CTI.SetActive(false);
 			
 			
 			// TODO: Figure out why this is necessary for some Managers
@@ -130,6 +137,17 @@ public class PlayerManager : MonoBehaviour
 		if(hasTarget && target == null)
 		{
 			CycleTarget();
+		}
+
+		if(target)
+		{
+			CTI.transform.position = target.transform.position + (Vector3.up * 2.0f);
+			CTI.transform.rotation = PlayerManager.GetPlayerRotation();
+			CTI.SetActive(true);
+		}
+		else
+		{
+			CTI.SetActive(false);
 		}
 	}
 	
