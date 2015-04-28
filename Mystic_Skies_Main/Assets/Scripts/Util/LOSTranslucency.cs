@@ -32,23 +32,25 @@ public class LOSTranslucency : MonoBehaviour
 			Vector3 toPlayer = playerTransform.position - transform.position;
 			Ray ray = new Ray(transform.position, toPlayer.normalized);
 			RaycastHit[] hitInfos = Physics.RaycastAll(ray, toPlayer.magnitude - 1.0f);
-			MeshRenderer mrenderer = null;
+			MeshRenderer[] mrenderer = null;
 
 			foreach(RaycastHit hit in hitInfos)
 			{
 				if(!hit.collider.CompareTag("Player") && !hit.collider.CompareTag("Enemy") && !hit.collider.CompareTag("InteractionBox"))
 				{
-					mrenderer = hit.collider.GetComponent<MeshRenderer>();
-
-					if(mrenderer)
+					mrenderer = hit.collider.GetComponentsInChildren<MeshRenderer>();
+					foreach(MeshRenderer r in mrenderer)
 					{
-						if(toFadeIn.Contains(mrenderer))
+						if(r)
 						{
-							toFadeIn.Remove(mrenderer);
-						}
-						if(!toFadeOut.Contains(mrenderer))
-						{
-							toFadeOut.Add(mrenderer);
+							if(toFadeIn.Contains(r))
+							{
+								toFadeIn.Remove(r);
+							}
+							if(!toFadeOut.Contains(r))
+							{
+								toFadeOut.Add(r);
+							}
 						}
 					}
 				}
@@ -65,12 +67,15 @@ public class LOSTranslucency : MonoBehaviour
 			// fade out
 			foreach(MeshRenderer r in toFadeOut)
 			{
-				Color c = r.material.color;
-				if(c.a > 0.1f)
+				if(r)
 				{
-					c.a -= 0.05f;
+					Color c = r.material.color;
+					if(c.a > 0.1f)
+					{
+						c.a -= 0.05f;
+					}
+					r.material.color = c;
 				}
-				r.material.color = c;
 			}
 			// check for fade in additions
 			foreach(MeshRenderer mr in toFadeOut.FindAll(obj => obj.material.color.a < 0.15f))

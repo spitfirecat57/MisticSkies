@@ -7,13 +7,21 @@ public class PlayerController : MonoBehaviour
 	public float runSpeed;
 	public float rotSmoothing;
 	public float speedEpsilon;
+
+	private bool isDodging = false;
+	private float dodgeTimer = 0.0f;
+	public float dodgeDuration;
+	public float dodgeSpeed;
 	
 	private Transform camTransform;
+
+	private Vector3 heading;
 
 
 	void Start()
 	{
 		camTransform = PlayerManager.GetCameraTransform ();
+		isDodging = false;
 	}
 
 	void Update()
@@ -28,41 +36,66 @@ public class PlayerController : MonoBehaviour
 
 		Vector3 newVel = Vector3.zero;
 
-		// forward
-		if(Input.GetKey(InputManager.GetKeyCode(InputKeys.Up)))
+		if(isDodging == false)
 		{
-			newVel += forward;
-		}
-		// back
-		if(Input.GetKey(InputManager.GetKeyCode(InputKeys.Down)))
-		{
-			newVel -= forward;
-		}
-		// right
-		if(Input.GetKey(InputManager.GetKeyCode(InputKeys.Right)))
-		{
-			newVel += right;
-		}
-		// left
-		if(Input.GetKey(InputManager.GetKeyCode(InputKeys.Left)))
-		{
-			newVel -= right;
-		}
+			// forward
+			if(Input.GetKey(InputManager.GetKeyCode(InputKeys.Up)))
+			{
+				newVel += forward;
+				print ("FORWARD");
+			}
+			// back
+			else if(Input.GetKey(InputManager.GetKeyCode(InputKeys.Down)))
+			{
+				newVel -= forward;
+				print ("BACK");
+			}
+			// right
+			if(Input.GetKey(InputManager.GetKeyCode(InputKeys.Right)))
+			{
+				newVel += right;
+				print ("RIGHT");
+			}
+			// left
+			else if(Input.GetKey(InputManager.GetKeyCode(InputKeys.Left)))
+			{
+				newVel -= right;
+				print ("LEFT");
+			}
 
-		newVel.Normalize();
-		if(Input.GetKey(InputManager.GetKeyCode(InputKeys.Run)))
-		{
-			newVel *= runSpeed;
+			newVel.Normalize();
+			heading = newVel;
+			if(Input.GetKey(InputManager.GetKeyCode(InputKeys.Run)))
+			{
+				newVel *= runSpeed;
+			}
+			else
+			{
+				newVel *= speed;
+			}
+
+			rigidbody.velocity = new Vector3(0.0f, rigidbody.velocity.y, 0.0f) + newVel;
 		}
 		else
 		{
-			newVel *= speed;
+			dodgeTimer -= Time.deltaTime;
+			if(dodgeTimer <= 0.0f)
+			{
+				isDodging = false;
+			}
 		}
 
-		rigidbody.velocity = new Vector3(0.0f, rigidbody.velocity.y, 0.0f) + newVel;
+		if(!isDodging && Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.Dodge)))
+		{
+			isDodging = true;
+			rigidbody.velocity = heading * dodgeSpeed;
+			dodgeTimer = dodgeDuration;
+		}
 
 
-		GameObject target = PlayerManager.Target ();
+
+
+		GameObject target = PlayerManager.Target();
 		if(target)
 		{
 			Vector3 targetPos = PlayerManager.Target().transform.position;

@@ -3,8 +3,6 @@ using System.Collections;
 
 public class InputManager : MonoBehaviour
 {
-	public InputLayout defaultLayout;
-	public InputLayout defaultLayoutAlt;
 	public InputLayout layoutFile0;
 	public InputLayout layoutFile1;
 	public InputLayout layoutFile2;
@@ -15,14 +13,6 @@ public class InputManager : MonoBehaviour
 	
 	void Start()
 	{
-		if(defaultLayout == null)
-		{
-			Debug.Log("[InputManager] defaultLayout is null");
-		}
-		if(defaultLayoutAlt == null)
-		{
-			Debug.Log("[InputManager] defaultLayoutAlt is null");
-		}
 		if(layoutFile0 == null)
 		{
 			Debug.Log("[InputManager] layoutFile0 is null");
@@ -43,9 +33,9 @@ public class InputManager : MonoBehaviour
 		inputLayouts[2] = layoutFile2;
 		
 		keyCodes = new KeyCode[(int)InputKeys.COUNT];
-		for(int i = 0; i < keyCodes.Length; ++i)
+		for(int i = 0; i < (int)InputKeys.COUNT; ++i)
 		{
-			keyCodes [i] = defaultLayout.keys[i].key;
+			keyCodes[i] = layoutFile0.keys[i].key;
 		}
 	}
 	

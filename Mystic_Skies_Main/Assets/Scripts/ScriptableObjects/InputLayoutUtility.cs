@@ -27,6 +27,8 @@ public enum InputKeys
 
 	Inventory,
 
+	Dodge,
+
 	Exit,
 	COUNT
 }
@@ -76,6 +78,8 @@ public static class InputLayoutUtility
 		asset1.keys [(int)InputKeys.RejuvPotion].key 		= KeyCode.Alpha3;
 
 		asset1.keys [(int)InputKeys.Inventory].key 			= KeyCode.I;
+
+		asset1.keys [(int)InputKeys.Dodge].key 				= KeyCode.Space;
 
 		asset1.keys [(int)InputKeys.Exit].key 				= KeyCode.Escape;
 
