@@ -12,7 +12,7 @@ public enum UICanvasTypes
 	COUNT
 }
 
-public class UIManager : Singleton<UIManager>
+public class UIManager : MonoBehaviour
 {
 	public GameObject speechBubblePrefab;
 	private static GameObject speechBubbleObject;

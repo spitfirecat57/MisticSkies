@@ -17,7 +17,6 @@ public class StateGameplay : GameState
 		if(Input.GetKeyDown(InputManager.GetUIKeyCode(InputKeys.Exit)))
 		{
 			GameManager.PauseUnpauseGameplayStatic();
-			UIManager.Activate(UICanvasTypes.Pause);
 		}
 		else if(Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.Inventory)))
 		{

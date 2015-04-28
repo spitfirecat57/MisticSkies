@@ -96,6 +96,7 @@ public class PlayerManager : MonoBehaviour
 
 
 			CTI = GameObject.Instantiate(currentTargetIndicator) as GameObject;
+			CTI.transform.parent = PlayerManager.GetPlayerObject().transform;
 			CTI.SetActive(false);
 			
 			
@@ -231,6 +232,10 @@ public class PlayerManager : MonoBehaviour
 	public static Camera GetCameraScript()
 	{
 		return cameraScript;
+	}
+	public static CameraController GetCameraController()
+	{
+		return cameraControllerScript;
 	}
 	
 	

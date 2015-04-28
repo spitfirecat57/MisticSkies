@@ -2,8 +2,22 @@
 using UnityEditor;
 using System.Collections;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : MonoBehaviour
 {
+	private static GameManager instance = null;
+	void Awake()
+	{
+		if(instance == null)
+		{
+			instance = this;
+			DontDestroyOnLoad(gameObject);
+		}
+		else if(instance != this)
+		{
+			Destroy(gameObject);
+		}
+	}
+
 	private static int currentFileIndex = 0;
 	private static string screenshotsFolderPath = Application.dataPath + "/Screenshots";
 	private static int screenshotIndex = 1;
@@ -97,22 +111,7 @@ public class GameManager : Singleton<GameManager>
 	
 	public static void PauseUnpauseGameplayStatic()
 	{
-		if(isPaused)
-		{
-			// unpause
-			Time.timeScale = 1.0f;
-			InputManager.SetAcceptingInput(true);
-			UIManager.DeActivate(UICanvasTypes.Pause);
-			isPaused = false;
-		}
-		else
-		{
-			// pause
-			Time.timeScale = 0.0f;
-			InputManager.SetAcceptingInput(false);
-			UIManager.Activate(UICanvasTypes.Pause);
-			isPaused = true;
-		}
+		instance.PauseUnpauseGameplay();
 	}
 	
 	public void PauseUnpauseGameplay()
@@ -120,17 +119,19 @@ public class GameManager : Singleton<GameManager>
 		if(isPaused)
 		{
 			// unpause
+			UIManager.DeActivate(UICanvasTypes.Pause);
 			Time.timeScale = 1.0f;
 			InputManager.SetAcceptingInput(true);
-			UIManager.DeActivate(UICanvasTypes.Pause);
+			PlayerManager.GetCameraController().enabled = true;
 			isPaused = false;
 		}
 		else
 		{
 			// pause
+			UIManager.Activate(UICanvasTypes.Pause);
 			Time.timeScale = 0.0f;
 			InputManager.SetAcceptingInput(false);
-			UIManager.Activate(UICanvasTypes.Pause);
+			PlayerManager.GetCameraController().enabled = false;
 			isPaused = true;
 		}
 	}

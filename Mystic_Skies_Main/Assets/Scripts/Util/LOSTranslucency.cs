@@ -40,13 +40,16 @@ public class LOSTranslucency : MonoBehaviour
 				{
 					mrenderer = hit.collider.GetComponent<MeshRenderer>();
 
-					if(toFadeIn.Contains(mrenderer))
+					if(mrenderer)
 					{
-						toFadeIn.Remove(mrenderer);
-					}
-					if(!toFadeOut.Contains(mrenderer))
-					{
-						toFadeOut.Add(mrenderer);
+						if(toFadeIn.Contains(mrenderer))
+						{
+							toFadeIn.Remove(mrenderer);
+						}
+						if(!toFadeOut.Contains(mrenderer))
+						{
+							toFadeOut.Add(mrenderer);
+						}
 					}
 				}
 			}
@@ -79,12 +82,15 @@ public class LOSTranslucency : MonoBehaviour
 			// fade in
 			foreach(MeshRenderer r in toFadeIn)
 			{
-				Color c = r.material.color;
-				if(c.a < 1.0f)
+				if(r)
 				{
-					c.a += 0.05f;
+					Color c = r.material.color;
+					if(c.a < 1.0f)
+					{
+						c.a += 0.05f;
+					}
+					r.material.color = c;
 				}
-				r.material.color = c;
 			}
 			toFadeIn.RemoveAll(obj => obj.material.color.a == 1.0f);
 			
