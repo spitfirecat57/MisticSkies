@@ -239,7 +239,6 @@ public class PlayerManager : MonoBehaviour
 	}
 	
 	
-	
 	// ######################   Setters   ##################################
 	
 	public static void SetPlayerPositon(Vector3 pos)

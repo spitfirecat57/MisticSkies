@@ -5,9 +5,11 @@ public class MinimapCameraC : MonoBehaviour {
 	
 	public Transform target;
 	
-	void  Start (){
-		if(!target){
-            target = GameObject.FindWithTag ("Player").transform;
+	void  Start ()
+	{
+		if(!target)
+		{
+            target = PlayerManager.GetPlayerTransform();
         }
 		
 	}
