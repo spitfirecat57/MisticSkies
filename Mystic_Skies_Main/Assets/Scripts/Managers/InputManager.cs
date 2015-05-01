@@ -1,6 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum InputKeys
+{
+	Up,
+	Down,
+	Left,
+	Right,
+	Run,
+	
+	Interact,
+	
+	FireSpell,
+	WaterSpell,
+	RockSpell,
+	MagicMode,
+	
+	CycleTarget,
+	QuitTarget,
+	
+	HealthPotion,
+	ManaPotion,
+	RejuvPotion,
+	
+	Inventory,
+	
+	Dodge,
+	
+	Exit,
+	COUNT
+}
+
 public class InputManager : MonoBehaviour
 {
 	public InputLayout layoutFile0;

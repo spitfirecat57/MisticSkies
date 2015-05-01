@@ -63,7 +63,7 @@ public class SpellEruption : Spell
 
 				// get y value for explosion point from terrain
 				RaycastHit hitInfo;
-				if(Physics.Raycast(explosionPoint, Vector3.down, out hitInfo, loadout.maxDistUpDown, LayerMask.NameToLayer("Terrain")))
+				if(Physics.Raycast(explosionPoint, Vector3.down, out hitInfo, loadout.maxDistUpDown))//, LayerMask.NameToLayer("Terrain")))
 				{
 					GameObject.Instantiate(explosionObject, hitInfo.point, Quaternion.identity);
 

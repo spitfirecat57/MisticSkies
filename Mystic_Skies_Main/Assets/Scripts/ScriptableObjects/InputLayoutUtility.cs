@@ -3,36 +3,6 @@ using UnityEditor;
 using System.IO;
 
 
-public enum InputKeys
-{
-	Up,
-	Down,
-	Left,
-	Right,
-	Run,
-
-	Interact,
-
-	FireSpell,
-	WaterSpell,
-	RockSpell,
-	MagicMode,
-
-	CycleTarget,
-	QuitTarget,
-
-	HealthPotion,
-	ManaPotion,
-	RejuvPotion,
-
-	Inventory,
-
-	Dodge,
-
-	Exit,
-	COUNT
-}
-
 public static class InputLayoutUtility
 {
 	// ------------------------------------------------------------

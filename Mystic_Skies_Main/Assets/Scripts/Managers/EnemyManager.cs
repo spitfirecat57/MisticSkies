@@ -101,18 +101,13 @@ public class EnemyManager : Singleton<EnemyManager>
 
 	public static void InitEnemy(Enemy e)
 	{
-		foreach(EnemyLoadout el in enemyLoadouts)
-		{
-			if(el.mType == e.type)
-			{
-				e.loadout.name 			 = el.name;
-				e.loadout.maxHealth 	 = el.maxHealth;
-				e.loadout.damage		 = el.damage;
-				e.loadout.knockbackPower = el.knockbackPower;
-				e.loadout.speed 		 = el.speed;
-				return;
-			}
-		}
+		EnemyLoadout el = enemyLoadouts [(int)e.loadout.mType];
+		e.loadout.name 			 = el.name;
+		e.loadout.health		 = el.maxHealth;
+		e.loadout.maxHealth 	 = el.maxHealth;
+		e.loadout.damage		 = el.damage;
+		e.loadout.knockbackPower = el.knockbackPower;
+		e.loadout.speed 		 = el.speed;
 	}
 
 	public static EnemyLoadout GetEnemyLoadout(SpellType type)

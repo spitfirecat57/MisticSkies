@@ -25,9 +25,12 @@ public class Player : MonoBehaviour
 	public float maxMana;
 	public float speedEpsilon;
 	public float friction;
+	public float mKnockbackHeight = 4.0f;
 	public List<NameValue> potions;
 	public List<NameValue> inventory;
 	public List<NameValue> collectibles;
+
+	private bool isInvincible = false;
 	
 	private PlayerController mc;
 	
@@ -94,6 +97,8 @@ public class Player : MonoBehaviour
 	
 	public void TakeDamage(float damage)
 	{
+		if (isInvincible) return;
+
 		health -= damage;
 		
 		if(health <= 0.0f)
@@ -108,13 +113,14 @@ public class Player : MonoBehaviour
 	
 	public void KnockBack(Vector3 knockback)
 	{
+		if (isInvincible) return;
 		StartCoroutine("CoKnockBack", knockback);
 	}
 	
 	IEnumerator CoKnockBack(Vector3 knockback)
 	{
 		mc.enabled = false;
-		rigidbody.velocity = new Vector3(knockback.x, 8.0f, knockback.z);
+		rigidbody.velocity = new Vector3(knockback.x, mKnockbackHeight, knockback.z);
 		while(gameObject.rigidbody.velocity.sqrMagnitude > speedEpsilon)
 		{
 			rigidbody.velocity *= (1.0f - friction);
@@ -191,6 +197,11 @@ public class Player : MonoBehaviour
 			}
 			}
 		}
+	}
+
+	public void SetInvincible(bool invincible)
+	{
+		isInvincible = invincible;
 	}
 	
 	

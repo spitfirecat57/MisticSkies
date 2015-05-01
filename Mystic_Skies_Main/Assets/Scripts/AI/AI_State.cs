@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(NavMeshAgent), typeof(AI_StateMachine))]
+[RequireComponent(typeof(NavMeshAgent), typeof(AI_StateMachine), typeof(Enemy))]
 
 public abstract class AI_State: MonoBehaviour 
 {
 	protected AI_StateMachine owner;
 	protected NavMeshAgent navAgent;
+	protected Enemy enemyScript;
 	protected Vector3 spawnPos;
 	
 	abstract public void OnEnter();
@@ -17,6 +18,7 @@ public abstract class AI_State: MonoBehaviour
 	{
 		spawnPos = gameObject.transform.position;
 		navAgent = gameObject.GetComponent<NavMeshAgent> ();
+		enemyScript = gameObject.GetComponent<Enemy> ();
 	}
 
 	public void SetOwner(AI_StateMachine owner)

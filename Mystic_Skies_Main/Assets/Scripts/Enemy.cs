@@ -9,6 +9,10 @@ public class Enemy : MonoBehaviour
 	[HideInInspector]
 	public EnemyLoadout loadout;
 
+	public float suicideSpeed = 10.0f;
+	public bool explodeOnTouch = false;
+	public GameObject suicideObjectPrefab;
+
 	
 	public ItemManager.ConsumableDropChance dropChance;
 	
@@ -19,7 +23,7 @@ public class Enemy : MonoBehaviour
 	{
 		EnemyManager.RegisterEnemy(gameObject);
 		EnemyManager.InitEnemy(this);
-		
+
 		navAgent = GetComponent<NavMeshAgent>();
 		
 		if(dropChance.percentChanceToDrop > 0.0f)
@@ -42,12 +46,42 @@ public class Enemy : MonoBehaviour
 			}
 		}
 	}
+
+	void OnTriggerEnter(Collider other)
+	{
+		if(other.CompareTag("Player"))
+		{
+			if(explodeOnTouch)
+			{
+				Vector3 explodePos = transform.position + (Vector3.up * 2.0f);
+
+				NavMeshHit navHit;
+				if(NavMesh.SamplePosition(transform.position, out navHit, 5.0f, NavMesh.GetNavMeshLayerFromName("Default")))
+				{
+					explodePos = navHit.position;
+				}
+				print ("explodePos = " + explodePos);
+
+				GameObject.Instantiate(suicideObjectPrefab, explodePos, Quaternion.identity);
+
+				Destroy(gameObject);
+			}
+			else
+			{
+				Player playerScript = PlayerManager.GetPlayerScript();
+				playerScript.TakeDamage(loadout.damage);
+				playerScript.KnockBack((PlayerManager.GetPlayerPosition() - transform.position).normalized * loadout.knockbackPower);
+				Stun(1.0f);
+			}
+		}
+	}
 	
 	public void TakeDamage(SpellType attackType, float damage)
 	{
 		float totalDamage = damage * Spell.GetDamageMultiplier (attackType, loadout.mType);
 		loadout.health -= totalDamage;
 		print ("Enemy took " + damage + " damage");
+		print ("New Health = " + loadout.health);
 		
 		if(loadout.health < 1)
 		{
@@ -104,6 +138,15 @@ public class Enemy : MonoBehaviour
 	{
 		navAgent.velocity = direction;
 		yield return new WaitForSeconds (0.5f);
+	}
+
+	IEnumerator Stun(float duration)
+	{
+		navAgent.Stop ();
+		//isStunned = true;
+		yield return new WaitForSeconds (duration);
+		navAgent.Resume ();
+		//isStunned = false;
 	}
 
 	private void OnDeath()

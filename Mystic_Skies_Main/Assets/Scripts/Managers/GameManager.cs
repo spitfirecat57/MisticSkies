@@ -41,6 +41,15 @@ public class GameManager : MonoBehaviour
 			Debug.Log("[GameManager] Saving Game");
 			SaveGame();
 		}
+
+		if(Input.GetKeyDown(KeyCode.Keypad1))
+		{
+			PlayerManager.GetPlayerScript().IncreaseHealth(100);
+		}
+		if(Input.GetKeyDown(KeyCode.Keypad2))
+		{
+			PlayerManager.GetPlayerScript().IncreaseMana(100);
+		}
 	}
 	
 	public static void TakeScreenshot()

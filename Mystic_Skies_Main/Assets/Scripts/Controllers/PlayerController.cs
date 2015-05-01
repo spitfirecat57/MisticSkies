@@ -9,13 +9,19 @@ public class PlayerController : MonoBehaviour
 	public float speedEpsilon;
 
 	private bool isDodging = false;
-	private float dodgeTimer = 0.0f;
+	private float dodgeDurationTimer = 0.0f;
+	private float dodgeCooldownTimer = 0.0f;
 	public float dodgeDuration;
 	public float dodgeSpeed;
+	public float dodgeCooldown;
 	
 	private Transform camTransform;
 
 	private Vector3 heading;
+
+
+
+	private Color matColor;
 
 
 	void Start()
@@ -36,31 +42,33 @@ public class PlayerController : MonoBehaviour
 
 		Vector3 newVel = Vector3.zero;
 
-		if(isDodging == false)
+		dodgeCooldownTimer += Time.deltaTime;
+
+		if(!isDodging)
 		{
 			// forward
 			if(Input.GetKey(InputManager.GetKeyCode(InputKeys.Up)))
 			{
 				newVel += forward;
-				print ("FORWARD");
+				//print ("FORWARD");
 			}
 			// back
 			else if(Input.GetKey(InputManager.GetKeyCode(InputKeys.Down)))
 			{
 				newVel -= forward;
-				print ("BACK");
+				//print ("BACK");
 			}
 			// right
 			if(Input.GetKey(InputManager.GetKeyCode(InputKeys.Right)))
 			{
 				newVel += right;
-				print ("RIGHT");
+				//print ("RIGHT");
 			}
 			// left
 			else if(Input.GetKey(InputManager.GetKeyCode(InputKeys.Left)))
 			{
 				newVel -= right;
-				print ("LEFT");
+				//print ("LEFT");
 			}
 
 			newVel.Normalize();
@@ -78,18 +86,22 @@ public class PlayerController : MonoBehaviour
 		}
 		else
 		{
-			dodgeTimer -= Time.deltaTime;
-			if(dodgeTimer <= 0.0f)
+			dodgeDurationTimer += Time.deltaTime;
+			if(dodgeDurationTimer >= dodgeDuration)
 			{
+				dodgeDurationTimer = 0.0f;
 				isDodging = false;
+				PlayerManager.GetPlayerScript().SetInvincible(false);
 			}
 		}
 
-		if(!isDodging && Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.Dodge)))
+		if(!isDodging && Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.Dodge)) && dodgeCooldownTimer >= dodgeCooldown)
 		{
 			isDodging = true;
 			rigidbody.velocity = heading * dodgeSpeed;
-			dodgeTimer = dodgeDuration;
+			dodgeCooldownTimer = 0.0f;
+			dodgeDurationTimer = 0.0f;
+			PlayerManager.GetPlayerScript().SetInvincible(true);
 		}
 
 

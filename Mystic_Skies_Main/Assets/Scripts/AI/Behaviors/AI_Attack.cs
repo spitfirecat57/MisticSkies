@@ -4,14 +4,20 @@ using System.Collections;
 public class AI_Attack : AI_State 
 {
 	public GameObject enemyAttack;
-	public float attackRate = 4.0f;
-	public float attackDuration = 2.0f;
-	private float attackTimer = 0.0f;
-	public bool isRanged = true;
+	public int numFireballsInBurst = 3;
+	public float burstFireRate = 0.8f;
+	public float attackCooldownTime = 5.0f;
+
+	private float burstFireTimer = 0.0f;
+	private int burstFireCount = 0;
+	private float attackIntervalTimer = 0.0f;
+	private bool isAttacking = false;
+	private bool isSuicidal = false;
+
 
 	void Start()
 	{
-		attackTimer = attackRate + 1.0f;
+		attackIntervalTimer = attackCooldownTime;
 	}
 
 	override public void OnEnter()
@@ -25,30 +31,78 @@ public class AI_Attack : AI_State
 		//anim.SetTrigger("attack");
 		//anim.CrossFade ("Attack", 0f);
 		//------MARCO WAS HERE------
+
+		print ("[Enemy] Entered Attack State");
 	}
-	
+
+	void Update()
+	{
+		// time bertween burstFire attacks
+		attackIntervalTimer += Time.deltaTime;
+	}
+
 	override public void OnUpdate()
 	{
 		Vector3 playerPos = PlayerManager.GetPlayerPosition ();
 		float distToTargetSqr = (playerPos - transform.position).sqrMagnitude;
-
 		transform.LookAt (new Vector3(playerPos.x, transform.position.y, playerPos.z));
 
-		attackTimer += Time.deltaTime;
-		if(attackTimer > attackRate)
+
+		if(isAttacking)
 		{
-			// Attack the player
-			GameObject.Instantiate (enemyAttack, transform.position + transform.forward, transform.rotation);
-			attackTimer = -attackDuration;
+			// increment burstfire timer
+			burstFireTimer += Time.deltaTime;
+
+			// if firing is available
+			if(burstFireTimer >= burstFireRate)
+			{
+				GameObject.Instantiate (enemyAttack, transform.position + transform.forward, transform.rotation);				
+				++burstFireCount;
+				burstFireTimer = 0.0f;
+
+				print ("[Enemy] Fired number " + burstFireCount);
+
+				if(burstFireCount == numFireballsInBurst)
+				{
+					attackIntervalTimer = 0.0f;
+					burstFireCount = 0;
+					isAttacking = false;
+				}
+			}
+		}
+		else
+		//if(!isAttacking)
+		{
+			// set attacking flag
+			if(attackIntervalTimer > attackCooldownTime)
+			{
+				isAttacking = true;
+				print ("[Enemy] Starting attack cycle");
+			}
+
+			if(distToTargetSqr > owner.attackDistance * owner.attackDistance)
+			{
+				owner.ChangeState(AI_StateMachine.AIStates.Seek);
+			}
+			else if(distToTargetSqr > owner.pursueDistance * owner.pursueDistance)
+			{
+				owner.ChangeState(AI_StateMachine.AIStates.Idle);
+			}
 		}
 
-		if(!isRanged && attackTimer > 0.0f && distToTargetSqr > owner.attackDistance * owner.attackDistance)
+		if(!isSuicidal && enemyScript.loadout.health < enemyScript.loadout.maxHealth / 4)
 		{
-			owner.ChangeState(AI_StateMachine.AIStates.Seek);
+			owner.attackDistance = 1000.0f;
+			owner.pursueDistance = 1000.0f;
+			owner.alertDistance = 0.0f;
+			enemyScript.explodeOnTouch = true;
+			navAgent.SetDestination(playerPos);
+			navAgent.speed = enemyScript.suicideSpeed;
+			isSuicidal = true;
 		}
-		else if(isRanged && distToTargetSqr > owner.pursueDistance * owner.pursueDistance)
+		else if(isSuicidal)
 		{
-			owner.ChangeState(AI_StateMachine.AIStates.Idle);
+			navAgent.SetDestination(playerPos);
 		}
 	}
 	
