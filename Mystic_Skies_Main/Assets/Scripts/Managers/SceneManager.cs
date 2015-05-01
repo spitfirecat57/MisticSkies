@@ -8,6 +8,7 @@ public enum Scenes
 	Level1,
 	test_1,
 	test_2,
+	JustForJesse,
 	COUNT
 }
 
