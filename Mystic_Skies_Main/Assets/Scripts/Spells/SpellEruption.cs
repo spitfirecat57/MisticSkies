@@ -75,10 +75,19 @@ public class SpellEruption : Spell
 							Enemy enemy = col.GetComponent<Enemy>();
 							if(enemy)
 							{
-								Debug.Log("[SpellEruption] Explosion hit an enemy");
+								//Debug.Log("[SpellEruption] Explosion hit an enemy");
 								enemy.TakeDamage(loadout.type, loadout.explosionDamage);
 							}
 						}
+						else if(col.CompareTag("FireBoss"))
+						{
+							FireBoss enemy = col.GetComponent<FireBoss>();
+							if(enemy)
+							{
+								enemy.TakeDamage(loadout.type, loadout.explosionDamage);
+							}
+						}
+
 					}
 				}
 

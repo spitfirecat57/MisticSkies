@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(NavMeshAgent))]
 
@@ -15,11 +16,17 @@ public class FireBoss : MonoBehaviour
 	private delegate void AttackDelegate();
 	private AttackDelegate[] attackArray;
 
+	private SpellType mType = SpellType.Fire;
 	public float maxHealth;
-	private float currentHealth;
+	public float currentHealth;
+	public float knockBackPower;
 	public float walkSpeed;
 	public float turnSpeedDegreesPerSecond;
 	public float noticePlayerDist;
+	private bool lookAtPlayer = true;
+	public Transform mouthPosition;
+	private bool isInvincible = false;
+	private bool hasBeenCatastrophic = false;
 
 	// ===== Basic Attacks =====
 	public float basicAttackCooldownTime;
@@ -50,6 +57,11 @@ public class FireBoss : MonoBehaviour
 	// ===== Catastrophic Combustion Attacks =====
 	public float cataCooldownTime;
 	private float cataAttackTimer = 0.0f;
+	public Transform cataPosition;
+	public Transform[] flamePillarPositions;
+	public GameObject flamePillarPrefab;
+	private List<GameObject> flamePillars;
+	public float flamePillarRiseSpeed;
 
 	// Fireball
 	public GameObject fireballPrefab;
@@ -72,14 +84,18 @@ public class FireBoss : MonoBehaviour
 		attackArray[(int)BasicAttacks.Headbutt] 	= Headbutt;
 		attackArray[(int)BasicAttacks.FlameTower] 	= FlameTower;
 		attackArray[(int)BasicAttacks.FlameThrower] = FlameThrower;
+
+		flamePillars = new List<GameObject>();
 	}
 
 	void Update()
 	{
 		Vector3 playerPos = PlayerManager.GetPlayerPosition();
 
-
-		transform.LookAt(new Vector3 (playerPos.x, transform.position.y, playerPos.z));
+		if(lookAtPlayer)
+		{
+			transform.LookAt(new Vector3 (playerPos.x, transform.position.y, playerPos.z));
+		}
 
 
 		if(Input.GetKeyDown(KeyCode.B))
@@ -94,28 +110,40 @@ public class FireBoss : MonoBehaviour
 		{
 			FlameThrower();
 		}
+		if(Input.GetKeyDown(KeyCode.V))
+		{
+			Fireball();
+		}
 
-//		// Basic
-//		if(!isCatastrophic)
-//		{
-//			basicAttackTimer += Time.deltaTime;
-//			if(basicAttackTimer >= basicAttackCooldownTime)
-//			{
-//				int attack = Random.Range (0, (int)BasicAttacks.COUNT);
-//				//attackArray[attack]();
-//				print ("[fIREbOSS] aTTACKED");
-//			}
-//		}
-//		// Catastrophic
-//		else
-//		{
-//			cataAttackTimer += Time.deltaTime;
-//			if(cataAttackTimer >= cataCooldownTime)
-//			{
-//				Fireball();
-//			}
-//		}
+		// Basic
+		if(!isCatastrophic)
+		{
+			basicAttackTimer += Time.deltaTime;
+			if(basicAttackTimer >= basicAttackCooldownTime)
+			{
+				int attack = Random.Range (0, (int)BasicAttacks.COUNT);
+				attackArray[attack]();
+				basicAttackTimer = 0.0f;
+			}
+		}
+		// Catastrophic
+		else
+		{
+			cataAttackTimer += Time.deltaTime;
+			if(cataAttackTimer >= cataCooldownTime)
+			{
+				Fireball();
+				cataAttackTimer = 0.0f;
+			}
 
+			flamePillars.RemoveAll(obj => obj == null);
+
+			if(flamePillars.Count == 0)
+			{
+				isInvincible = false;
+				isCatastrophic = false;
+			}
+		}
 	}
 
 	private void Headbutt()
@@ -142,6 +170,17 @@ public class FireBoss : MonoBehaviour
 		}
 		navAgent.velocity = Vector3.zero;
 		//lookAtPlayer = true;
+	}
+
+	void OnCollisionEnter(Collision collision)
+	{
+		if(collision.gameObject.CompareTag("Player"))
+		{
+			StopCoroutine("HeadbuttCo");
+			navAgent.velocity = Vector3.zero;
+			PlayerManager.GetPlayerScript().KnockBack(transform.forward * knockBackPower);
+			PlayerManager.GetPlayerScript().TakeDamage(headbuttDamage);
+		}
 	}
 
 	private void FlameTower()
@@ -184,5 +223,76 @@ public class FireBoss : MonoBehaviour
 
 	private void Fireball()
 	{
+		GameObject.Instantiate (fireballPrefab, mouthPosition.position, transform.rotation);
 	}
+
+	public void TakeDamage(SpellType type, float damage)
+	{
+		float totalDamage = damage * Spell.GetDamageMultiplier (type, mType);
+		if(!isInvincible)
+		{
+			currentHealth -= totalDamage;
+		}
+
+		if(currentHealth < maxHealth * 0.25f && !hasBeenCatastrophic)
+		{
+			currentHealth = maxHealth * 0.25f;
+			StartCoroutine("InitCatastrophicCombustion");
+		}
+
+		if(currentHealth < 0.0f)
+		{
+			currentHealth = 0.0f;
+			Destroy(gameObject);
+		}
+	}
+
+	private IEnumerator InitCatastrophicCombustion()
+	{
+		// TODO: fix the pillar rise
+
+		isCatastrophic = true;
+		hasBeenCatastrophic = true;
+		isInvincible = true;
+		lookAtPlayer = false;
+		navAgent.stoppingDistance = 0.0f;
+		navAgent.SetDestination (cataPosition.position);
+
+		int numFlamePillars = flamePillarPositions.Length;
+		for(int i = 0; i < numFlamePillars; ++i)
+		{
+			GameObject fp = GameObject.Instantiate(flamePillarPrefab, flamePillarPositions[i].position - (Vector3.up * 5.0f), Quaternion.identity) as GameObject;
+			fp.rigidbody.velocity = Vector3.up * flamePillarRiseSpeed;
+			fp.collider.enabled = false;
+			flamePillars.Add(fp);
+		}
+
+		float timeToRise = 10.0f / flamePillarRiseSpeed;
+		float riseTimer = 0.0f;
+
+		while(riseTimer < timeToRise)
+		{
+			riseTimer += Time.deltaTime;
+			yield return null;
+		}
+
+		foreach(GameObject g in flamePillars)
+		{
+			g.rigidbody.velocity = Vector3.zero;
+			g.collider.enabled = true;
+		}
+
+		lookAtPlayer = true;
+	}
+
+
+
+
+
 }
+
+
+
+
+
+

@@ -36,6 +36,16 @@ public class Meteor : MonoBehaviour
 					enemy.TakeDamage(loadout.type, loadout.damage);
 				}
 			}
+			else if(col.CompareTag("FireBoss"))
+			{
+				FireBoss enemy = col.GetComponent<FireBoss>();
+				if(enemy)
+				{
+					//Debug.Log("[Fireball] Explosion hit an enemy");
+					enemy.TakeDamage(loadout.type, loadout.damage);
+				}
+			}
+
 		}
 		Destroy (gameObject);
 	}

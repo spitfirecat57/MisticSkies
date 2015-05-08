@@ -41,5 +41,19 @@ public class RockNova : MonoBehaviour
 				}
 			}
 		}
+		else if(collider.CompareTag("FireBoss"))
+		{
+			Vector3 toOther = collider.transform.position - transform.position;
+			
+			if(toOther.y < loadout.maxHeight)
+			{
+				FireBoss enemy = collider.GetComponent<FireBoss>();
+				if(enemy)
+				{
+					enemy.TakeDamage(loadout.type, loadout.damage);
+				}
+			}
+		}
+
 	}
 }

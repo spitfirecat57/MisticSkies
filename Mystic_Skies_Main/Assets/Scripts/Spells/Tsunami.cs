@@ -32,5 +32,17 @@ public class Tsunami : MonoBehaviour
 				e.TakeDamage(loadout.type, loadout.damage);
 			}
 		}
+		else if(other.CompareTag("FireBoss"))
+		{
+			FireBoss e = other.GetComponent<FireBoss>();
+			if(e)
+			{
+				e.TakeDamage(loadout.type, loadout.damage);
+			}
+		}
+		else if(other.CompareTag("FlamePillar"))
+		{
+			Destroy(other.gameObject);
+		}
 	}
 }

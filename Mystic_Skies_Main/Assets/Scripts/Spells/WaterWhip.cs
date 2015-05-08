@@ -62,5 +62,23 @@ public class WaterWhip : MonoBehaviour
 				}
 			}
 		}
+		else if(collider.CompareTag("FireBoss"))
+		{
+			Vector3 toOtherOffset = collider.transform.position - positionOffset;
+			float theta = Mathf.Acos(Vector3.Dot(toOtherOffset.normalized, transform.forward));
+			
+			if(toOtherOffset.sqrMagnitude < (loadout.range * loadout.range) && theta < (loadout.radius * 0.5f * Mathf.Deg2Rad))
+			{
+				FireBoss enemy = collider.GetComponent<FireBoss>();
+				if(enemy)
+				{
+					enemy.TakeDamage(loadout.type, loadout.damage);
+				}
+			}
+		}
+		else if(collider.CompareTag("FlamePillar"))
+		{
+			Destroy(collider.gameObject);
+		}
 	}
 }

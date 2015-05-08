@@ -50,6 +50,15 @@ public class Fireball : MonoBehaviour
 					enemy.TakeDamage(loadout.type, loadout.damage);
 				}
 			}
+			else if(other.CompareTag("FireBoss"))
+			{
+				FireBoss enemy = other.GetComponent<FireBoss>();
+				if(enemy)
+				{
+					enemy.TakeDamage(loadout.type, loadout.damage);
+				}
+			}
+
 			
 			if(loadout.isExplosive)
 			{
