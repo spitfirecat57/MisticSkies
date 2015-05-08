@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 
 	private Vector3 heading;
 
-
+	Animator animator;
 
 	private Color matColor;
 
@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
 	{
 		camTransform = PlayerManager.GetCameraTransform ();
 		isDodging = false;
+		animator = GetComponentInChildren<Animator> ();
 	}
 
 	void Update()
@@ -89,8 +90,11 @@ public class PlayerController : MonoBehaviour
 			dodgeDurationTimer += Time.deltaTime;
 			if(dodgeDurationTimer >= dodgeDuration)
 			{
-				dodgeDurationTimer = 0.0f;
 				isDodging = false;
+				//
+				animator.SetBool("Rolling", isDodging);
+				//
+				dodgeDurationTimer = 0.0f;
 				PlayerManager.GetPlayerScript().SetInvincible(false);
 			}
 		}
@@ -98,7 +102,10 @@ public class PlayerController : MonoBehaviour
 		if(!isDodging && Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.Dodge)) && dodgeCooldownTimer >= dodgeCooldown)
 		{
 			isDodging = true;
-			rigidbody.velocity = heading * dodgeSpeed;
+			//
+			animator.SetBool("Rolling", isDodging);
+			//
+			rigidbody.velocity = heading * dodgeSpeed + new Vector3(0.0f, rigidbody.velocity.y, 0.0f);
 			dodgeCooldownTimer = 0.0f;
 			dodgeDurationTimer = 0.0f;
 			PlayerManager.GetPlayerScript().SetInvincible(true);
