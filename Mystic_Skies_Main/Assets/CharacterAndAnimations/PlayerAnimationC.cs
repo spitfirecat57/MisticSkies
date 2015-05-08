@@ -38,6 +38,7 @@ public class PlayerAnimationC : MonoBehaviour {
 			inCastPos = true;
 		}
 
+
 		if(inCastPos)
 		{
 			mTimer += Time.deltaTime;
@@ -49,6 +50,22 @@ public class PlayerAnimationC : MonoBehaviour {
 				inCastPos = false;
 			}
 		}
+
+		//MARCO WAS HERE
+		if (Input.GetKeyDown ("s"))
+		{
+
+			animator.SetBool("Back", true);
+		}
+		if (Input.GetKeyUp ("s"))
+		{
+			
+			animator.SetBool("Back", false);
+		}
+
+		//MARCO WAS HERE
+
+
 
 	}
 	
