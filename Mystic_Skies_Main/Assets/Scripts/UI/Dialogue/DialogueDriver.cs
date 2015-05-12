@@ -17,10 +17,17 @@ public class DialogueDriver : Interactable
 	private int dialogueIndex = 0;
 	private int numLines = 0;
 
+	//MARCO WAS HERE
+	internal Animator animator;
+	//MARCO WAS HERE
 
 	void Start()
 	{
 		numLines = dialogue.Length;
+
+		////MARCO WAS HERE
+		animator = GetComponent<Animator>();
+		////MARCO WAS HERE
 	}
 
 	public override void OnEnter()
@@ -33,6 +40,10 @@ public class DialogueDriver : Interactable
 		{
 			InputManager.SetAcceptingInput(false);
 			isInteracted = true;
+
+			//MARCO WAS HERE
+			animator.SetBool("Interacting", true);
+			//MARCO WAS HERE
 		}
 
 		if(dialogueIndex < numLines)
@@ -56,6 +67,10 @@ public class DialogueDriver : Interactable
 	{
 		isInteracted = false;
 		dialogueIndex = 0;
+
+		//MARCO WAS HERE
+		animator.SetBool("Interacting", false);
+		//MARCO WAS HERE
 	}
 
 
