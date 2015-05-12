@@ -149,7 +149,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
-    motionNodeName: 
+    motionNodeName: Kessho_Mesh
     animationCompression: 3
     animationRotationError: .5
     animationPositionError: .5
