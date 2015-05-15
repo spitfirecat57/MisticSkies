@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
 	public float maxMana;
 	public float speedEpsilon;
 	public float friction;
+	public float maxTargetingRange;
 	public float mKnockbackHeight = 4.0f;
 	public List<NameValue> potions;
 	public List<NameValue> inventory;
@@ -121,10 +122,10 @@ public class Player : MonoBehaviour
 	{
 		mc.enabled = false;
 		rigidbody.velocity = new Vector3(knockback.x, mKnockbackHeight, knockback.z);
-		while(gameObject.rigidbody.velocity.sqrMagnitude > speedEpsilon)
+		while(Mathf.Abs(gameObject.rigidbody.velocity.y) > speedEpsilon)
 		{
-			rigidbody.velocity *= (1.0f - friction);
-			yield return new WaitForEndOfFrame();
+			rigidbody.velocity *= (1.0f - (friction * Time.deltaTime));
+			yield return null;
 		}
 		mc.enabled = true;
 		rigidbody.velocity = Vector3.zero;	

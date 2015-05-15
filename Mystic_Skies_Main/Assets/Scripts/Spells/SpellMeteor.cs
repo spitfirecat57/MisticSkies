@@ -41,7 +41,7 @@ public class SpellMeteor : Spell
 				}
 				else
 				{
-					target = EnemyManager.GetClosest(transform.position);
+					target = EnemyManager.GetClosest(transform.position, PlayerManager.GetPlayerScript().maxTargetingRange);
 					if(target)
 					{
 						met.targetPos = target.transform.position;

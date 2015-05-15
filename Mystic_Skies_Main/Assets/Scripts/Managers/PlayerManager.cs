@@ -163,11 +163,11 @@ public class PlayerManager : MonoBehaviour
 	{
 		if(target)
 		{
-			target = EnemyManager.GetNextClosest(target, transform.position);
+			target = EnemyManager.GetNextClosest(target, PlayerManager.GetPlayerPosition(), playerScript.maxTargetingRange);
 		}
 		else
 		{
-			target = EnemyManager.GetClosest(transform.position);
+			target = EnemyManager.GetClosest(PlayerManager.GetPlayerPosition(), playerScript.maxTargetingRange);
 		}
 	}
 	

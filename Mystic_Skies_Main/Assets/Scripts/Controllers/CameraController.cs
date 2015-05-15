@@ -71,6 +71,18 @@ public class CameraController : MonoBehaviour
 			
 			transform.position = playerTransform.position + newCameraPos;
 			transform.LookAt (playerTransform.position + (Vector3.up * lookAtHeightOffset));
+
+			RaycastHit hit;
+			if(Physics.Raycast(transform.position, transform.forward, out hit, maxDistFromPlayer))
+			{
+				if(hit.collider.CompareTag("Floor"))
+				{
+					//print ("[Camera] Behind the terrain, correcting position");
+					transform.position = hit.point + (Vector3.up * 0.2f);
+					transform.LookAt (playerTransform.position + (Vector3.up * lookAtHeightOffset));
+				}
+			}
+
 		}
 		// target, action cam
 		else

@@ -47,7 +47,7 @@ public class SpellFireball : Spell
 			}
 			else
 			{
-				fb.target = EnemyManager.GetClosest(transform.position);
+				fb.target = EnemyManager.GetClosest(transform.position, PlayerManager.GetPlayerScript().maxTargetingRange);
 			}
 			
 			fb.loadout = loadout;

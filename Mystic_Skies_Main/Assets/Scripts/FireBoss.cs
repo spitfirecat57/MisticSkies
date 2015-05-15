@@ -41,7 +41,7 @@ public class FireBoss : MonoBehaviour
 	public float headbuttRearingSpeed;
 
 	// Flame Tower
-	public GameObject flameTowerIndicatorCircle;
+	public GameObject flameTowerPrefab;
 	public float flameTowerDamage;
 	public float flameTowerSpeed;
 	public float flameTowerDuration;
@@ -185,31 +185,38 @@ public class FireBoss : MonoBehaviour
 
 	private void FlameTower()
 	{
-		StartCoroutine ("FlameTowerCo");
-	}
-	private IEnumerator FlameTowerCo()
-	{
-		float flameIndicatorTimer = 0.0f;
-		float flameTowerTimer = 0.0f;
+		GameObject ft = GameObject.Instantiate (flameTowerPrefab, transform.position, transform.rotation) as GameObject;
+		FlameTower ftscript = ft.GetComponent<FlameTower> ();
+		ftscript.Init (flameTowerDamage, flameTowerSpeed, flameTowerSpeed);
+		Destroy (ft, flameTowerDuration);
 
-		GameObject fti = GameObject.Instantiate (flameTowerIndicatorCircle, transform.position, transform.rotation) as GameObject;
-		while(flameIndicatorTimer < flameTowerDuration)
-		{
-			flameIndicatorTimer += Time.deltaTime;
-			fti.transform.localScale = new Vector3(fti.transform.localScale.x * flameTowerSpeed, fti.transform.localScale.y, fti.transform.localScale.z * flameTowerSpeed);
-			yield return null;
-		}
-		Destroy(fti);
-
-		GameObject ftf = GameObject.Instantiate (flameTowerIndicatorCircle, transform.position, transform.rotation) as GameObject;
-		while(flameTowerTimer < flameTowerDuration)
-		{
-			flameTowerTimer += Time.deltaTime;
-			ftf.transform.localScale = new Vector3(ftf.transform.localScale.x * flameTowerSpeed, ftf.transform.localScale.y, ftf.transform.localScale.z * flameTowerSpeed);
-			yield return null;
-		}
-		Destroy(ftf);
+		//StartCoroutine ("FlameTowerCo");
 	}
+
+
+//	private IEnumerator FlameTowerCo()
+//	{
+//		float flameIndicatorTimer = 0.0f;
+//		float flameTowerTimer = 0.0f;
+//
+//		GameObject fti = GameObject.Instantiate (flameTowerIndicatorCircle, transform.position, transform.rotation) as GameObject;
+//		while(flameIndicatorTimer < flameTowerDuration)
+//		{
+//			flameIndicatorTimer += Time.deltaTime;
+//			fti.transform.localScale = new Vector3(fti.transform.localScale.x * flameTowerSpeed, fti.transform.localScale.y, fti.transform.localScale.z * flameTowerSpeed);
+//			yield return null;
+//		}
+//		Destroy(fti);
+//
+//		GameObject ftf = GameObject.Instantiate (flameTowerIndicatorCircle, transform.position, transform.rotation) as GameObject;
+//		while(flameTowerTimer < flameTowerDuration)
+//		{
+//			flameTowerTimer += Time.deltaTime;
+//			ftf.transform.localScale = new Vector3(ftf.transform.localScale.x * flameTowerSpeed, ftf.transform.localScale.y, ftf.transform.localScale.z * flameTowerSpeed);
+//			yield return null;
+//		}
+//		Destroy(ftf);
+//	}
 
 	private void FlameThrower()
 	{

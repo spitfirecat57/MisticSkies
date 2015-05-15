@@ -29,7 +29,7 @@ public class Fireball : MonoBehaviour
 		}
 		else
 		{
-			target = EnemyManager.GetClosest(transform.position);
+			target = EnemyManager.GetClosest(transform.position, PlayerManager.GetPlayerScript().maxTargetingRange);
 		}
 		
 		rigidbody.velocity += accel;

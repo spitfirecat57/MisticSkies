@@ -49,7 +49,7 @@ public class EnemyManager : Singleton<EnemyManager>
 		}
 	}
 
-	public static GameObject GetClosest(Vector3 pos)
+	public static GameObject GetClosest(Vector3 pos, float maxDist)
 	{
 		enemies.RemoveAll(obj => obj == null);
 
@@ -65,11 +65,14 @@ public class EnemyManager : Singleton<EnemyManager>
 				closestEnemy = e;
 			}
 		}
-
+		if(closestDist > maxDist * maxDist)
+		{
+			return null;
+		}
 		return closestEnemy;
 	}
 
-	public static GameObject GetNextClosest(GameObject current, Vector3 pos)
+	public static GameObject GetNextClosest(GameObject current, Vector3 pos, float maxDist)
 	{
 		enemies.RemoveAll(obj => obj == null);
 
@@ -85,7 +88,10 @@ public class EnemyManager : Singleton<EnemyManager>
 				closestEnemy = e;
 			}
 		}
-		
+		if(closestDist > maxDist * maxDist)
+		{
+			return null;
+		}
 		return closestEnemy;
 	}
 
