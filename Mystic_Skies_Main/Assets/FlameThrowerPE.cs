@@ -7,11 +7,13 @@ public class FlameThrowerPE : MonoBehaviour
 
 	void OnParticleCollision(GameObject other)
 	{
-		print("OnParticleCollision");
 		if(other.CompareTag("Player"))
 		{
 			PlayerManager.GetPlayerScript().TakeDamage(damagePerSecond * Time.deltaTime);
-			print("OnParticleCollision:Hit Player");
+		}
+		else if(other.CompareTag("Fireball"))
+		{
+			Destroy(other.gameObject);
 		}
 	}
 }
