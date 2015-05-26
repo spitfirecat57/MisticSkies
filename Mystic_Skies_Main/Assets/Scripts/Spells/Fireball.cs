@@ -7,6 +7,8 @@ public class Fireball : MonoBehaviour
 	public GameObject target;
 	[HideInInspector]
 	public SpellFireball.Loadout loadout;
+	public float damage;
+	public SpellType type;
 	
 	
 	void Start()
@@ -47,7 +49,7 @@ public class Fireball : MonoBehaviour
 				if(enemy)
 				{
 					enemy.Knockback((other.transform.position - transform.position).normalized * loadout.knockBack);
-					enemy.TakeDamage(loadout.type, loadout.damage);
+					enemy.TakeDamage(type, damage);
 				}
 			}
 			else if(other.CompareTag("FireBoss"))
@@ -55,7 +57,7 @@ public class Fireball : MonoBehaviour
 				FireBoss enemy = other.GetComponent<FireBoss>();
 				if(enemy)
 				{
-					enemy.TakeDamage(loadout.type, loadout.damage);
+					enemy.TakeDamage(type, damage);
 				}
 			}
 
@@ -83,7 +85,7 @@ public class Fireball : MonoBehaviour
 				if(enemy)
 				{
 					//Debug.Log("[Fireball] Explosion hit an enemy");
-					enemy.TakeDamage(loadout.type, loadout.explodeDamage);
+					enemy.TakeDamage(type, damage);
 				}
 			}
 		}

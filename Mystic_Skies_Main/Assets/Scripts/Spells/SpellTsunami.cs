@@ -6,8 +6,6 @@ public class SpellTsunami : Spell
 	[System.Serializable]
 	public class Loadout
 	{
-		public SpellType type;
-		public float damage;
 		public float speed;
 		public float range;
 	}
@@ -34,6 +32,8 @@ public class SpellTsunami : Spell
 			Tsunami tsu = tsunami.GetComponent<Tsunami>();
 			if(tsu)
 			{
+				tsu.type = type;
+				tsu.damage = damage;
 				tsu.loadout = loadout;
 			}
 		}

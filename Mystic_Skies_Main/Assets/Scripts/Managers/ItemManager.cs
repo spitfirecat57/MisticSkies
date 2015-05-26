@@ -15,6 +15,11 @@ public class ItemManager : MonoBehaviour
 		PotionMana,
 		PotionRejuv,
 		HealthShard,
+		MaxHealthShard,
+		MaxMagicShard,
+		MagicRegenShard,
+		StrengthShard,
+		ToughnessShard,
 		// ##### INVENTORY ITEMS #####
 		Wand,
 		// ##### COLLECTIBLES #####
@@ -24,7 +29,7 @@ public class ItemManager : MonoBehaviour
 
 
 	//######################################################################
-	// ENUM ConsumableType: ANYTHING THAT CAN BE DROPPED BY AN ENEMY
+	// ENUM ConsumableType: ANYTHING THAT CAN BE PICKED UP BY THE PLAYER
 
 	public enum ConsumableType
 	{
@@ -33,6 +38,11 @@ public class ItemManager : MonoBehaviour
 		PotionMana,
 		PotionRejuv,
 		HealthShard,
+		MaxHealthShard,
+		MaxMagicShard,
+		MagicRegenShard,
+		StrengthShard,
+		ToughnessShard,
 		COUNT
 	};
 
@@ -93,6 +103,12 @@ public class ItemManager : MonoBehaviour
 	public GameObject objPotionMana;
 	public GameObject objPotionRejuv;
 	public GameObject objHealthShard;
+	public GameObject objMaxHealthShard;
+	public GameObject objMaxMagicShard;
+	public GameObject objMagicRegenShard;
+	public GameObject objStrengthShard;
+	public GameObject objToughnessShard;
+
 	// ##### INVENTORY ITEMS #####
 	public GameObject objWand;
 	// ##### COLLECTIBLES #####
@@ -102,10 +118,15 @@ public class ItemManager : MonoBehaviour
 	//######################################################################
 	// ITEM VALUES: VALUES FOR ITEMS
 
-	public int valHealthShard;
 	public int valPotionHealth;
 	public int valPotionMana;
 	public int valPotionRejuv;
+	public int valHealthShard;
+	public int valMaxHealthShard;
+	public int valMaxMagicShard;
+	public int valMagicRegenShard;
+	public int valStrengthShard;
+	public int valToughnessShard;
 
 	// TODO: What do values for other items mean??
 
@@ -140,26 +161,42 @@ public class ItemManager : MonoBehaviour
 			}
 
 			// Consumables
-			itemObjects[(int)ItemType.HealthShard]	= objHealthShard;
-			itemObjects[(int)ItemType.PotionHealth]	= objPotionHealth;
-			itemObjects[(int)ItemType.PotionMana] 	= objPotionMana;
-			itemObjects[(int)ItemType.PotionRejuv] 	= objPotionRejuv;
+			itemObjects[(int)ItemType.HealthShard]		= objHealthShard;
+			itemObjects[(int)ItemType.PotionHealth]		= objPotionHealth;
+			itemObjects[(int)ItemType.PotionMana] 		= objPotionMana;
+			itemObjects[(int)ItemType.PotionRejuv] 		= objPotionRejuv;
+			itemObjects[(int)ItemType.MaxHealthShard]	= objMaxHealthShard;
+			itemObjects[(int)ItemType.MaxMagicShard]	= objMaxMagicShard;
+			itemObjects[(int)ItemType.MagicRegenShard]	= objMagicRegenShard;
+			itemObjects[(int)ItemType.StrengthShard]	= objStrengthShard;
+			itemObjects[(int)ItemType.ToughnessShard]	= objToughnessShard;
 			// Inventory Items
 			itemObjects[(int)ItemType.Wand] 		= objWand;
 			// Collectibles
 			itemObjects[(int)ItemType.PuzzlePiece] 	= objPuzzlePiece;
 
 			// Consumables
-			itemValues[(int)ItemType.HealthShard]	= valHealthShard;
-			itemValues[(int)ItemType.PotionHealth] 	= valPotionHealth;
-			itemValues[(int)ItemType.PotionMana] 	= valPotionMana;
-			itemValues[(int)ItemType.PotionRejuv] 	= valPotionRejuv;
+			itemValues[(int)ItemType.HealthShard]		= valHealthShard;
+			itemValues[(int)ItemType.PotionHealth] 		= valPotionHealth;
+			itemValues[(int)ItemType.PotionMana] 		= valPotionMana;
+			itemValues[(int)ItemType.PotionRejuv] 		= valPotionRejuv;
+			itemValues[(int)ItemType.MaxHealthShard]	= valMaxHealthShard;
+			itemValues[(int)ItemType.MaxMagicShard]		= valMaxMagicShard;
+			itemValues[(int)ItemType.MagicRegenShard]	= valMagicRegenShard;
+			itemValues[(int)ItemType.StrengthShard]		= valStrengthShard;
+			itemValues[(int)ItemType.ToughnessShard]	= valToughnessShard;
+
 
 			// Consumables
-			itemNames[(int)ItemType.HealthShard] 	= "Heart";
-			itemNames[(int)ItemType.PotionHealth] 	= "PotionHealth";
-			itemNames[(int)ItemType.PotionMana] 	= "PotionMana";
-			itemNames[(int)ItemType.PotionRejuv] 	= "PotionRejuv";
+			itemNames[(int)ItemType.HealthShard] 		= "Heart";
+			itemNames[(int)ItemType.PotionHealth] 		= "PotionHealth";
+			itemNames[(int)ItemType.PotionMana] 		= "PotionMana";
+			itemNames[(int)ItemType.PotionRejuv] 		= "PotionRejuv";
+			itemNames[(int)ItemType.MaxHealthShard] 	= "MaxHealthShard";
+			itemNames[(int)ItemType.MaxMagicShard] 		= "MaxMagicShard";
+			itemNames[(int)ItemType.MagicRegenShard] 	= "MagicRegenShard";
+			itemNames[(int)ItemType.StrengthShard] 		= "StrengthShard";
+			itemNames[(int)ItemType.ToughnessShard] 	= "ToughnessShard";
 			// Inventory Items
 			itemNames[(int)ItemType.Wand] 			= "Wand";
 			// Collectibles

@@ -5,6 +5,8 @@ public class WaterWhip : MonoBehaviour
 {
 	[HideInInspector]
 	public SpellWaterWhip.Loadout loadout;
+	public float damage;
+	public SpellType type;
 
 	private BoxCollider hitbox;
 	
@@ -54,7 +56,7 @@ public class WaterWhip : MonoBehaviour
 				Enemy enemy = collider.GetComponent<Enemy>();
 				if(enemy)
 				{
-					enemy.TakeDamage(loadout.type, loadout.damage);
+					enemy.TakeDamage(type, damage);
 				}
 				else
 				{
@@ -72,7 +74,7 @@ public class WaterWhip : MonoBehaviour
 				FireBoss enemy = collider.GetComponent<FireBoss>();
 				if(enemy)
 				{
-					enemy.TakeDamage(loadout.type, loadout.damage);
+					enemy.TakeDamage(type, damage);
 				}
 			}
 		}

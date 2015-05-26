@@ -81,7 +81,7 @@ public class Enemy : MonoBehaviour
 		float totalDamage = damage * Spell.GetDamageMultiplier (attackType, loadout.mType);
 		loadout.health -= totalDamage;
 		print ("Enemy took " + damage + " damage");
-		print ("New Health = " + loadout.health);
+		//print ("New Health = " + loadout.health);
 		
 		if(loadout.health < 1)
 		{

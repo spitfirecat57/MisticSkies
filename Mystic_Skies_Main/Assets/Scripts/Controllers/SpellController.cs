@@ -115,7 +115,41 @@ public class SpellController : MonoBehaviour
 			}
 		}
 	}
+
+
+	public void IncreaseStrength(float val)
+	{
+		foreach(Spell spell in mSpells)
+		{
+			spell.damage *= val;
+		}
+	}
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

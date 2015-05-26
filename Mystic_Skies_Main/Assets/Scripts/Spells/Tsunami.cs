@@ -5,6 +5,8 @@ public class Tsunami : MonoBehaviour
 {
 	[HideInInspector]
 	public SpellTsunami.Loadout loadout;
+	public float damage;
+	public SpellType type;
 
 	private float distanceTravelled = 0.0f;
 
@@ -29,7 +31,7 @@ public class Tsunami : MonoBehaviour
 			Enemy e = other.GetComponent<Enemy>();
 			if(e)
 			{
-				e.TakeDamage(loadout.type, loadout.damage);
+				e.TakeDamage(type, damage);
 			}
 		}
 		else if(other.CompareTag("FireBoss"))
@@ -37,7 +39,7 @@ public class Tsunami : MonoBehaviour
 			FireBoss e = other.GetComponent<FireBoss>();
 			if(e)
 			{
-				e.TakeDamage(loadout.type, loadout.damage);
+				e.TakeDamage(type, damage);
 			}
 		}
 		else if(other.CompareTag("FlamePillar"))

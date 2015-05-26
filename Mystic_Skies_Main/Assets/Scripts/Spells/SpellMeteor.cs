@@ -6,8 +6,6 @@ public class SpellMeteor : Spell
 	[System.Serializable]
 	public class Loadout
 	{
-		public SpellType type;
-		public float damage;
 		public float explodeRadius;
 		public float speed;
 		public float launchOffsetHeight;
@@ -47,6 +45,8 @@ public class SpellMeteor : Spell
 						met.targetPos = target.transform.position;
 					}
 				}
+				met.type = type;
+				met.damage = damage;
 				met.loadout = loadout;
 			}
 		}

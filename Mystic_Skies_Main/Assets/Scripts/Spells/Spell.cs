@@ -21,6 +21,11 @@ public abstract class Spell : MonoBehaviour
 		return owner;
 	}
 
+
+	public SpellType type;
+	public float damage;
+
+
 	abstract public void Cast();
 
 

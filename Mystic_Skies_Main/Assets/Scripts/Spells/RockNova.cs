@@ -5,6 +5,9 @@ public class RockNova : MonoBehaviour
 {
 	[HideInInspector]
 	public SpellRockNova.Loadout loadout;
+
+	public float damage;
+	public SpellType type;
 	
 	
 	void Start()
@@ -33,7 +36,7 @@ public class RockNova : MonoBehaviour
 				Enemy enemy = collider.GetComponent<Enemy>();
 				if(enemy)
 				{
-					enemy.TakeDamage(loadout.type, loadout.damage);
+					enemy.TakeDamage(type, damage);
 				}
 				else
 				{
@@ -50,7 +53,7 @@ public class RockNova : MonoBehaviour
 				FireBoss enemy = collider.GetComponent<FireBoss>();
 				if(enemy)
 				{
-					enemy.TakeDamage(loadout.type, loadout.damage);
+					enemy.TakeDamage(type, damage);
 				}
 			}
 		}

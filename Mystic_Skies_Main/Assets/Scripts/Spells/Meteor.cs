@@ -8,6 +8,9 @@ public class Meteor : MonoBehaviour
 	[HideInInspector]
 	public Vector3 targetPos;
 
+	public float damage;
+	public SpellType type;
+
 
 	void Start()
 	{
@@ -33,7 +36,7 @@ public class Meteor : MonoBehaviour
 				if(enemy)
 				{
 					//Debug.Log("[Fireball] Explosion hit an enemy");
-					enemy.TakeDamage(loadout.type, loadout.damage);
+					enemy.TakeDamage(type, damage);
 				}
 			}
 			else if(col.CompareTag("FireBoss"))
@@ -42,7 +45,7 @@ public class Meteor : MonoBehaviour
 				if(enemy)
 				{
 					//Debug.Log("[Fireball] Explosion hit an enemy");
-					enemy.TakeDamage(loadout.type, loadout.damage);
+					enemy.TakeDamage(type, damage);
 				}
 			}
 

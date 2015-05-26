@@ -6,10 +6,8 @@ public class SpellWaterWhip : Spell
 	[System.Serializable]
 	public class Loadout
 	{
-		public SpellType type;
 		public float range;
 		public float radius;
-		public float damage;
 		public float minWidth;
 		public float verticalSize;
 	}
@@ -34,6 +32,8 @@ public class SpellWaterWhip : Spell
 
 		if(ww)
 		{
+			ww.type = type;
+			ww.damage = damage;
 			ww.loadout = loadout;
 		}
 		else

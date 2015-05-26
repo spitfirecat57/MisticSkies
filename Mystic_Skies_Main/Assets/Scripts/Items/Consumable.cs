@@ -22,29 +22,52 @@ public class Consumable : MonoBehaviour
 				{
 					case ItemManager.ConsumableType.HealthShard:
 					{
-						print ("ItemType = Consumable.Heart");
 						player.IncreaseHealth(ItemManager.GetValue(type));
 						break;
 					}
 					case ItemManager.ConsumableType.PotionHealth:
 					{
-						print ("ItemType = Consumable.PotionHealth");
 						player.AddPotion(ItemManager.PotionType.Health);
 						break;
 					}
 					case ItemManager.ConsumableType.PotionMana:
 					{
-						print ("ItemType = Consumable.PotionMana");
 						player.AddPotion(ItemManager.PotionType.Mana);
 						break;
 					}
 					case ItemManager.ConsumableType.PotionRejuv:
 					{
-						print ("ItemType = Consumable.PotionRejuv");
 						player.AddPotion(ItemManager.PotionType.Rejuv);
 						break;
 					}
+					case ItemManager.ConsumableType.MaxHealthShard:
+					{
+						player.IncreaseMaxHealth(ItemManager.GetValue(type));
+						break;
+					}
+					case ItemManager.ConsumableType.MaxMagicShard:
+					{
+						player.IncreaseMaxMana(ItemManager.GetValue(type));
+						break;
+					}
+					case ItemManager.ConsumableType.MagicRegenShard:
+					{
+						player.IncreaseMagicRegen(ItemManager.GetValue(type));
+						break;
+					}
+					case ItemManager.ConsumableType.StrengthShard:
+					{
+						player.IncreaseStrength(ItemManager.GetValue(type));
+						break;
+					}
+					case ItemManager.ConsumableType.ToughnessShard:
+					{
+						player.IncreaseToughness(ItemManager.GetValue(type));
+						break;
+					}
 				}
+
+				print ("ItemType = " + type.ToString());
 				
 				Destroy(gameObject);
 			}

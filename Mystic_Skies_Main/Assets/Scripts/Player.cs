@@ -23,6 +23,9 @@ public class Player : MonoBehaviour
 	public float maxHealth;
 	public float mana;
 	public float maxMana;
+	public float manaRegen;
+	private float manaRegenTimer = 0.0f;
+	public float toughnes;
 	public float speedEpsilon;
 	public float friction;
 	public float maxTargetingRange;
@@ -94,13 +97,19 @@ public class Player : MonoBehaviour
 		{
 			ConsumePotion(ItemManager.PotionType.Rejuv);
 		}
+
+		manaRegenTimer += Time.deltaTime;
+		if(manaRegenTimer > 3.0f)
+		{
+			mana += manaRegen * (int)manaRegenTimer;
+		}
 	}
 	
 	public void TakeDamage(float damage)
 	{
 		if (isInvincible) return;
 
-		health -= damage;
+		health -= damage * (1.0f - toughnes);
 		
 		if(health <= 0.0f)
 		{
@@ -131,31 +140,53 @@ public class Player : MonoBehaviour
 		rigidbody.velocity = Vector3.zero;	
 	}
 	
-	public void IncreaseHealth(int val)
+	public void IncreaseHealth(float val)
 	{
 		health += val;
 		if(health > maxHealth)
 		{
 			health = maxHealth;
 		}
-		if(health < 0)
+		if(health < 0.0f)
 		{
-			health = 0;
+			health = 0.0f;
 		}
 	}
 	
-	public void IncreaseMana(int val)
+	public void IncreaseMana(float val)
 	{
 		mana += val;
 		if(mana > maxMana)
 		{
 			mana = maxMana;
 		}
-		if(mana < 0)
+		if(mana < 0.0f)
 		{
-			mana = 0;
+			mana = 0.0f;
 		}
 	}
+
+	public void IncreaseMaxHealth(float val)
+	{
+		maxHealth *= val;
+	}
+	public void IncreaseMaxMana(float val)
+	{
+		maxMana *= val;
+	}
+	public void IncreaseMagicRegen(float val)
+	{
+		manaRegen *= val;
+	}
+	public void IncreaseStrength(float val)
+	{
+		PlayerManager.GetPlayerSpellController().IncreaseStrength(val);
+	}
+	public void IncreaseToughness(float val)
+	{
+		toughnes += val;
+	}
+
 	
 	
 	public void AddPotion(ItemManager.PotionType type)

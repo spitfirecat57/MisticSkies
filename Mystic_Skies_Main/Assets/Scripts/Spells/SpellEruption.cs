@@ -7,7 +7,6 @@ public class SpellEruption : Spell
 	[System.Serializable]
 	public class Loadout
 	{
-		public SpellType type;
 		public float minDistForward = 5.0f;
 		public float maxDistForward = 20.0f;
 		public float maxDistSide = 5.0f;
@@ -16,10 +15,11 @@ public class SpellEruption : Spell
 		public float duration = 1.0f;
 		
 		public int numExplosions = 5;
-		public float explosionDamage = 5.0f;
 		public float explosionRadius = 5.0f;
 	}
 	public Loadout loadout;
+	public float damage;
+	public SpellType type;
 
 	public GameObject explosionObject;
 
@@ -76,7 +76,7 @@ public class SpellEruption : Spell
 							if(enemy)
 							{
 								//Debug.Log("[SpellEruption] Explosion hit an enemy");
-								enemy.TakeDamage(loadout.type, loadout.explosionDamage);
+								enemy.TakeDamage(type, damage);
 							}
 						}
 						else if(col.CompareTag("FireBoss"))
@@ -84,7 +84,7 @@ public class SpellEruption : Spell
 							FireBoss enemy = col.GetComponent<FireBoss>();
 							if(enemy)
 							{
-								enemy.TakeDamage(loadout.type, loadout.explosionDamage);
+								enemy.TakeDamage(type, damage);
 							}
 						}
 

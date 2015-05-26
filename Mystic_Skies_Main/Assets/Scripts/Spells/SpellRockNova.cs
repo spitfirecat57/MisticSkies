@@ -6,10 +6,8 @@ public class SpellRockNova : Spell
 	[System.Serializable]
 	public class Loadout
 	{
-		public SpellType type;
 		public float radius;
 		public float maxHeight;
-		public float damage;
 	}
 	public Loadout loadout;
 	public GameObject rockNovaObject;
@@ -33,6 +31,8 @@ public class SpellRockNova : Spell
 		
 		if(rn)
 		{
+			rn.type = type;
+			rn.damage = damage;
 			rn.loadout = loadout;
 		}
 		else

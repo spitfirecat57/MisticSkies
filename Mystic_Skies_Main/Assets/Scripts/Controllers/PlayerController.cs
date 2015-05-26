@@ -119,6 +119,11 @@ public class PlayerController : MonoBehaviour
 		{
 			Vector3 targetPos = PlayerManager.Target().transform.position;
 			transform.LookAt(new Vector3(targetPos.x, transform.position.y, targetPos.z), Vector3.up);
+
+			//if(rigidbody.velocity.sqrMagnitude < speed * 0.85f)
+			//{
+				rigidbody.velocity = new Vector3(0.0f, 0.0f, 0.0f);
+			//}
 		}
 		else
 		{
@@ -126,7 +131,7 @@ public class PlayerController : MonoBehaviour
 			if(newVel != Vector3.zero)
 			{
 				Vector3 towards = new Vector3(newVel.x, 0.0f, newVel.z);
-				transform.forward = Vector3.RotateTowards(transform.forward, towards.normalized, rotSmoothing * Time.deltaTime, 1.0f);
+				transform.forward = Vector3.RotateTowards(transform.forward, towards.normalized, rotSmoothing * Time.deltaTime, 0.0f);
 			}
 		}
 	}

@@ -7,9 +7,7 @@ public class SpellFireball : Spell
 	[System.Serializable]
 	public class Loadout
 	{
-		public SpellType type;
 		public float lifetime;
-		public float damage;
 		public float speed;
 		public float acceleration;
 		public float knockBack;
@@ -50,6 +48,8 @@ public class SpellFireball : Spell
 				fb.target = EnemyManager.GetClosest(transform.position, PlayerManager.GetPlayerScript().maxTargetingRange);
 			}
 			
+			fb.type = type;
+			fb.damage = damage;
 			fb.loadout = loadout;
 		}
 		else

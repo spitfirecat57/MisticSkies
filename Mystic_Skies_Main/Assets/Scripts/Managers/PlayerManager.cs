@@ -21,6 +21,7 @@ public class PlayerManager : MonoBehaviour
 	private static Transform playerTransform = null;
 	private static Player playerScript = null;
 	private static PlayerController playerControllerScript = null;
+	private static SpellController playerSpellController = null;
 
 	public static GameObject target = null;
 	private static bool hasTarget = false;
@@ -63,6 +64,7 @@ public class PlayerManager : MonoBehaviour
 				DontDestroyOnLoad(playerObject);
 				playerScript = playerObject.GetComponent<Player>();
 				playerControllerScript = playerObject.GetComponent<PlayerController>();
+				playerSpellController = playerObject.GetComponent<SpellController>();
 				playerTransform = playerObject.transform;
 				
 				cameraObject = GameObject.FindGameObjectWithTag("MainCamera");
@@ -79,6 +81,7 @@ public class PlayerManager : MonoBehaviour
 				
 				playerScript = playerObject.GetComponent<Player>();
 				playerControllerScript = playerObject.GetComponent<PlayerController>();
+				playerSpellController = playerObject.GetComponent<SpellController>();
 				
 				cameraObject = GameObject.Instantiate(cameraPrefab) as GameObject;
 				cameraObject.name = "PlayerCamera";
@@ -236,6 +239,10 @@ public class PlayerManager : MonoBehaviour
 	public static CameraController GetCameraController()
 	{
 		return cameraControllerScript;
+	}
+	public static SpellController GetPlayerSpellController()
+	{
+		return playerSpellController;
 	}
 	
 	
