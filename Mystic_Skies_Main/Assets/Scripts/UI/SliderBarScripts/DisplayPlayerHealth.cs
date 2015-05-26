@@ -7,14 +7,19 @@ using UnityEngine.UI;
 public class DisplayPlayerHealth : MonoBehaviour
 {
 	Slider slider;
+	Text text;
 
 	void Start()
 	{
 		slider = GetComponent<Slider>();
+		text = GetComponentInChildren<Text> ();
 	}
 
 	void Update()
 	{
-		slider.value = PlayerManager.GetPlayerHealth () / PlayerManager.GetPlayerMaxHealth();
+		float playerHealth = PlayerManager.GetPlayerHealth ();
+
+		slider.value = (playerHealth == 0.0f ? 0.0f : playerHealth) / PlayerManager.GetPlayerMaxHealth();
+		text.text = (playerHealth == 0.0f ? 0 : (int)playerHealth) + " / " + (int)PlayerManager.GetPlayerMaxHealth();
 	}
 }

@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
 	public List<NameValue> collectibles;
 
 	private bool isInvincible = false;
+	private bool knockingBack = false;
 	
 	private PlayerController mc;
 	
@@ -101,7 +102,16 @@ public class Player : MonoBehaviour
 		manaRegenTimer += Time.deltaTime;
 		if(manaRegenTimer > 3.0f)
 		{
-			mana += manaRegen * (int)manaRegenTimer;
+			IncreaseMana(maxMana * manaRegen);
+			manaRegenTimer = 0.0f;
+		}
+	}
+
+	void OnCollisionEnter(Collision col)
+	{
+		if(col.gameObject.CompareTag("Floor"))
+		{
+			knockingBack = false;
 		}
 	}
 	
@@ -124,14 +134,15 @@ public class Player : MonoBehaviour
 	public void KnockBack(Vector3 knockback)
 	{
 		if (isInvincible) return;
+		rigidbody.velocity = new Vector3(knockback.x, mKnockbackHeight, knockback.z);
+		knockingBack = true;
 		StartCoroutine("CoKnockBack", knockback);
 	}
 	
 	IEnumerator CoKnockBack(Vector3 knockback)
 	{
 		mc.enabled = false;
-		rigidbody.velocity = new Vector3(knockback.x, mKnockbackHeight, knockback.z);
-		while(Mathf.Abs(gameObject.rigidbody.velocity.y) > speedEpsilon)
+		while(knockingBack)
 		{
 			rigidbody.velocity *= (1.0f - (friction * Time.deltaTime));
 			yield return null;
@@ -168,15 +179,15 @@ public class Player : MonoBehaviour
 
 	public void IncreaseMaxHealth(float val)
 	{
-		maxHealth *= val;
+		maxHealth *= 1.0f + (val / 100.0f);
 	}
 	public void IncreaseMaxMana(float val)
 	{
-		maxMana *= val;
+		maxMana *= 1.0f + (val / 100.0f);
 	}
 	public void IncreaseMagicRegen(float val)
 	{
-		manaRegen *= val;
+		manaRegen += val / 100.0f;
 	}
 	public void IncreaseStrength(float val)
 	{

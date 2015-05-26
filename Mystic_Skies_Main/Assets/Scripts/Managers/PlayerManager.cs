@@ -99,7 +99,7 @@ public class PlayerManager : MonoBehaviour
 
 
 			CTI = GameObject.Instantiate(currentTargetIndicator) as GameObject;
-			CTI.transform.parent = PlayerManager.GetPlayerObject().transform;
+			CTI.transform.parent = gameObject.transform;
 			CTI.SetActive(false);
 			
 			

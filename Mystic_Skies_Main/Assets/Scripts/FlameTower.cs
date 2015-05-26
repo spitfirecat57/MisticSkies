@@ -6,7 +6,7 @@ public class FlameTower : MonoBehaviour
 	public GameObject FlamePrefab;
 	public int numFlames;
 
-	public void Init(float damage, float rotSpeed, float expansionSpeed)
+	public void Init(float damage, float rotSpeed, float expansionSpeed, float flameTowerDuration)
 	{
 		Vector3 startPos = transform.position;
 		float angle = 0.0f;
@@ -16,6 +16,7 @@ public class FlameTower : MonoBehaviour
 		{
 			Vector3 flamePos = transform.position + new Vector3(Mathf.Cos(angle) , transform.position.y, Mathf.Sin(angle));
 			GameObject flame = GameObject.Instantiate(FlamePrefab, flamePos, Quaternion.identity) as GameObject;
+			Destroy(flame, flameTowerDuration);
 			FlameTowerFlame ftf = flame.GetComponent<FlameTowerFlame>();
 
 			ftf.damage = damage;

@@ -14,6 +14,7 @@ public class FlameTowerFlame : MonoBehaviour
 		transform.RotateAround (startpos, Vector3.up, 1.5f);
 
 		transform.position += (transform.position - startpos).normalized * Time.deltaTime * 4.0f;
+		transform.position += Vector3.up * (PlayerManager.GetPlayerPosition () - transform.position).y * Time.deltaTime;
 	}
 
 	void OnTriggerEnter(Collider other)

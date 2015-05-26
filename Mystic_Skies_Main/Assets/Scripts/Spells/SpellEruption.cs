@@ -18,8 +18,6 @@ public class SpellEruption : Spell
 		public float explosionRadius = 5.0f;
 	}
 	public Loadout loadout;
-	public float damage;
-	public SpellType type;
 
 	public GameObject explosionObject;
 

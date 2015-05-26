@@ -86,6 +86,8 @@ public class FireBoss : MonoBehaviour
 		attackArray[(int)BasicAttacks.FlameThrower] = FlameThrower;
 
 		flamePillars = new List<GameObject>();
+
+		EnemyManager.RegisterEnemy (gameObject);
 	}
 
 	void Update()
@@ -115,33 +117,36 @@ public class FireBoss : MonoBehaviour
 			Fireball();
 		}
 
-		// Basic
-		if(!isCatastrophic)
+		if((transform.position - PlayerManager.GetPlayerPosition()).sqrMagnitude < noticePlayerDist * noticePlayerDist)
 		{
-			basicAttackTimer += Time.deltaTime;
-			if(basicAttackTimer >= basicAttackCooldownTime)
+			// Basic
+			if(!isCatastrophic)
 			{
-				int attack = Random.Range (0, (int)BasicAttacks.COUNT);
-				attackArray[attack]();
-				basicAttackTimer = 0.0f;
+				basicAttackTimer += Time.deltaTime;
+				if(basicAttackTimer >= basicAttackCooldownTime)
+				{
+					int attack = Random.Range (0, (int)BasicAttacks.COUNT);
+					attackArray[attack]();
+					basicAttackTimer = 0.0f;
+				}
 			}
-		}
-		// Catastrophic
-		else
-		{
-			cataAttackTimer += Time.deltaTime;
-			if(cataAttackTimer >= cataCooldownTime)
+			// Catastrophic
+			else
 			{
-				Fireball();
-				cataAttackTimer = 0.0f;
-			}
+				cataAttackTimer += Time.deltaTime;
+				if(cataAttackTimer >= cataCooldownTime)
+				{
+					Fireball();
+					cataAttackTimer = 0.0f;
+				}
 
-			flamePillars.RemoveAll(obj => obj == null);
+				flamePillars.RemoveAll(obj => obj == null);
 
-			if(flamePillars.Count == 0)
-			{
-				isInvincible = false;
-				isCatastrophic = false;
+				if(flamePillars.Count == 0)
+				{
+					isInvincible = false;
+					isCatastrophic = false;
+				}
 			}
 		}
 	}
@@ -176,10 +181,12 @@ public class FireBoss : MonoBehaviour
 	{
 		if(collision.gameObject.CompareTag("Player"))
 		{
-			StopCoroutine("HeadbuttCo");
 			navAgent.velocity = Vector3.zero;
-			PlayerManager.GetPlayerScript().KnockBack(transform.forward * knockBackPower);
 			PlayerManager.GetPlayerScript().TakeDamage(headbuttDamage);
+			PlayerManager.GetPlayerScript().KnockBack(transform.forward * knockBackPower);
+			Vector3 playervel = PlayerManager.GetPlayerObject().rigidbody.velocity;
+			PlayerManager.GetPlayerObject().rigidbody.velocity = new Vector3(playervel.x, 5.0f, playervel.z);
+			StopCoroutine("HeadbuttCo");
 		}
 	}
 
@@ -187,8 +194,7 @@ public class FireBoss : MonoBehaviour
 	{
 		GameObject ft = GameObject.Instantiate (flameTowerPrefab, transform.position, transform.rotation) as GameObject;
 		FlameTower ftscript = ft.GetComponent<FlameTower> ();
-		ftscript.Init (flameTowerDamage, flameTowerSpeed, flameTowerSpeed);
-		Destroy (ft, flameTowerDuration);
+		ftscript.Init (flameTowerDamage, flameTowerSpeed, flameTowerSpeed, flameTowerDuration);
 
 		//StartCoroutine ("FlameTowerCo");
 	}

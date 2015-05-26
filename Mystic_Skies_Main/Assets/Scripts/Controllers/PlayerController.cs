@@ -118,11 +118,12 @@ public class PlayerController : MonoBehaviour
 		if(target)
 		{
 			Vector3 targetPos = PlayerManager.Target().transform.position;
-			transform.LookAt(new Vector3(targetPos.x, transform.position.y, targetPos.z), Vector3.up);
+			//transform.LookAt(new Vector3(targetPos.x, transform.position.y, targetPos.z), Vector3.up);
+			transform.LookAt(targetPos, Vector3.up);
 
 			//if(rigidbody.velocity.sqrMagnitude < speed * 0.85f)
 			//{
-				rigidbody.velocity = new Vector3(0.0f, 0.0f, 0.0f);
+			//	rigidbody.velocity = new Vector3(0.0f, 0.0f, 0.0f);
 			//}
 		}
 		else
