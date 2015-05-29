@@ -1,0 +1,42 @@
+Thank you for purchasing the Terrain Hole System extension!
+
+Quick Start
+==========
+
+1. Create a new Material asset in your Project view, and set its shader to "TRI/THS/Basic".
+2. Drag the Material onto the "Material" setting in the "Terrain Settings" tab of your Terrain script.
+3. Add the Terrain Transparency script to your terrain object. This is what enables transparency, as well as letting you enable/disable 'cutout mode' and other options.
+4. Add the "Terrain Hole System/Textures/Transparent" texture as one of your terrain's textures/splatmaps.
+5. Paint on your terrain with the transparent texture. The places that you paint will become transparent. (note: for faster/less-laggy painting, disable the "Auto Update Transparency Map" option before painting, and re-enable it afterward)
+6. Add the Object Fall Through script to each object that you want to fall through transparent areas.
+
+Hit play, and try falling through the holes you made!
+
+Options
+==========
+
+To enable/disable "No Shadows Mode" (which avoids some issues with clipping--at least at the time of writing), add the "THSOptions" script to a GameObject in your scene, and use the "No Shadows Mode" checkbox in the inspector.
+
+Notes
+==========
+
+* If shadows are enabled, some transparent areas may cause darkening artifacts on the non-shadowed areas behind them. This seems to be caused by self-shadowing. This effect can't currently be avoided, unfortunately, while having terrain shadows enabled.
+
+Troubleshooting
+=========
+
+* If deferred rendering is being used, enabling shadows causes objects behind the terrain to no longer be seen through its transparent sections.
+
+You currently have three options:
+1) Switch your project's rendering path to Forward.
+2) Disable terrain shadows (in the THSOptions script, as explained above).
+3) Use a seperate camera for the terrain that has its Rendering Path set to Forward. (this is probably the least disruptive option)
+
+* If 'cutout mode' is disabled, partially transparent areas will 'clip' opaque terrain areas behind it. You can avoid this by turning 'cutout mode' back on, or by enabling 'no shadows mode'.
+
+* If the game is in play mode, the camera's 'Clear Flags' option is set to Skybox, and 'cutout mode' is not enabled, partially transparent areas will appear to be displayed on a gray background.
+
+You can fix this by:
+
+1) Dragging the Skybox Clear Fix script onto the camera that renders your terrain object.
+2) Enabling 'no shadows mode'. (note: as of Unity 4.0, this seems to no longer work fully)
