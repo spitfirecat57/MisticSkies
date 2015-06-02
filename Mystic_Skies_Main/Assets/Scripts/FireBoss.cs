@@ -119,6 +119,12 @@ public class FireBoss : MonoBehaviour
 
 		if((transform.position - PlayerManager.GetPlayerPosition()).sqrMagnitude < noticePlayerDist * noticePlayerDist)
 		{
+			if(noticePlayerDist < 10000.0f)
+			{
+				noticePlayerDist = 10000.0f;
+				DisplayFireBossHealth.Activate(this);
+			}
+
 			// Basic
 			if(!isCatastrophic)
 			{

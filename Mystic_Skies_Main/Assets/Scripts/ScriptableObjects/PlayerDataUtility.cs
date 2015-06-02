@@ -19,8 +19,6 @@ public static class PlayerDataUtility
 	// Create Scriptable Object function
 	public static void CreateNewObjectStates()
 	{
-		ItemManager itemManager = new ItemManager();
-		
 		const int numData = 3;
 		string path = "Assets/Data/PlayerData/";
 		
@@ -32,15 +30,19 @@ public static class PlayerDataUtility
 			playerManagerData[i] = ScriptableObject.CreateInstance<PlayerData>();
 			
 			// set initial data
-			playerManagerData[i].health 		= 10;
-			playerManagerData[i].maxHealth 		= 10;
-			playerManagerData[i].mana 			= 10;
-			playerManagerData[i].maxMana 		= 10;
+			playerManagerData[i].health 		= 100;
+			playerManagerData[i].maxHealth 		= 100;
+			playerManagerData[i].fireMana 		= 100;
+			playerManagerData[i].maxFireMana	= 100;
+			playerManagerData[i].waterMana 		= 100;
+			playerManagerData[i].maxWaterMana	= 100;
+			playerManagerData[i].rockMana 		= 100;
+			playerManagerData[i].maxRockMana	= 100;
 			
 			playerManagerData[i].potions = new List<int> ();
 			for(int j = 0; j < (int)ItemManager.PotionType.COUNT; ++j)
 			{
-				playerManagerData[i].potions.Add(0);
+				playerManagerData[i].potions.Add(1);
 			}
 			
 			playerManagerData[i].inventory = new List<int> ();

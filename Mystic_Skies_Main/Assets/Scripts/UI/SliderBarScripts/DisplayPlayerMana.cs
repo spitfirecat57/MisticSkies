@@ -8,6 +8,7 @@ public class DisplayPlayerMana : MonoBehaviour
 {
 	Slider slider;
 	Text text;
+	public SpellType type;
 	
 	void Start()
 	{
@@ -17,9 +18,26 @@ public class DisplayPlayerMana : MonoBehaviour
 	
 	void Update()
 	{
-		float playerMana = PlayerManager.GetPlayerMana();
-		
-		slider.value = (playerMana == 0.0f ? 0.0f : playerMana) / PlayerManager.GetPlayerMaxMana();
-		text.text = (playerMana == 0.0f ? 0 : (int)playerMana) + " / " + (int)PlayerManager.GetPlayerMaxMana();
+		float playerMana = 0.0f;
+		float playerMaxMana = 0.0f;
+
+		if(type == SpellType.Fire)
+		{
+			playerMana = PlayerManager.GetPlayerFireMana();
+			playerMaxMana = PlayerManager.GetPlayerMaxFireMana();
+		}
+		else if(type == SpellType.Water)
+		{
+			playerMana = PlayerManager.GetPlayerWaterMana();
+			playerMaxMana = PlayerManager.GetPlayerMaxWaterMana();
+		}
+		else
+		{
+			playerMana = PlayerManager.GetPlayerRockMana();
+			playerMaxMana = PlayerManager.GetPlayerMaxRockMana();
+		}
+		 
+		slider.value = (playerMana == 0.0f ? 0.0f : playerMana) / playerMaxMana;
+		text.text = (playerMana == 0.0f ? 0 : (int)playerMana) + " / " + playerMaxMana;
 	}
 }

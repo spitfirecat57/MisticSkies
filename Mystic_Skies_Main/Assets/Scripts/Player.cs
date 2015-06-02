@@ -21,8 +21,12 @@ public class Player : MonoBehaviour
 {
 	public float health;
 	public float maxHealth;
-	public float mana;
-	public float maxMana;
+	public float fireMana;
+	public float maxFireMana;
+	public float waterMana;
+	public float maxWaterMana;
+	public float rockMana;
+	public float maxRockMana;
 	public float manaRegen;
 	private float manaRegenTimer = 0.0f;
 	public float toughnes;
@@ -102,7 +106,9 @@ public class Player : MonoBehaviour
 		manaRegenTimer += Time.deltaTime;
 		if(manaRegenTimer > 3.0f)
 		{
-			IncreaseMana(maxMana * manaRegen);
+			IncreaseFireMana(maxFireMana * manaRegen);
+			IncreaseWaterMana(maxWaterMana * manaRegen);
+			IncreaseRockMana(maxRockMana * manaRegen);
 			manaRegenTimer = 0.0f;
 		}
 	}
@@ -123,11 +129,7 @@ public class Player : MonoBehaviour
 		
 		if(health <= 0.0f)
 		{
-			// play animation?
-			
-			// go to death screen?
-			
-			print("Player died.");
+			//GameManager.LoadCurrentGame();
 		}
 	}
 	
@@ -164,16 +166,42 @@ public class Player : MonoBehaviour
 		}
 	}
 	
-	public void IncreaseMana(float val)
+	public void IncreaseFireMana(float val)
 	{
-		mana += val;
-		if(mana > maxMana)
+		fireMana += val;
+		if(fireMana > maxFireMana)
 		{
-			mana = maxMana;
+			fireMana = maxFireMana;
 		}
-		if(mana < 0.0f)
+		if(fireMana < 0.0f)
 		{
-			mana = 0.0f;
+			fireMana = 0.0f;
+		}
+	}
+
+	public void IncreaseWaterMana(float val)
+	{
+		waterMana += val;
+		if(waterMana > maxWaterMana)
+		{
+			waterMana = maxWaterMana;
+		}
+		if(waterMana < 0.0f)
+		{
+			waterMana = 0.0f;
+		}
+	}
+
+	public void IncreaseRockMana(float val)
+	{
+		rockMana += val;
+		if(rockMana > maxRockMana)
+		{
+			rockMana = maxRockMana;
+		}
+		if(rockMana < 0.0f)
+		{
+			rockMana = 0.0f;
 		}
 	}
 
@@ -181,13 +209,21 @@ public class Player : MonoBehaviour
 	{
 		maxHealth *= 1.0f + (val / 100.0f);
 	}
-	public void IncreaseMaxMana(float val)
+	public void IncreaseMaxFireMana(float val)
 	{
-		maxMana *= 1.0f + (val / 100.0f);
+		maxFireMana *= 1.0f + (val / 100.0f);
+	}
+	public void IncreaseMaxWaterMana(float val)
+	{
+		maxWaterMana *= 1.0f + (val / 100.0f);
+	}
+	public void IncreaseMaxRockMana(float val)
+	{
+		maxRockMana *= 1.0f + (val / 100.0f);
 	}
 	public void IncreaseMagicRegen(float val)
 	{
-		manaRegen += val / 100.0f;
+		manaRegen += val;
 	}
 	public void IncreaseStrength(float val)
 	{
@@ -195,7 +231,7 @@ public class Player : MonoBehaviour
 	}
 	public void IncreaseToughness(float val)
 	{
-		toughnes += val;
+		toughnes += val / 100.0f;
 	}
 
 	
@@ -229,13 +265,17 @@ public class Player : MonoBehaviour
 			}
 			case ItemManager.PotionType.Mana:
 			{
-				IncreaseMana(ItemManager.GetValue(type));
+				IncreaseFireMana(ItemManager.GetValue(type));
+				IncreaseWaterMana(ItemManager.GetValue(type));
+				IncreaseRockMana(ItemManager.GetValue(type));
 				break;
 			}
 			case ItemManager.PotionType.Rejuv:
 			{
 				IncreaseHealth(ItemManager.GetValue(type));
-				IncreaseMana(ItemManager.GetValue(type));
+				IncreaseFireMana(ItemManager.GetValue(type));
+				IncreaseWaterMana(ItemManager.GetValue(type));
+				IncreaseRockMana(ItemManager.GetValue(type));
 				break;
 			}
 			}
@@ -252,8 +292,12 @@ public class Player : MonoBehaviour
 	{
 		health = data.health;
 		maxHealth = data.maxHealth;
-		mana = data.mana;
-		maxMana = data.maxMana;
+		fireMana = data.fireMana;
+		maxFireMana = data.maxFireMana;
+		waterMana = data.waterMana;
+		maxWaterMana = data.maxWaterMana;
+		rockMana = data.rockMana;
+		maxRockMana = data.maxRockMana;
 		
 		for(int i = 0; i < potions.Count; ++i)
 		{
@@ -274,8 +318,12 @@ public class Player : MonoBehaviour
 	{
 		data.health = health;
 		data.maxHealth = maxHealth;
-		data.mana = mana;
-		data.maxMana = maxMana;
+		data.fireMana = fireMana;
+		data.maxFireMana = maxFireMana;
+		data.waterMana = waterMana;
+		data.maxWaterMana = maxWaterMana;
+		data.rockMana = rockMana;
+		data.maxRockMana = maxRockMana;
 		
 		for(int i = 0; i < potions.Count; ++i)
 		{

@@ -97,7 +97,7 @@ public class LOSTranslucency : MonoBehaviour
 					r.material.color = c;
 				}
 			}
-			toFadeIn.RemoveAll(obj => obj.material.color.a == 1.0f);
+			toFadeIn.RemoveAll(obj => (obj == null) || (obj.material.color.a == 1.0f));
 			
 			yield return new WaitForEndOfFrame();
 		}

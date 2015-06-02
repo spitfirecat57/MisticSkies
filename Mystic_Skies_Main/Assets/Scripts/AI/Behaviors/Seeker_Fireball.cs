@@ -44,7 +44,7 @@ public class Seeker_Fireball : MonoBehaviour
 			}
 		}		
 
-		if(!other.CompareTag("InteractionBox") && !other.CompareTag("Enemy"))
+		if(!other.CompareTag("FireBoss") && !other.CompareTag("InteractionBox") && !other.CompareTag("Enemy"))
 		{
 			Destroy(gameObject);
 		}

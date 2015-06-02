@@ -63,6 +63,7 @@ public class PlayerManager : MonoBehaviour
 				playerObject.name = "Player";
 				DontDestroyOnLoad(playerObject);
 				playerScript = playerObject.GetComponent<Player>();
+				print ("Got playerScript from reference");
 				playerControllerScript = playerObject.GetComponent<PlayerController>();
 				playerSpellController = playerObject.GetComponent<SpellController>();
 				playerTransform = playerObject.transform;
@@ -70,6 +71,9 @@ public class PlayerManager : MonoBehaviour
 				cameraObject = GameObject.FindGameObjectWithTag("MainCamera");
 				cameraScript = cameraObject.GetComponent<Camera>();
 				cameraControllerScript = cameraObject.GetComponent<CameraController>();
+
+				DontDestroyOnLoad(playerObject);
+				DontDestroyOnLoad(cameraObject);
 			}
 			else if(playerPrefab && cameraPrefab)
 			{
@@ -91,6 +95,9 @@ public class PlayerManager : MonoBehaviour
 
 				playerObject.SetActive(true);
 				cameraObject.SetActive(true);
+
+				DontDestroyOnLoad(playerObject);
+				DontDestroyOnLoad(cameraObject);
 			}
 			else
 			{
@@ -119,6 +126,59 @@ public class PlayerManager : MonoBehaviour
 		{
 			Debug.Log("[PlayerManager] playerObject is null in Start(), reaquiring");
 			playerObject = GameObject.FindGameObjectWithTag("Player");
+		}
+	}
+
+	void OnLevelWasLoaded(int level)
+	{
+		print ("[PlayerManager] Lost Player reference");
+		if(!playerObject)
+		{
+			GameObject playerObjectOther = GameObject.FindGameObjectWithTag("Player");
+			if(playerObjectOther)
+			{
+				Debug.Log("[PlayerManager] Player already created. Grabbing it as reference.");
+				
+				playerObject = playerObjectOther;
+				
+				playerObject.name = "Player";
+				DontDestroyOnLoad(playerObject);
+				playerScript = playerObject.GetComponent<Player>();
+				print ("Got playerScript from reference");
+				playerControllerScript = playerObject.GetComponent<PlayerController>();
+				playerSpellController = playerObject.GetComponent<SpellController>();
+				playerTransform = playerObject.transform;
+				
+				cameraObject = GameObject.FindGameObjectWithTag("MainCamera");
+				cameraScript = cameraObject.GetComponent<Camera>();
+				cameraControllerScript = cameraObject.GetComponent<CameraController>();
+
+				DontDestroyOnLoad(playerObject);
+				DontDestroyOnLoad(cameraObject);
+			}
+			else if(playerPrefab && cameraPrefab)
+			{
+				Debug.Log("[PlayerManager] Instantiating player object.");
+				playerObject = GameObject.Instantiate(playerPrefab, Vector3.up * 2.0f, Quaternion.identity) as GameObject;
+				playerObject.name = "Player";
+				DontDestroyOnLoad(playerObject);
+				playerTransform = playerObject.transform;
+				
+				playerScript = playerObject.GetComponent<Player>();
+				playerControllerScript = playerObject.GetComponent<PlayerController>();
+				playerSpellController = playerObject.GetComponent<SpellController>();
+				
+				cameraObject = GameObject.Instantiate(cameraPrefab) as GameObject;
+				cameraObject.name = "PlayerCamera";
+				DontDestroyOnLoad(cameraObject);
+				cameraScript = cameraObject.GetComponent<Camera>();
+				cameraControllerScript = cameraObject.GetComponent<CameraController>();
+				
+				playerObject.SetActive(true);
+				cameraObject.SetActive(true);
+			}
+			DontDestroyOnLoad(playerObject);
+			DontDestroyOnLoad(cameraObject);
 		}
 	}
 	
@@ -206,19 +266,99 @@ public class PlayerManager : MonoBehaviour
 	}
 	public static float GetPlayerHealth()
 	{
-		return playerScript.health;
+		if(playerScript)
+		{
+			return playerScript.health;
+		}
+		else
+		{
+			print ("playerScript is not set to an instance of a PlayerScript");
+			return 0.0f;
+		}
 	}
 	public static float GetPlayerMaxHealth()
 	{
-		return playerScript.maxHealth;
+		if(playerScript)
+		{
+			return playerScript.maxHealth;
+		}
+		else
+		{
+			print ("playerScript is not set to an instance of a PlayerScript");
+			return 0.0f;
+		}
 	}
-	public static float GetPlayerMana()
+	public static float GetPlayerFireMana()
 	{
-		return playerScript.mana;
+		if(playerScript)
+		{
+			return playerScript.fireMana;
+		}
+		else
+		{
+			print ("playerScript is not set to an instance of a PlayerScript");
+			return 0.0f;
+		}
 	}
-	public static float  GetPlayerMaxMana()
+	public static float  GetPlayerMaxFireMana()
 	{
-		return playerScript.maxMana;
+		if(playerScript)
+		{
+			return playerScript.maxFireMana;
+		}
+		else
+		{
+			print ("playerScript is not set to an instance of a PlayerScript");
+			return 0.0f;
+		}
+	}
+	public static float GetPlayerWaterMana()
+	{
+		if(playerScript)
+		{
+			return playerScript.waterMana;
+		}
+		else
+		{
+			print ("playerScript is not set to an instance of a PlayerScript");
+			return 0.0f;
+		}
+	}
+	public static float  GetPlayerMaxWaterMana()
+	{
+		if(playerScript)
+		{
+			return playerScript.maxWaterMana;
+		}
+		else
+		{
+			print ("playerScript is not set to an instance of a PlayerScript");
+			return 0.0f;
+		}
+	}
+	public static float GetPlayerRockMana()
+	{
+		if(playerScript)
+		{
+			return playerScript.rockMana;
+		}
+		else
+		{
+			print ("playerScript is not set to an instance of a PlayerScript");
+			return 0.0f;
+		}
+	}
+	public static float  GetPlayerMaxRockMana()
+	{
+		if(playerScript)
+		{
+			return playerScript.maxRockMana;
+		}
+		else
+		{
+			print ("playerScript is not set to an instance of a PlayerScript");
+			return 0.0f;
+		}
 	}
 	public static PlayerController GetMovementScript()
 	{
@@ -276,12 +416,12 @@ public class PlayerManager : MonoBehaviour
 	
 	public static void LoadGame(int fileSlotindex)
 	{
-		PlayerManager.GetPlayerScript().LoadData(instance.playerData[fileSlotindex]);
+		playerScript.LoadData(instance.playerData[fileSlotindex]);
 	}
 	
 	public static void SaveGame(int fileSlotindex)
 	{
-		PlayerManager.GetPlayerScript().SaveData(instance.playerData[fileSlotindex]);
+		playerScript.SaveData(instance.playerData[fileSlotindex]);
 	}
 	
 	

@@ -42,7 +42,10 @@ public class DialogueDriver : Interactable
 			isInteracted = true;
 
 			//MARCO WAS HERE
-			animator.SetBool("Interacting", true);
+			if(animator)
+			{
+				animator.SetBool("Interacting", true);
+			}
 			//MARCO WAS HERE
 		}
 
@@ -69,7 +72,10 @@ public class DialogueDriver : Interactable
 		dialogueIndex = 0;
 
 		//MARCO WAS HERE
-		animator.SetBool("Interacting", false);
+		if(animator)
+		{
+			animator.SetBool("Interacting", false);
+		}
 		//MARCO WAS HERE
 	}
 

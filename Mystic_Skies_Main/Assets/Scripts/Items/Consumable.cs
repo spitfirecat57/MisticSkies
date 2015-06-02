@@ -11,6 +11,12 @@ public class Consumable : MonoBehaviour
 		{
 			rigidbody.velocity = Vector3.zero;
 			rigidbody.Sleep();
+			RaycastHit hit;
+			if(Physics.Raycast(transform.position, Vector3.up, out hit, 10.0f))
+			{
+				print ("Consumable is below " + hit.collider.name + ", resolving");
+				transform.position = hit.point;
+			}
 		}
 		if(other.CompareTag("Player"))
 		{
@@ -42,27 +48,29 @@ public class Consumable : MonoBehaviour
 					}
 					case ItemManager.ConsumableType.MaxHealthShard:
 					{
-						player.IncreaseMaxHealth(ItemManager.GetValue(type));
+						player.IncreaseMaxHealth((float)ItemManager.GetValue(type));
 						break;
 					}
 					case ItemManager.ConsumableType.MaxMagicShard:
 					{
-						player.IncreaseMaxMana(ItemManager.GetValue(type));
+						player.IncreaseMaxFireMana((float)ItemManager.GetValue(type));
+						player.IncreaseMaxWaterMana((float)ItemManager.GetValue(type));
+						player.IncreaseMaxRockMana((float)ItemManager.GetValue(type));
 						break;
 					}
 					case ItemManager.ConsumableType.MagicRegenShard:
 					{
-						player.IncreaseMagicRegen(ItemManager.GetValue(type));
+						player.IncreaseMagicRegen((float)ItemManager.GetValue(type));
 						break;
 					}
 					case ItemManager.ConsumableType.StrengthShard:
 					{
-						player.IncreaseStrength(ItemManager.GetValue(type));
+						player.IncreaseStrength((float)ItemManager.GetValue(type));
 						break;
 					}
 					case ItemManager.ConsumableType.ToughnessShard:
 					{
-						player.IncreaseToughness(ItemManager.GetValue(type));
+						player.IncreaseToughness((float)ItemManager.GetValue(type));
 						break;
 					}
 				}

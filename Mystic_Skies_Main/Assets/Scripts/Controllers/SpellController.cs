@@ -6,7 +6,7 @@ public class SpellController : MonoBehaviour
 	private float attackTimer = 0.0f;
 	public  float LQkDelayTime = 0.5f;
 	public  float HQDelayTime = 1.0f;
-	public int HQAttackManaCost = -50;
+	public int HQAttackManaCost = 50;
 
 	public Transform spellSpawnTransform;
 	
@@ -57,12 +57,6 @@ public class SpellController : MonoBehaviour
 			HQMagic = !HQMagic;
 		}
 
-		if(PlayerManager.GetPlayerMana() < 50)
-		{
-			HQMagic = false;
-		}
-
-
 
 		if(attackTimer < 0.0f)
 		{			
@@ -72,7 +66,7 @@ public class SpellController : MonoBehaviour
 				if(HQMagic)
 				{
 					mSpells[(int)Spells.Fire2].Cast ();
-					PlayerManager.GetPlayerScript().IncreaseMana(HQAttackManaCost);
+					PlayerManager.GetPlayerScript().IncreaseFireMana(-HQAttackManaCost);
 					attackTimer = HQDelayTime;
 				}
 				else
@@ -88,7 +82,7 @@ public class SpellController : MonoBehaviour
 				if(HQMagic)
 				{
 					mSpells[(int)Spells.Water2].Cast ();
-					PlayerManager.GetPlayerScript().IncreaseMana(HQAttackManaCost);
+					PlayerManager.GetPlayerScript().IncreaseWaterMana(-HQAttackManaCost);
 					attackTimer = HQDelayTime;
 				}
 				else
@@ -104,7 +98,7 @@ public class SpellController : MonoBehaviour
 				if(HQMagic)
 				{
 					mSpells[(int)Spells.Rock2].Cast ();
-					PlayerManager.GetPlayerScript().IncreaseMana(HQAttackManaCost);
+					PlayerManager.GetPlayerScript().IncreaseRockMana(-HQAttackManaCost);
 					attackTimer = HQDelayTime;
 				}
 				else
@@ -121,7 +115,7 @@ public class SpellController : MonoBehaviour
 	{
 		foreach(Spell spell in mSpells)
 		{
-			spell.damage *= val;
+			spell.damage *= 1.0f + (val / 100.0f);
 		}
 	}
 

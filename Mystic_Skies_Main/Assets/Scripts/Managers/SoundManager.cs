@@ -11,12 +11,13 @@ public class SoundManager : MonoBehaviour
 		Speech,
 		COUNT
 	}
-	protected static SoundManager instance = null;	
+	public static SoundManager instance = null;
 	
 	private static List<SoundSource>[] soundSources;
 	private static float[] volumes;
 	private static float masterVolume;
 	
+
 	void Awake()
 	{
 		if(instance == null)
@@ -44,6 +45,7 @@ public class SoundManager : MonoBehaviour
 		volumes[(int)SoundType.Speech] = PlayerPrefs.GetFloat ("SpeechVolume", 1.0f);
 	}
 	
+
 	
 	// Register/Remove audio sources
 	public static void RegisterSoundSource(SoundSource source)

@@ -6,16 +6,37 @@ using UnityEngine.UI;
 
 public class DisplayFireBossHealth : MonoBehaviour
 {
-	private Slider slider;
-	public FireBoss fb;
+	private static DisplayFireBossHealth instance = null;
+
+	private Slider slider = null;
+	private static FireBoss fb = null;
 
 	void Start()
 	{
 		slider = GetComponent<Slider>();
+		gameObject.SetActive (false);
+
+		if(instance == null)
+		{
+			instance = this;
+		}
+	}
+
+	public static void Activate(FireBoss boss)
+	{
+		fb = boss;
+		instance.gameObject.SetActive (true);
 	}
 
 	void Update()
 	{
-		slider.value = fb.currentHealth / fb.maxHealth;
+		if(fb)
+		{
+			slider.value = fb.currentHealth / fb.maxHealth;
+		}
+		else
+		{
+			gameObject.SetActive(false);
+		}
 	}
 }

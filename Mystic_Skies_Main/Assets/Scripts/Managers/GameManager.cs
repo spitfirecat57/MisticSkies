@@ -48,7 +48,9 @@ public class GameManager : MonoBehaviour
 		}
 		if(Input.GetKeyDown(KeyCode.Keypad2))
 		{
-			PlayerManager.GetPlayerScript().IncreaseMana(100);
+			PlayerManager.GetPlayerScript().IncreaseFireMana(100);
+			PlayerManager.GetPlayerScript().IncreaseWaterMana(100);
+			PlayerManager.GetPlayerScript().IncreaseRockMana(100);
 		}
 	}
 	

@@ -36,6 +36,13 @@ public class StateManager : MonoBehaviour
 			InputManager.SetAcceptingInput (true);
 			PlayerManager.SetPlayerAndCameraActive(true);
 			UIManager.Activate(UICanvasTypes.HUD);
+			#if UNITY_EDITOR
+			Screen.showCursor = true;
+			#else
+			Screen.showCursor = false;
+			#endif
+			Screen.lockCursor = true;
+			BackgroundMusicManager.StartPlaying ();
 		}
 		else
 		{

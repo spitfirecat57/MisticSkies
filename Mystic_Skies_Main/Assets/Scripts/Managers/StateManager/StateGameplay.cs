@@ -10,6 +10,14 @@ public class StateGameplay : GameState
 		PlayerManager.SetPlayerAndCameraActive(true);
 		SceneManager.LoadSceneDestructive (SceneManager.CurrentScene());
 		UIManager.Activate (UICanvasTypes.HUD);
+		BackgroundMusicManager.StartPlaying ();
+
+#if UNITY_EDITOR
+		Screen.showCursor = true;
+#else
+		Screen.showCursor = false;
+#endif
+		Screen.lockCursor = true;
 	}
 	
 	public override void OnUpdate()
@@ -32,6 +40,9 @@ public class StateGameplay : GameState
 	public override void OnExit()
 	{
 		UIManager.DeActivate (UICanvasTypes.HUD);
+		Screen.showCursor = true;
+		Screen.lockCursor = false;
+		BackgroundMusicManager.StopPlaying();
 	}
 	
 	
