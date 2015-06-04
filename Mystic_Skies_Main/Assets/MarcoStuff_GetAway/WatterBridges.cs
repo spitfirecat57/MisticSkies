@@ -5,6 +5,9 @@ public class WatterBridges : MonoBehaviour
 {
 	public GameObject clips;
 	public GameObject DelCol;
+
+	public GameObject camClip;
+	public int cameraLife;
 	// Use this for initialization
 	void Start () 
 	{
@@ -24,7 +27,10 @@ public class WatterBridges : MonoBehaviour
 		if(col.gameObject.name == "WaterWhip(Clone)")
 		{
 			clips.SetActive(true);
+			camClip.SetActive(true);
+			Destroy(camClip, cameraLife);
 			DelCol.SetActive(false);
+
 		}
 		
 	}
