@@ -7,6 +7,7 @@ public struct EnemyLoadout
 {
 	public string name;
 	public SpellType mType;
+	public GameObject prefab;
 	public float maxHealth;
 	[HideInInspector]
 	public float health;

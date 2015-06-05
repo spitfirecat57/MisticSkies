@@ -38,14 +38,14 @@ public class BackgroundMusicManager : MonoBehaviour
 	
 	public static void StartPlaying()
 	{
-		print ("StartPlaying");
+		//print ("StartPlaying");
 		isPlaying = true;
 		instance.currentSong.source.Play ();
 	}
 
 	public static void StopPlaying()
 	{
-		print ("StopPlaying");
+		//print ("StopPlaying");
 		isPlaying = false;
 		instance.currentSong.source.Stop();
 	}
@@ -55,8 +55,8 @@ public class BackgroundMusicManager : MonoBehaviour
 		if(isPlaying)
 		{
 			currentTimeIntoSong += Time.deltaTime;
-			print ("CurrentTimeIntoSong = " + currentTimeIntoSong);
-			print ("CurretnSongIndex = " + currentSongIndex);
+			//print ("CurrentTimeIntoSong = " + currentTimeIntoSong);
+			//print ("CurretnSongIndex = " + currentSongIndex);
 
 			float startToFade = (currentSongLength - fadeTime);
 
