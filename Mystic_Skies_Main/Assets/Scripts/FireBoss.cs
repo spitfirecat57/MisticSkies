@@ -96,7 +96,8 @@ public class FireBoss : MonoBehaviour
 
 		if(lookAtPlayer)
 		{
-			transform.LookAt(new Vector3 (playerPos.x, transform.position.y, playerPos.z));
+			transform.forward = Vector3.RotateTowards(transform.forward, (playerPos - transform.position), turnSpeedDegreesPerSecond * Mathf.Deg2Rad * Time.deltaTime, 0.0f);
+			//transform.LookAt(new Vector3 (playerPos.x, transform.position.y, playerPos.z));
 		}
 
 

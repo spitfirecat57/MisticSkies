@@ -13,6 +13,11 @@ public class Enemy : MonoBehaviour
 	public bool explodeOnTouch = false;
 	public GameObject suicideObjectPrefab;
 
+	private SkinnedMeshRenderer[] mRenderers;
+	private static Color damageColor = Color.red;
+	private static float damageFlashDuration = 0.4f;
+	private bool isFlashing = false;	
+
 	
 	public ItemManager.ConsumableDropChance dropChance;
 	
@@ -45,6 +50,13 @@ public class Enemy : MonoBehaviour
 				dropChance.potionRejuvRatio = ((dropChance.potionRejuvRatio / dropSum) * 100.0f) + dropChance.potionManaRatio;
 			}
 		}
+
+		mRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+		if(mRenderers.Length == 0)
+		{
+			print ("[Enemy] Could not find renderers in children");
+		}
+
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -75,6 +87,24 @@ public class Enemy : MonoBehaviour
 			}
 		}
 	}
+
+	IEnumerator FlashDamageColor()
+	{
+		isFlashing = true;
+		for(int i = 0; i < mRenderers.Length; ++i)
+		{
+			SkinnedMeshRenderer r = mRenderers[i];
+			Color normalColor = r.material.color;
+			r.material.color = damageColor;
+			yield return new WaitForSeconds(damageFlashDuration);
+			r.material.color = normalColor;
+			yield return new WaitForSeconds(damageFlashDuration * 0.5f);
+			r.material.color = damageColor;
+			yield return new WaitForSeconds(damageFlashDuration);
+			r.material.color = normalColor;
+		}
+		isFlashing = false;
+	}
 	
 	public void TakeDamage(SpellType attackType, float damage)
 	{
@@ -82,6 +112,11 @@ public class Enemy : MonoBehaviour
 		loadout.health -= totalDamage;
 		print ("Enemy took " + damage + " damage");
 		//print ("New Health = " + loadout.health);
+
+		if(!isFlashing)
+		{
+			StartCoroutine ("FlashDamageColor");
+		}
 		
 		if(loadout.health < 1)
 		{

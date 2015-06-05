@@ -14,11 +14,13 @@ public class CameraController : MonoBehaviour
 	public float xMinAngle;
 	public float xMaxAngle;
 	public Vector3 focalPoint = (Vector3.up * 2.0f) + (Vector3.back * 2.0f);
+	public float targetingHeightMultiplier = 1.0f;
 	
 	private float rotY;
 	private float rotX;
 	
 	private Transform playerTransform;
+
 	
 	void Start()
 	{
@@ -87,7 +89,7 @@ public class CameraController : MonoBehaviour
 		// target, action cam
 		else
 		{
-			Vector3 targetPos = target.transform.position;
+			Vector3 targetPos = target.transform.position + (Vector3.up * targetingHeightMultiplier);
 			Vector3 newfocalPoint = playerTransform.position + (Vector3.up * lookAtHeightOffset) + (playerTransform.up * focalPoint.y);
 			Vector3 fromTargetToFocalPoint = (newfocalPoint - targetPos).normalized;
 			Vector3 camPos = newfocalPoint + (fromTargetToFocalPoint * focalPoint.z) + (playerTransform.right * focalPoint.x);

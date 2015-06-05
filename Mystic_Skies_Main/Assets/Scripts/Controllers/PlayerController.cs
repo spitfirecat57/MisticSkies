@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
 
 	private Color matColor;
 
+	public float toFeetDist = 5.0f;
+	public float maxTerrainAngle = Mathf.PI * 0.25f;
+
 
 	void Start()
 	{
@@ -112,6 +115,30 @@ public class PlayerController : MonoBehaviour
 		}
 
 
+		// hill climbing is a no-no
+		RaycastHit hit;
+		Ray ray = new Ray(transform.position, (transform.forward - (transform.up * 4.0f)).normalized);
+		if(Physics.Raycast(ray, out hit, toFeetDist))
+		{
+			print ("[PlayerController] saw a " + hit.collider.name + " tagged " + hit.collider.tag);
+			if(hit.collider.gameObject.CompareTag("Floor"))
+			{
+				if(Vector3.Dot(transform.forward, hit.normal) < 0.0f &&
+				   Mathf.Acos(Vector3.Dot(transform.up, hit.normal)) > maxTerrainAngle)
+				{
+					Debug.DrawLine (ray.origin, ray.origin + (ray.direction * toFeetDist), Color.red, 0.1f);
+					rigidbody.velocity = new Vector3(0.0f, rigidbody.velocity.y, 0.0f);
+				}
+				else
+				{
+					Debug.DrawLine (ray.origin, ray.origin + (ray.direction * toFeetDist), Color.green, 0.1f);
+				}
+			}
+		}
+		else
+		{
+			Debug.DrawLine (ray.origin, ray.origin + (ray.direction * toFeetDist), Color.white, 0.1f);
+		}
 
 
 		GameObject target = PlayerManager.Target();
