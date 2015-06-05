@@ -7,6 +7,9 @@ public class SpellController : MonoBehaviour
 	public  float LQkDelayTime = 0.5f;
 	public  float HQDelayTime = 1.0f;
 	public int HQAttackManaCost = 50;
+	public int fireAttackManaCost = 10;
+	public int waterAttackManaCost = 10;
+	public int rockAttackManaCost = 10;
 
 	public Transform spellSpawnTransform;
 	
@@ -72,6 +75,7 @@ public class SpellController : MonoBehaviour
 				else
 				{
 					mSpells[(int)Spells.Fire1].Cast ();
+					PlayerManager.GetPlayerScript().IncreaseFireMana(-fireAttackManaCost);
 					attackTimer = LQkDelayTime;
 				}
 			}
@@ -88,6 +92,7 @@ public class SpellController : MonoBehaviour
 				else
 				{
 					mSpells[(int)Spells.Water1].Cast ();
+					PlayerManager.GetPlayerScript().IncreaseWaterMana(-waterAttackManaCost);
 					attackTimer = LQkDelayTime;
 				}
 			}
@@ -104,6 +109,7 @@ public class SpellController : MonoBehaviour
 				else
 				{
 					mSpells[(int)Spells.Rock1].Cast ();
+					PlayerManager.GetPlayerScript().IncreaseRockMana(-rockAttackManaCost);
 					attackTimer = LQkDelayTime;
 				}
 			}
