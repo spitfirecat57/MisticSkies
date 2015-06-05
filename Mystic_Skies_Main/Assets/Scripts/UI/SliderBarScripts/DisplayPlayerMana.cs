@@ -38,6 +38,9 @@ public class DisplayPlayerMana : MonoBehaviour
 		}
 		 
 		slider.value = (playerMana == 0.0f ? 0.0f : playerMana) / playerMaxMana;
-		text.text = (playerMana == 0.0f ? 0 : (int)playerMana) + " / " + playerMaxMana;
+		if(text)
+		{
+			text.text = (playerMana == 0.0f ? 0 : (int)playerMana) + " / " + playerMaxMana;
+		}
 	}
 }
