@@ -20,6 +20,9 @@ public class DisplayPlayerHealth : MonoBehaviour
 		float playerHealth = PlayerManager.GetPlayerHealth ();
 
 		slider.value = (playerHealth == 0.0f ? 0.0f : playerHealth) / PlayerManager.GetPlayerMaxHealth();
-		text.text = (playerHealth == 0.0f ? 0 : (int)playerHealth) + " / " + (int)PlayerManager.GetPlayerMaxHealth();
+		if(text)
+		{
+			text.text = (playerHealth == 0.0f ? 0 : (int)playerHealth) + " / " + (int)PlayerManager.GetPlayerMaxHealth();
+		}
 	}
 }
