@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
 		Ray ray = new Ray(transform.position, (transform.forward - (transform.up * 4.0f)).normalized);
 		if(Physics.Raycast(ray, out hit, toFeetDist))
 		{
-			print ("[PlayerController] saw a " + hit.collider.name + " tagged " + hit.collider.tag);
+			//print ("[PlayerController] saw a " + hit.collider.name + " tagged " + hit.collider.tag);
 			if(hit.collider.gameObject.CompareTag("Floor"))
 			{
 				if(Vector3.Dot(transform.forward, hit.normal) < 0.0f &&

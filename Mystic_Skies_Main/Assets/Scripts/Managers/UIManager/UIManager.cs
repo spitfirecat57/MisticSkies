@@ -27,6 +27,8 @@ public class UIManager : MonoBehaviour
 	public GameObject dialogueBox;
 	private static GameObject dialogueBoxObject;
 	private static DialogueBoxController dialogueBoxController;
+	public GameObject deathScreen;
+	private static GameObject deathScreenStatic;
 	
 	private static GameObject[] canvases;
 	private static bool[] activeCanvases;
@@ -50,6 +52,8 @@ public class UIManager : MonoBehaviour
 		dialogueBoxController = dialogueBox.GetComponent<DialogueBoxController>();
 		
 		UIImageObject = UIImagePrefab;
+
+		deathScreenStatic = deathScreen;
 	}
 	
 	void OnLevelWasLoaded(int level)
@@ -135,7 +139,14 @@ public class UIManager : MonoBehaviour
 		}
 	}
 	
-	
+	public static void ActivateDeathScreen()
+	{
+		deathScreenStatic.SetActive (true);
+	}
+	public static void DeActivateDeathScreen()
+	{
+		deathScreenStatic.SetActive (false);
+	}
 	
 	
 	

@@ -112,6 +112,7 @@ public class GameManager : MonoBehaviour
 	{
 		PlayerManager.SaveGame(currentFileIndex);
 		SceneManager.SaveGame(currentFileIndex);
+		AssetDatabase.SaveAssets ();
 	}
 	
 	public static void ExitGameStatic()
@@ -155,9 +156,23 @@ public class GameManager : MonoBehaviour
 			isPaused = true;
 		}
 	}
-	
-	
+
+	public static void LoadCurrentGameStatic()
+	{
+		UIManager.ActivateDeathScreen();
+		Time.timeScale = 0.01f;
+		LoadGameStatic (currentFileIndex);
+		SceneManager.LoadSceneDestructive (SceneManager.CurrentScene ());
+	}
+
+
 }
+
+
+
+
+
+
 
 
 

@@ -74,6 +74,18 @@ public class PlayerManager : MonoBehaviour
 
 				DontDestroyOnLoad(playerObject);
 				DontDestroyOnLoad(cameraObject);
+
+				if(playerObject.transform.parent)
+				{
+					playerObject.transform.parent = null;
+				}
+				if(cameraObject.transform.parent)
+				{
+					cameraObject.transform.parent = null;
+				}
+
+				playerObject.SetActive(true);
+				cameraObject.SetActive(true);
 			}
 			else if(playerPrefab && cameraPrefab)
 			{

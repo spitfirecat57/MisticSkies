@@ -129,7 +129,8 @@ public class Player : MonoBehaviour
 		
 		if(health <= 0.0f)
 		{
-			//GameManager.LoadCurrentGame();
+			health = 0.0f;
+			GameManager.LoadCurrentGameStatic();
 		}
 	}
 	
@@ -298,6 +299,9 @@ public class Player : MonoBehaviour
 		maxWaterMana = data.maxWaterMana;
 		rockMana = data.rockMana;
 		maxRockMana = data.maxRockMana;
+		print ("[Player] Saving: " +
+		       "health = " + health +
+		       "maxFireMana = " + maxFireMana);
 		
 		for(int i = 0; i < potions.Count; ++i)
 		{
@@ -324,6 +328,10 @@ public class Player : MonoBehaviour
 		data.maxWaterMana = maxWaterMana;
 		data.rockMana = rockMana;
 		data.maxRockMana = maxRockMana;
+
+		print ( "[Player] Saving: " +
+				"health = " + data.health +
+		        "maxFireMana = " + data.maxFireMana);
 		
 		for(int i = 0; i < potions.Count; ++i)
 		{

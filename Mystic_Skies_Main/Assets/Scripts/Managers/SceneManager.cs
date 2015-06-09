@@ -72,7 +72,7 @@ public class SceneManager : MonoBehaviour
 			
 			if(Application.loadedLevelName != sceneNames[(int)Scenes.Frontend])
 			{
-				Debug.Log("[SceneManager] Loaded level was not Frontend Screen");
+				Debug.Log("[SceneManager] Loaded level was not Frontend Screen. Loaded level was " + (Scenes)Application.loadedLevel);
 				currentScene = (Scenes)Application.loadedLevel;
 			}
 			else
@@ -101,7 +101,6 @@ public class SceneManager : MonoBehaviour
 			
 			// initialize current state info
 			objectStates = new List<ObjectState>();
-			currentScene = Scenes.Frontend;
 			transitionPointIndex = 0;
 			
 			// TODO: Figure out why this is necessary for some Managers
@@ -228,6 +227,7 @@ public class SceneManager : MonoBehaviour
 	
 	public static void SaveGame(int fileSlotindex)
 	{
+		print ("[SceneManager] Saving: scene = " + currentScene + "TPI = " + transitionPointIndex);
 		instance.sceneManagerData [fileSlotindex].currentScene 			= currentScene;
 		instance.sceneManagerData [fileSlotindex].transitionPointIndex 	= transitionPointIndex;
 		instance.sceneManagerData [fileSlotindex].objectStates 			= objectStates;

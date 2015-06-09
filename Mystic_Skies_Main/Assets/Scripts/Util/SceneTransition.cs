@@ -27,6 +27,8 @@ public class SceneTransition : MonoBehaviour
 		if(other.CompareTag("Player"))
 		{
 			SceneManager.SetTransitionPointIndex(this.transitionPointIndex);
+			GameManager.SaveGame();
+
 			if(loadSceneOnCollision)
 			{
 				SceneManager.LoadSceneDestructive(sceneToload);
