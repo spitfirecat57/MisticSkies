@@ -84,7 +84,10 @@ public class PlayerAnimationC : MonoBehaviour {
 		    Input.GetKey(InputManager.GetKeyCode(InputKeys.Left)) ||
 		    Input.GetKey(InputManager.GetKeyCode(InputKeys.Right)))
 		{
-			walk = 0.2f;
+			//if(!Input.GetKey(InputManager.GetKeyCode(InputKeys.Run)))
+			//{
+				walk = 0.2f;
+			//}
 		}
 		else
 		{
@@ -96,11 +99,22 @@ public class PlayerAnimationC : MonoBehaviour {
 
 	void Running()
 	{
-		if(Input.GetKeyDown (InputManager.GetKeyCode(InputKeys.Run)))
+		if(Input.GetKey (InputManager.GetKeyCode(InputKeys.Run)) == true && 
+		   (Input.GetKey(InputManager.GetKeyCode(InputKeys.Up)) == true ||
+		   Input.GetKey(InputManager.GetKeyCode(InputKeys.Down)) == true ||
+		   Input.GetKey(InputManager.GetKeyCode(InputKeys.Left)) == true ||
+		   Input.GetKey(InputManager.GetKeyCode(InputKeys.Right)) == true))
 		{
 			animator.SetBool("Running", true);
 		}
-		else if (Input.GetKeyUp (InputManager.GetKeyCode(InputKeys.Run)))
+		else if ( Input.GetKeyUp (InputManager.GetKeyCode(InputKeys.Run)) )
+		{
+			animator.SetBool("Running", false);
+		}
+		else if( Input.GetKey(InputManager.GetKeyCode(InputKeys.Up)) == false &&
+		        Input.GetKey(InputManager.GetKeyCode(InputKeys.Down)) == false &&
+		        Input.GetKey(InputManager.GetKeyCode(InputKeys.Left)) == false &&
+		        Input.GetKey(InputManager.GetKeyCode(InputKeys.Right)) == false)
 		{
 			animator.SetBool("Running", false);
 		}
