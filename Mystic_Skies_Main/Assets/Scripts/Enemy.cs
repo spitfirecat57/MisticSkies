@@ -80,9 +80,10 @@ public class Enemy : MonoBehaviour
 			}
 			else
 			{
+				print ("Enemy hit the player");
 				Player playerScript = PlayerManager.GetPlayerScript();
 				playerScript.TakeDamage(loadout.damage);
-				playerScript.KnockBack((PlayerManager.GetPlayerPosition() - transform.position).normalized * loadout.knockbackPower);
+				//playerScript.KnockBack((PlayerManager.GetPlayerPosition() - transform.position).normalized * loadout.knockbackPower);
 				Stun(1.0f);
 			}
 		}

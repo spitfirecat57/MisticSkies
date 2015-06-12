@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 	public float dodgeSpeed;
 	public float dodgeCooldown;
 	
-	private Transform camTransform;
+	//private Transform camTransform;
 
 	private Vector3 heading;
 
@@ -29,13 +29,13 @@ public class PlayerController : MonoBehaviour
 
 	void Start()
 	{
-		camTransform = PlayerManager.GetCameraTransform ();
 		isDodging = false;
 		animator = GetComponentInChildren<Animator> ();
 	}
 
 	void Update()
 	{
+		Transform camTransform = PlayerManager.GetCameraTransform ();
 		Vector3 forward = camTransform.forward;
 		forward.y = 0.0f;
 		forward.Normalize();

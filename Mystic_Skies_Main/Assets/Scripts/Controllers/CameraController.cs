@@ -27,7 +27,15 @@ public class CameraController : MonoBehaviour
 		rotX = 45.0f;
 		rotY = -90.0f;
 		
-		playerTransform = PlayerManager.GetPlayerTransform ();
+		GameObject playerObject = GameObject.FindWithTag ("Player");
+		if(playerObject)
+		{
+			playerTransform = playerObject.transform;
+		}
+		else
+		{
+			print("[CameraController] Could not find Player");
+		}
 		if(zoomFalloffMultiplier == 0.0f)
 		{
 			zoomFalloffMultiplier = 1.0f;

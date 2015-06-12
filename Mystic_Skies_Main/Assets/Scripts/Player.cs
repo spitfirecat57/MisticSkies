@@ -33,7 +33,8 @@ public class Player : MonoBehaviour
 	public float speedEpsilon;
 	public float friction;
 	public float maxTargetingRange;
-	public float mKnockbackHeight = 4.0f;
+	public float mKnockbackHeight = 2.0f;
+	public float mKnockbackMult = 6.0f;
 	public List<NameValue> potions;
 	public List<NameValue> inventory;
 	public List<NameValue> collectibles;
@@ -42,31 +43,29 @@ public class Player : MonoBehaviour
 	private bool knockingBack = false;
 	
 	private PlayerController mc;
-
-	Animator anim;
-
+	
 	
 	void Start()
 	{
-		if(PlayerManager.GetPlayerObject() != gameObject)
-		{
+//		if(PlayerManager.GetPlayerObject() != gameObject)
+//		{
 			if(transform.parent)
 			{
-				Destroy(transform.parent.gameObject);
+				transform.parent.DetachChildren();
 			}
-			else
-			{
-				GameObject[] cams = GameObject.FindGameObjectsWithTag("MainCamera");
-				foreach(GameObject cam in cams)
-				{
-					if(PlayerManager.GetCameraObject() != cam)
-					{
-						Destroy(cam);
-					}
-				}
-				Destroy(gameObject);
-			}
-		}
+//			else
+//			{
+//				GameObject[] cams = GameObject.FindGameObjectsWithTag("MainCamera");
+//				foreach(GameObject cam in cams)
+//				{
+//					if(PlayerManager.GetCameraObject() != cam)
+//					{
+//						Destroy(cam);
+//					}
+//				}
+//				Destroy(gameObject);
+//			}
+//		}
 		
 		potions = new List<NameValue> ();
 		for(int i = 0; i < (int)ItemManager.PotionType.COUNT; ++i)
@@ -106,13 +105,15 @@ public class Player : MonoBehaviour
 		}
 
 		manaRegenTimer += Time.deltaTime;
-		if(manaRegenTimer > 3.0f)
+		if(manaRegenTimer > 2.0f)
 		{
 			IncreaseFireMana(maxFireMana * manaRegen);
 			IncreaseWaterMana(maxWaterMana * manaRegen);
 			IncreaseRockMana(maxRockMana * manaRegen);
 			manaRegenTimer = 0.0f;
 		}
+
+
 	}
 
 	void OnCollisionEnter(Collision col)
@@ -131,24 +132,15 @@ public class Player : MonoBehaviour
 		
 		if(health <= 0.0f)
 		{
-
-			Animator anim = GetComponentInChildren<Animator>();
-				anim.CrossFade ("Dead", 0f);
-			//anim.SetBool("Dead", true);
 			health = 0.0f;
 			GameManager.LoadCurrentGameStatic();
-			//
-		//	Animator anim = GetComponentInChildren<Animator>();
-		//	anim.CrossFade ("Dead", 0f);
-		//	anim.SetBool("Dead", true);
-			//
 		}
 	}
 	
 	public void KnockBack(Vector3 knockback)
 	{
 		if (isInvincible) return;
-		rigidbody.velocity = new Vector3(knockback.x, mKnockbackHeight, knockback.z);
+		rigidbody.velocity = new Vector3(knockback.x * mKnockbackMult, mKnockbackHeight, knockback.z * mKnockbackMult);
 		knockingBack = true;
 		StartCoroutine("CoKnockBack", knockback);
 	}

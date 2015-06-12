@@ -54,6 +54,8 @@ public class SpellController : MonoBehaviour
 		attackTimer -= Time.deltaTime;
 
 
+		Player p = PlayerManager.GetPlayerScript ();
+
 		// switch between low and high magic
 		if(Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.MagicMode)))
 		{
@@ -66,13 +68,13 @@ public class SpellController : MonoBehaviour
 			// left click == fire spells
 			if(Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.FireSpell)))
 			{
-				if(HQMagic)
+				if(HQMagic && p.fireMana > HQAttackManaCost)
 				{
 					mSpells[(int)Spells.Fire2].Cast ();
 					PlayerManager.GetPlayerScript().IncreaseFireMana(-HQAttackManaCost);
 					attackTimer = HQDelayTime;
 				}
-				else
+				else if( p.fireMana > fireAttackManaCost)
 				{
 					mSpells[(int)Spells.Fire1].Cast ();
 					PlayerManager.GetPlayerScript().IncreaseFireMana(-fireAttackManaCost);
@@ -83,13 +85,13 @@ public class SpellController : MonoBehaviour
 			// right click == water spells
 			if(Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.WaterSpell)))
 			{
-				if(HQMagic)
+				if(HQMagic && p.waterMana > HQAttackManaCost)
 				{
 					mSpells[(int)Spells.Water2].Cast ();
 					PlayerManager.GetPlayerScript().IncreaseWaterMana(-HQAttackManaCost);
 					attackTimer = HQDelayTime;
 				}
-				else
+				else if( p.waterMana > waterAttackManaCost)
 				{
 					mSpells[(int)Spells.Water1].Cast ();
 					PlayerManager.GetPlayerScript().IncreaseWaterMana(-waterAttackManaCost);
@@ -100,13 +102,13 @@ public class SpellController : MonoBehaviour
 			// middle click == rock spells
 			if(Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.RockSpell)))
 			{
-				if(HQMagic)
+				if(HQMagic && p.rockMana > HQAttackManaCost)
 				{
 					mSpells[(int)Spells.Rock2].Cast ();
 					PlayerManager.GetPlayerScript().IncreaseRockMana(-HQAttackManaCost);
 					attackTimer = HQDelayTime;
 				}
-				else
+				else if(p.rockMana > rockAttackManaCost)
 				{
 					mSpells[(int)Spells.Rock1].Cast ();
 					PlayerManager.GetPlayerScript().IncreaseRockMana(-rockAttackManaCost);

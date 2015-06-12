@@ -6,12 +6,10 @@ public class LOSTranslucency : MonoBehaviour
 {
 	List<MeshRenderer> toFadeOut;
 	List<MeshRenderer> toFadeIn;
-	private Transform playerTransform;
+	//private Transform playerTransform;
 
 	void Start()
 	{
-		playerTransform = PlayerManager.GetPlayerTransform();
-
 		toFadeOut = new List<MeshRenderer>();
 		toFadeIn = new List<MeshRenderer>();
 		StartCoroutine("CastRay");
@@ -29,7 +27,8 @@ public class LOSTranslucency : MonoBehaviour
 	{
 		while(true)
 		{
-			Vector3 toPlayer = playerTransform.position - transform.position;
+			yield return new WaitForEndOfFrame();
+			Vector3 toPlayer = PlayerManager.GetPlayerTransform().position - transform.position;
 			Ray ray = new Ray(transform.position, toPlayer.normalized);
 			RaycastHit[] hitInfos = Physics.RaycastAll(ray, toPlayer.magnitude - 1.0f);
 			MeshRenderer[] mrenderer = null;

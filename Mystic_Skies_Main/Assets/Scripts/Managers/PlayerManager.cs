@@ -53,68 +53,7 @@ public class PlayerManager : MonoBehaviour
 			
 			
 			print ("[PlayerManager] Awake()");
-			GameObject playerObjectOther = GameObject.FindGameObjectWithTag("Player");
-			if(playerObjectOther)
-			{
-				Debug.Log("[PlayerManager] Player already created. Grabbing it as reference.");
-				
-				playerObject = playerObjectOther;
-				
-				playerObject.name = "Player";
-				DontDestroyOnLoad(playerObject);
-				playerScript = playerObject.GetComponent<Player>();
-				print ("Got playerScript from reference");
-				playerControllerScript = playerObject.GetComponent<PlayerController>();
-				playerSpellController = playerObject.GetComponent<SpellController>();
-				playerTransform = playerObject.transform;
-				
-				cameraObject = GameObject.FindGameObjectWithTag("MainCamera");
-				cameraScript = cameraObject.GetComponent<Camera>();
-				cameraControllerScript = cameraObject.GetComponent<CameraController>();
 
-				DontDestroyOnLoad(playerObject);
-				DontDestroyOnLoad(cameraObject);
-
-				if(playerObject.transform.parent)
-				{
-					playerObject.transform.parent = null;
-				}
-				if(cameraObject.transform.parent)
-				{
-					cameraObject.transform.parent = null;
-				}
-
-				playerObject.SetActive(true);
-				cameraObject.SetActive(true);
-			}
-			else if(playerPrefab && cameraPrefab)
-			{
-				Debug.Log("[PlayerManager] Instantiating player object.");
-				playerObject = GameObject.Instantiate(playerPrefab, Vector3.up * 2.0f, Quaternion.identity) as GameObject;
-				playerObject.name = "Player";
-				DontDestroyOnLoad(playerObject);
-				playerTransform = playerObject.transform;
-				
-				playerScript = playerObject.GetComponent<Player>();
-				playerControllerScript = playerObject.GetComponent<PlayerController>();
-				playerSpellController = playerObject.GetComponent<SpellController>();
-				
-				cameraObject = GameObject.Instantiate(cameraPrefab) as GameObject;
-				cameraObject.name = "PlayerCamera";
-				DontDestroyOnLoad(cameraObject);
-				cameraScript = cameraObject.GetComponent<Camera>();
-				cameraControllerScript = cameraObject.GetComponent<CameraController>();
-
-				playerObject.SetActive(true);
-				cameraObject.SetActive(true);
-
-				DontDestroyOnLoad(playerObject);
-				DontDestroyOnLoad(cameraObject);
-			}
-			else
-			{
-				Debug.Log("[PlayerManager] playerPrefab or cameraPrefab is null");
-			}
 
 
 			CTI = GameObject.Instantiate(currentTargetIndicator) as GameObject;
@@ -134,10 +73,59 @@ public class PlayerManager : MonoBehaviour
 	
 	void Start()
 	{
-		if(playerObject == null)
+		GameObject playerObjectOther = null;
+		playerObjectOther = GameObject.FindWithTag("Player");
+		
+		if(playerObjectOther != null)
 		{
-			Debug.Log("[PlayerManager] playerObject is null in Start(), reaquiring");
-			playerObject = GameObject.FindGameObjectWithTag("Player");
+			Debug.Log("[PlayerManager] Player already created. Grabbing it as reference: " + playerObjectOther.name + " " + playerObjectOther.tag);
+			
+			playerObject = playerObjectOther;
+			
+			playerObject.name = "Player";
+			DontDestroyOnLoad(playerObject);
+			playerScript = playerObject.GetComponent<Player>();
+			playerControllerScript = playerObject.GetComponent<PlayerController>();
+			playerSpellController = playerObject.GetComponent<SpellController>();
+			playerTransform = playerObject.transform;
+			
+			cameraObject = GameObject.FindGameObjectWithTag("MainCamera");
+			cameraScript = cameraObject.GetComponent<Camera>();
+			cameraControllerScript = cameraObject.GetComponent<CameraController>();
+			
+			DontDestroyOnLoad(playerObject);
+			DontDestroyOnLoad(cameraObject);
+			
+			playerObject.SetActive(true);
+			cameraObject.SetActive(true);
+		}
+		else if(playerPrefab && cameraPrefab)
+		{
+			Debug.Log("[PlayerManager] Instantiating player object.");
+			playerObject = GameObject.Instantiate(playerPrefab, Vector3.up * 2.0f, Quaternion.identity) as GameObject;
+			playerObject.name = "Player";
+			DontDestroyOnLoad(playerObject);
+			playerTransform = playerObject.transform;
+			
+			playerScript = playerObject.GetComponent<Player>();
+			playerControllerScript = playerObject.GetComponent<PlayerController>();
+			playerSpellController = playerObject.GetComponent<SpellController>();
+			
+			cameraObject = GameObject.Instantiate(cameraPrefab) as GameObject;
+			cameraObject.name = "PlayerCamera";
+			DontDestroyOnLoad(cameraObject);
+			cameraScript = cameraObject.GetComponent<Camera>();
+			cameraControllerScript = cameraObject.GetComponent<CameraController>();
+			
+			playerObject.SetActive(true);
+			cameraObject.SetActive(true);
+			
+			DontDestroyOnLoad(playerObject);
+			DontDestroyOnLoad(cameraObject);
+		}
+		else
+		{
+			Debug.Log("[PlayerManager] playerPrefab or cameraPrefab is null");
 		}
 	}
 

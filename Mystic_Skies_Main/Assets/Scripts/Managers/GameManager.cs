@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
 	{
 		PlayerManager.SaveGame(currentFileIndex);
 		SceneManager.SaveGame(currentFileIndex);
-		AssetDatabase.SaveAssets ();
+		//AssetDatabase.SaveAssets ();
 	}
 	
 	public static void ExitGameStatic()
