@@ -76,6 +76,7 @@ public class LOSTranslucency : MonoBehaviour
 					r.material.color = c;
 				}
 			}
+			toFadeOut.RemoveAll(obj => obj == null);
 			// check for fade in additions
 			foreach(MeshRenderer mr in toFadeOut.FindAll(obj => obj.material.color.a < 0.15f))
 			{

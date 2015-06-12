@@ -165,6 +165,11 @@ public class GameManager : MonoBehaviour
 		SceneManager.LoadSceneDestructive (SceneManager.CurrentScene ());
 	}
 
+	public void SetTimeScale(float t)
+	{
+		Time.timeScale = t;
+	}
+
 
 }
 

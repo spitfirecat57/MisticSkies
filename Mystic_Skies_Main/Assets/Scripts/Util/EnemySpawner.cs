@@ -32,8 +32,11 @@ public class EnemySpawner : MonoBehaviour
 			   	(PlayerManager.GetPlayerPosition() - transform.position).sqrMagnitude < activationDistance * activationDistance)
 			{
 				onSpawnParticles.Play();
-				spawnedEnemy = GameObject.Instantiate(EnemyManager.GetEnemyLoadout(enemyType).prefab, transform.position, Quaternion.identity) as GameObject;
-				mSpawnDelayTimer = 0.0f;				
+				EnemyLoadout el = EnemyManager.GetEnemyLoadout(enemyType);
+				print ("[EnemySpawner] damage = " + el.damage + ", " + el.prefab == null);
+
+				spawnedEnemy = GameObject.Instantiate(el.prefab, transform.position, Quaternion.identity) as GameObject;
+				mSpawnDelayTimer = 0.0f;	
 			}
 		}
 	}

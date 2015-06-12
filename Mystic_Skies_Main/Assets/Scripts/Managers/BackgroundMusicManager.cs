@@ -10,8 +10,8 @@ public class BackgroundMusicManager : MonoBehaviour
 	private static AudioSource[] backgroundMusicStatic;
 	
 	private static int currentSongIndex = 0;
-	private static float currentSongLength;
-	private static float currentTimeIntoSong;
+	private static float currentSongLength = 0.0f;
+	private static float currentTimeIntoSong = 0.0f;
 
 	private static bool isPlaying = false;
 	
@@ -57,7 +57,10 @@ public class BackgroundMusicManager : MonoBehaviour
 	{
 		//print ("StopPlaying");
 		isPlaying = false;
-		backgroundMusicStatic[currentSongIndex].Stop();
+		if(backgroundMusicStatic.Length > 0)
+		{
+			backgroundMusicStatic[currentSongIndex].Stop();
+		}
 	}
 
 	void Update()

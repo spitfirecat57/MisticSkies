@@ -40,6 +40,12 @@ public class CameraController : MonoBehaviour
 		{
 			zoomFalloffMultiplier = 1.0f;
 		}
+
+		if(PlayerManager.GetCameraObject() != gameObject)
+		{
+			print ("Camera is not the only one, DESTROYING");
+			Destroy(gameObject);
+		}
 	}
 	
 	void Update()
@@ -101,6 +107,12 @@ public class CameraController : MonoBehaviour
 			Vector3 newfocalPoint = playerTransform.position + (Vector3.up * lookAtHeightOffset) + (playerTransform.up * focalPoint.y);
 			Vector3 fromTargetToFocalPoint = (newfocalPoint - targetPos).normalized;
 			Vector3 camPos = newfocalPoint + (fromTargetToFocalPoint * focalPoint.z) + (playerTransform.right * focalPoint.x);
+
+			if((camPos - targetPos).sqrMagnitude < minDistFromPlayer * minDistFromPlayer)
+			{
+				camPos = (camPos - targetPos) * minDistFromPlayer;
+			}
+
 			transform.position = camPos;
 			transform.LookAt (targetPos);
 		}

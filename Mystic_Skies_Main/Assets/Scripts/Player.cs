@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
 
 	private bool isInvincible = false;
 	private bool knockingBack = false;
+	private bool isDead = false;
 	
 	private PlayerController mc;
 	
@@ -53,6 +54,12 @@ public class Player : MonoBehaviour
 			{
 				transform.parent.DetachChildren();
 			}
+
+		if(PlayerManager.GetPlayerObject() != gameObject)
+		{
+			print ("This player is not the first, DESTROYING");
+			Destroy(gameObject);
+		}
 //			else
 //			{
 //				GameObject[] cams = GameObject.FindGameObjectsWithTag("MainCamera");
@@ -126,20 +133,34 @@ public class Player : MonoBehaviour
 	
 	public void TakeDamage(float damage)
 	{
-		if (isInvincible) return;
+		if (isInvincible || isDead) return;
 
 		health -= damage * (1.0f - toughnes);
 		
-		if(health <= 0.0f)
+		if(health <= 0.0f && !isDead)
 		{
+			Animator anim = GetComponentInChildren<Animator>();
+			anim.CrossFade("Dead", 0.0f);
 			health = 0.0f;
-			GameManager.LoadCurrentGameStatic();
+			isDead = true;
+			PlayerManager.GetMovementScript().enabled = false;
+			StartCoroutine("WaitThenLoadCurrentGame", 4.0f);
 		}
+	}
+
+	IEnumerator WaitThenLoadCurrentGame(float t)
+	{
+		yield return new WaitForSeconds (t);
+		GameManager.LoadCurrentGameStatic();
+		isDead = false;
+		mc.enabled = true;
+		Animator anim = GetComponentInChildren<Animator> ();
+		anim.CrossFade ("Idle", 0.0f);
 	}
 	
 	public void KnockBack(Vector3 knockback)
 	{
-		if (isInvincible) return;
+		if (isInvincible || isDead) return;
 		rigidbody.velocity = new Vector3(knockback.x * mKnockbackMult, mKnockbackHeight, knockback.z * mKnockbackMult);
 		knockingBack = true;
 		StartCoroutine("CoKnockBack", knockback);

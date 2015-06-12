@@ -63,7 +63,7 @@ public class SpellController : MonoBehaviour
 		}
 
 
-		if(attackTimer < 0.0f)
+		if(attackTimer < 0.0f && !Input.GetKey(InputManager.GetKeyCode(InputKeys.Run)))
 		{			
 			// left click == fire spells
 			if(Input.GetKeyDown(InputManager.GetKeyCode(InputKeys.FireSpell)))
