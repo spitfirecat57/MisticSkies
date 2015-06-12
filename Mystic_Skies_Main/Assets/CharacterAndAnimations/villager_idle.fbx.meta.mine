@@ -1,0 +1,133 @@
+fileFormatVersion: 2
+guid: 3bb9189cf6e4ae44495d5bfaf2389f6a
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: backJnt_01
+    100002: backJnt_02
+    100004: backJnt_03
+    100006: head_EndJnt
+    100008: headJnt
+    100010: left_AnkleJnt
+    100012: left_ElbowJnt
+    100014: left_Hand_EndJnt
+    100016: left_HandJnt_01
+    100018: left_HandJnt_02
+    100020: left_HipJnt
+    100022: left_KneeJnt
+    100024: left_ShoulderJnt
+    100026: left_Thumb_EndJnt
+    100028: left_ThumbJnt
+    100030: left_Toe_EndJnt
+    100032: left_ToeJnt
+    100034: left_WristJnt
+    100036: neckJnt
+    100038: right_AnkleJnt
+    100040: right_ElbowJnt
+    100042: right_Hand_EndJnt
+    100044: right_HandJnt_01
+    100046: right_HandJnt_02
+    100048: right_HipJnt
+    100050: right_KneeJnt
+    100052: right_ShoulderJnt
+    100054: right_Thumb_EndJnt
+    100056: right_ThumbJnt
+    100058: right_Toe_EndJnt
+    100060: right_ToeJnt
+    100062: right_WristJnt
+    100064: rootJnt
+    100066: //RootNode
+    100068: VillagerM_Geo
+    400000: backJnt_01
+    400002: backJnt_02
+    400004: backJnt_03
+    400006: head_EndJnt
+    400008: headJnt
+    400010: left_AnkleJnt
+    400012: left_ElbowJnt
+    400014: left_Hand_EndJnt
+    400016: left_HandJnt_01
+    400018: left_HandJnt_02
+    400020: left_HipJnt
+    400022: left_KneeJnt
+    400024: left_ShoulderJnt
+    400026: left_Thumb_EndJnt
+    400028: left_ThumbJnt
+    400030: left_Toe_EndJnt
+    400032: left_ToeJnt
+    400034: left_WristJnt
+    400036: neckJnt
+    400038: right_AnkleJnt
+    400040: right_ElbowJnt
+    400042: right_Hand_EndJnt
+    400044: right_HandJnt_01
+    400046: right_HandJnt_02
+    400048: right_HipJnt
+    400050: right_KneeJnt
+    400052: right_ShoulderJnt
+    400054: right_Thumb_EndJnt
+    400056: right_ThumbJnt
+    400058: right_Toe_EndJnt
+    400060: right_ToeJnt
+    400062: right_WristJnt
+    400064: rootJnt
+    400066: //RootNode
+    400068: VillagerM_Geo
+    4300000: VillagerM_Geo
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: VillagerM_Geo
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
