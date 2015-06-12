@@ -2,19 +2,17 @@
 using System.Collections;
 
 public class BossAttack_anim : MonoBehaviour {
-
-	public GameObject clip;
+	
 	public GameObject attack;
-	public int cameraLife;
-
 	// Use this for initialization
 	void Start ()
 	{
-	
+		attack.SetActive (false);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 	
 	}
 
@@ -22,12 +20,7 @@ public class BossAttack_anim : MonoBehaviour {
 	{
 		if(col.gameObject.name == "Player")
 		{
-
-			clip.SetActive(true);
-			//Destroy(clip, 6);
 			attack.SetActive(true);
-
-			Destroy(clip, cameraLife);
 		}
 	}
 

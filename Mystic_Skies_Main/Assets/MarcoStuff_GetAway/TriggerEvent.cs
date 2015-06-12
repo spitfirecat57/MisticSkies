@@ -7,6 +7,8 @@ public class TriggerEvent : MonoBehaviour
 	public GameObject clipObj;
 	public GameObject clipObj1;
 
+	public string collideWith;
+
 
 
 	// Use this for initialization
@@ -18,16 +20,12 @@ public class TriggerEvent : MonoBehaviour
 
 	}
 	
-	// Update is called once per frame
-	void Update () 
-	{
-		
-	}
+
 
 	void OnTriggerEnter (Collider col)
 	{
 		print ("Collided with " + col.name);
-		if(col.gameObject.name == "Player")
+		if(col.gameObject.name == collideWith)
 		{
 			clipObj.SetActive(true);
 			clipObj1.SetActive(true);
