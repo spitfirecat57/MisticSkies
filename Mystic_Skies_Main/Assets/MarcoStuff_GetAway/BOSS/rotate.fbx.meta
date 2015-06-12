@@ -1,0 +1,509 @@
+fileFormatVersion: 2
+guid: 4b03e14cc9301d945a82406a5162a54f
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: bottom1
+    100002: Head_Thing03
+    100004: Head_Thing04
+    100006: joint1
+    100008: joint10
+    100010: joint11
+    100012: joint12
+    100014: joint13
+    100016: joint14
+    100018: joint15
+    100020: joint16
+    100022: joint17
+    100024: joint18
+    100026: joint19
+    100028: joint2
+    100030: joint20
+    100032: joint21
+    100034: joint22
+    100036: joint23
+    100038: joint24
+    100040: joint25
+    100042: joint26
+    100044: joint27
+    100046: joint28
+    100048: joint29
+    100050: joint3
+    100052: joint30
+    100054: joint31
+    100056: joint32
+    100058: joint33
+    100060: joint34
+    100062: joint35
+    100064: joint36
+    100066: joint37
+    100068: joint38
+    100070: joint39
+    100072: joint4
+    100074: joint40
+    100076: joint41
+    100078: joint42
+    100080: joint43
+    100082: joint44
+    100084: joint45
+    100086: joint46
+    100088: joint47
+    100090: joint48
+    100092: joint49
+    100094: joint5
+    100096: joint50
+    100098: joint51
+    100100: joint52
+    100102: joint53
+    100104: joint54
+    100106: joint55
+    100108: joint56
+    100110: joint57
+    100112: joint58
+    100114: joint59
+    100116: joint6
+    100118: joint60
+    100120: joint61
+    100122: joint62
+    100124: joint63
+    100126: joint64
+    100128: joint65
+    100130: joint66
+    100132: joint67
+    100134: joint68
+    100136: joint69
+    100138: joint7
+    100140: joint8
+    100142: joint9
+    100144: Lizard1
+    100146: LIZARD_Grp
+    100148: pCube54
+    100150: pCube55
+    100152: pCube56
+    100154: pCube57
+    100156: pCube58
+    100158: pCube59
+    100160: pCube60
+    100162: pCube61
+    100164: pCube62
+    100166: pCube63
+    100168: pCube64
+    100170: pCube65
+    100172: pCube66
+    100174: pCube67
+    100176: pCube68
+    100178: pCube69
+    100180: pCube70
+    100182: pCube71
+    100184: pCube72
+    100186: pCube73
+    100188: pCube74
+    100190: pCube75
+    100192: pCube77
+    100194: pCube78
+    100196: pCube79
+    100198: pCube80
+    100200: pCube81
+    100202: pCube82
+    100204: pCube83
+    100206: //RootNode
+    100208: Teeth
+    400000: bottom1
+    400002: Head_Thing03
+    400004: Head_Thing04
+    400006: joint1
+    400008: joint10
+    400010: joint11
+    400012: joint12
+    400014: joint13
+    400016: joint14
+    400018: joint15
+    400020: joint16
+    400022: joint17
+    400024: joint18
+    400026: joint19
+    400028: joint2
+    400030: joint20
+    400032: joint21
+    400034: joint22
+    400036: joint23
+    400038: joint24
+    400040: joint25
+    400042: joint26
+    400044: joint27
+    400046: joint28
+    400048: joint29
+    400050: joint3
+    400052: joint30
+    400054: joint31
+    400056: joint32
+    400058: joint33
+    400060: joint34
+    400062: joint35
+    400064: joint36
+    400066: joint37
+    400068: joint38
+    400070: joint39
+    400072: joint4
+    400074: joint40
+    400076: joint41
+    400078: joint42
+    400080: joint43
+    400082: joint44
+    400084: joint45
+    400086: joint46
+    400088: joint47
+    400090: joint48
+    400092: joint49
+    400094: joint5
+    400096: joint50
+    400098: joint51
+    400100: joint52
+    400102: joint53
+    400104: joint54
+    400106: joint55
+    400108: joint56
+    400110: joint57
+    400112: joint58
+    400114: joint59
+    400116: joint6
+    400118: joint60
+    400120: joint61
+    400122: joint62
+    400124: joint63
+    400126: joint64
+    400128: joint65
+    400130: joint66
+    400132: joint67
+    400134: joint68
+    400136: joint69
+    400138: joint7
+    400140: joint8
+    400142: joint9
+    400144: Lizard1
+    400146: LIZARD_Grp
+    400148: pCube54
+    400150: pCube55
+    400152: pCube56
+    400154: pCube57
+    400156: pCube58
+    400158: pCube59
+    400160: pCube60
+    400162: pCube61
+    400164: pCube62
+    400166: pCube63
+    400168: pCube64
+    400170: pCube65
+    400172: pCube66
+    400174: pCube67
+    400176: pCube68
+    400178: pCube69
+    400180: pCube70
+    400182: pCube71
+    400184: pCube72
+    400186: pCube73
+    400188: pCube74
+    400190: pCube75
+    400192: pCube77
+    400194: pCube78
+    400196: pCube79
+    400198: pCube80
+    400200: pCube81
+    400202: pCube82
+    400204: pCube83
+    400206: //RootNode
+    400208: Teeth
+    4300000: Lizard1
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Lizard1
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: bottom1
+        weight: 1
+      - path: joint6
+        weight: 1
+      - path: joint6/joint7
+        weight: 1
+      - path: joint6/joint7/joint8
+        weight: 1
+      - path: joint6/joint7/joint8/joint9
+        weight: 1
+      - path: joint6/joint7/joint8/joint9/joint10
+        weight: 1
+      - path: joint6/joint7/joint8/joint9/joint10/joint11
+        weight: 1
+      - path: joint6/joint7/joint8/joint9/joint10/joint11/joint12
+        weight: 1
+      - path: joint6/joint7/joint8/joint9/joint10/joint11/joint12/joint13
+        weight: 1
+      - path: joint6/joint7/joint8/joint9/joint10/joint11/joint12/joint13/joint14
+        weight: 1
+      - path: joint6/joint7/joint8/joint9/joint10/joint11/joint12/joint13/joint14/joint15
+        weight: 1
+      - path: joint6/joint7/joint8/joint9/joint10/joint11/joint12/joint13/joint14/joint15/joint16
+        weight: 1
+      - path: joint6/joint17
+        weight: 1
+      - path: joint6/joint17/joint18
+        weight: 1
+      - path: joint6/joint17/joint18/joint19
+        weight: 1
+      - path: joint6/joint17/joint18/joint19/joint20
+        weight: 1
+      - path: joint6/joint17/joint18/joint19/joint20/joint21
+        weight: 1
+      - path: joint6/joint32
+        weight: 1
+      - path: joint6/joint32/joint33
+        weight: 1
+      - path: joint6/joint32/joint33/joint34
+        weight: 1
+      - path: joint6/joint32/joint33/joint34/joint35
+        weight: 1
+      - path: joint6/joint32/joint33/joint34/joint35/joint36
+        weight: 1
+      - path: joint6/joint50
+        weight: 1
+      - path: joint6/joint50/joint51
+        weight: 1
+      - path: joint6/joint50/joint51/joint1
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint2
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint2/joint3
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint2/joint3/joint4
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint2/joint3/joint4/joint5
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint2/joint3/joint37
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint2/joint3/joint37/joint38
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint2/joint3/joint39
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint2/joint3/joint39/joint40
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint2/joint3/joint39/joint40/joint42
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint2/joint3/joint39/joint41
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint2/joint3/joint39/joint41/joint43
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint2/joint3/joint39/joint44
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint2/joint3/joint39/joint44/joint45
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint2/joint3/joint39/joint46
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint2/joint3/joint39/joint46/joint47
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint2/joint3/joint39/joint48
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint2/joint3/joint39/joint48/joint49
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint22
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint22/joint23
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint22/joint23/joint24
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint22/joint23/joint24/joint25
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint22/joint23/joint24/joint25/joint26
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint27
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint27/joint28
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint27/joint28/joint29
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint27/joint28/joint29/joint30
+        weight: 1
+      - path: joint6/joint50/joint51/joint1/joint27/joint28/joint29/joint30/joint31
+        weight: 1
+      - path: joint6/joint52
+        weight: 1
+      - path: joint6/joint52/joint61
+        weight: 1
+      - path: joint6/joint53
+        weight: 1
+      - path: joint6/joint53/joint66
+        weight: 1
+      - path: joint6/joint54
+        weight: 1
+      - path: joint6/joint54/joint67
+        weight: 1
+      - path: joint6/joint55
+        weight: 1
+      - path: joint6/joint55/joint68
+        weight: 1
+      - path: joint6/joint56
+        weight: 1
+      - path: joint6/joint56/joint69
+        weight: 1
+      - path: joint6/joint57
+        weight: 1
+      - path: joint6/joint57/joint62
+        weight: 1
+      - path: joint6/joint58
+        weight: 1
+      - path: joint6/joint58/joint63
+        weight: 1
+      - path: joint6/joint59
+        weight: 1
+      - path: joint6/joint59/joint64
+        weight: 1
+      - path: joint6/joint60
+        weight: 1
+      - path: joint6/joint60/joint65
+        weight: 1
+      - path: Lizard1
+        weight: 1
+      - path: LIZARD_Grp
+        weight: 1
+      - path: LIZARD_Grp/Head_Thing03
+        weight: 1
+      - path: LIZARD_Grp/Head_Thing04
+        weight: 1
+      - path: LIZARD_Grp/Teeth
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube54
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube55
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube56
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube57
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube58
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube59
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube60
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube61
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube62
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube63
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube64
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube65
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube66
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube67
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube68
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube69
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube70
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube71
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube72
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube73
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube74
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube75
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube77
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube78
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube79
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube80
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube81
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube82
+        weight: 1
+      - path: LIZARD_Grp/Teeth/pCube83
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
