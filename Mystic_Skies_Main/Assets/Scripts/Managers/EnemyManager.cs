@@ -16,8 +16,10 @@ public struct EnemyLoadout
 	public float speed;
 }
 
-public class EnemyManager : Singleton<EnemyManager>
+public class EnemyManager : MonoBehaviour
 {
+	private static EnemyManager instance;
+
 	public static List<GameObject> enemies;
 
 	public EnemyLoadout waterEnemyLoadout;
@@ -29,6 +31,12 @@ public class EnemyManager : Singleton<EnemyManager>
 	private static bool awakeHasBeenCalled = false;
 	void Awake()
 	{
+		if(instance == null)
+		{
+			instance = this;
+			DontDestroyOnLoad(gameObject);
+		}
+
 		if(!awakeHasBeenCalled)
 		{
 			print ("[EnemyManager] Start()");
@@ -39,6 +47,8 @@ public class EnemyManager : Singleton<EnemyManager>
 			enemyLoadouts[(int)SpellType.Fire]  = fireEnemyLoadout;
 			enemyLoadouts[(int)SpellType.Water] = waterEnemyLoadout;
 			enemyLoadouts[(int)SpellType.Rock]  = rockEnemyLoadout;
+
+			awakeHasBeenCalled = true;
 		}
 	}
 
@@ -119,6 +129,13 @@ public class EnemyManager : Singleton<EnemyManager>
 
 	public static EnemyLoadout GetEnemyLoadout(SpellType type)
 	{
+		if(enemyLoadouts == null)
+		{
+			enemyLoadouts = new EnemyLoadout[3];
+			enemyLoadouts[(int)SpellType.Fire]  = instance.fireEnemyLoadout;
+			enemyLoadouts[(int)SpellType.Water] = instance.waterEnemyLoadout;
+			enemyLoadouts[(int)SpellType.Rock]  = instance.rockEnemyLoadout;
+		}
 		return enemyLoadouts[(int)type];
 	}
 
