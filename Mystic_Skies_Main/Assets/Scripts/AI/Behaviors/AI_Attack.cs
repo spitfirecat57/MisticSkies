@@ -27,9 +27,10 @@ public class AI_Attack : AI_State
 		navAgent.velocity = Vector3.zero;
 
 		//------MARCO WAS HERE------
-		Animator anim = GetComponent<Animator>();
+		//Animator anim = GetComponent<Animator>();
+		Animator anim = GetComponentInChildren<Animator>();
 		//anim.SetTrigger("attack");
-		//anim.CrossFade ("Attack", 0f);
+		anim.CrossFade ("Attack", 0f);
 		//------MARCO WAS HERE------
 
 		print ("[Enemy] Entered Attack State");
