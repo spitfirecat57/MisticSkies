@@ -71,10 +71,15 @@ public class FireBoss : MonoBehaviour
 	//private bool noticedPlayer = false;
 	private bool isCatastrophic = false;
 
+	private Animator animator;
+
+
 	private NavMeshAgent navAgent;
 
 	void Start()
 	{
+		animator = GetComponentInChildren<Animator> ();
+
 		navAgent = GetComponent<NavMeshAgent>();
 		navAgent.speed = walkSpeed;
 
@@ -94,11 +99,21 @@ public class FireBoss : MonoBehaviour
 	{
 		Vector3 playerPos = PlayerManager.GetPlayerPosition();
 
+		//---------------MARCO WAS HERE
+
 		if(lookAtPlayer)
 		{
+			//_________________________________________________________________________________________
+
 			transform.forward = Vector3.RotateTowards(transform.forward, (playerPos - transform.position), turnSpeedDegreesPerSecond * Mathf.Deg2Rad * Time.deltaTime, 0.0f);
-			//transform.LookAt(new Vector3 (playerPos.x, transform.position.y, playerPos.z));
+			if (!this.animator.GetCurrentAnimatorStateInfo(0).IsName("rotate"))
+			{
+				animator.SetTrigger("rotate");
+			}
+			//_________________________________________________________________________________________
+
 		}
+		//---------------MARCO WAS HERE
 
 
 		if(Input.GetKeyDown(KeyCode.B))
@@ -160,6 +175,13 @@ public class FireBoss : MonoBehaviour
 
 	private void Headbutt()
 	{
+		//MARCO WAS HERE _________________________________________________________________________________________
+		if (!this.animator.GetCurrentAnimatorStateInfo(0).IsName("tackle"))
+		{
+			animator.SetTrigger("tackle");
+		}
+		//MARCO WAS HERE_________________________________________________________________________________________
+
 		StartCoroutine ("HeadbuttCo");
 	}
 	private IEnumerator HeadbuttCo()
@@ -199,6 +221,15 @@ public class FireBoss : MonoBehaviour
 
 	private void FlameTower()
 	{
+
+		//Marco was here_________________________________________________________________________________________
+		if (!this.animator.GetCurrentAnimatorStateInfo(0).IsName("firep"))
+		{
+			animator.SetTrigger("firePillar");
+		}
+		//Marco was here_________________________________________________________________________________________
+
+
 		GameObject ft = GameObject.Instantiate (flameTowerPrefab, transform.position, transform.rotation) as GameObject;
 		FlameTower ftscript = ft.GetComponent<FlameTower> ();
 		ftscript.Init (flameTowerDamage, flameTowerSpeed, flameTowerSpeed, flameTowerDuration);
@@ -234,6 +265,14 @@ public class FireBoss : MonoBehaviour
 	private void FlameThrower()
 	{
 		StartCoroutine ("FlameThrowerCo");
+		//_________________________________________________________________________________________
+
+		if (!this.animator.GetCurrentAnimatorStateInfo(0).IsName("fireB"))
+		{
+			animator.SetTrigger("FireBreath");
+		}
+		//_________________________________________________________________________________________
+
 	}
 	private IEnumerator FlameThrowerCo()
 	{
@@ -243,6 +282,15 @@ public class FireBoss : MonoBehaviour
 
 	private void Fireball()
 	{
+
+		//MARCO WAS HERE//_________________________________________________________________________________________
+
+		if (!this.animator.GetCurrentAnimatorStateInfo(0).IsName("fireB"))
+		{
+			animator.SetTrigger("FireBreath");
+		}
+		//MARCO WAS HERE//_________________________________________________________________________________________
+
 		GameObject.Instantiate (fireballPrefab, mouthPosition.position, transform.rotation);
 	}
 
