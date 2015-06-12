@@ -1,0 +1,93 @@
+fileFormatVersion: 2
+guid: cc428da4cf3068b4d8f16983905d0303
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Attatchments_Grp1
+    100002: Attatchments_Grp2
+    100004: BridgeCrystal01_Geo
+    100006: BridgeCrystal02_Geo
+    100008: BridgeDragon01_Geo
+    100010: BridgeDragon02_Geo
+    100012: BridgePlatform_Geo
+    100014: //RootNode
+    100016: main_Grp
+    400000: Attatchments_Grp1
+    400002: Attatchments_Grp2
+    400004: BridgeCrystal01_Geo
+    400006: BridgeCrystal02_Geo
+    400008: BridgeDragon01_Geo
+    400010: BridgeDragon02_Geo
+    400012: BridgePlatform_Geo
+    400014: //RootNode
+    400016: main_Grp
+    2300000: BridgeCrystal01_Geo
+    2300002: BridgeCrystal02_Geo
+    2300004: BridgeDragon01_Geo
+    2300006: BridgeDragon02_Geo
+    2300008: BridgePlatform_Geo
+    3300000: BridgeCrystal01_Geo
+    3300002: BridgeCrystal02_Geo
+    3300004: BridgeDragon01_Geo
+    3300006: BridgeDragon02_Geo
+    3300008: BridgePlatform_Geo
+    4300000: BridgePlatform_Geo
+    4300002: BridgeDragon02_Geo
+    4300004: BridgeDragon01_Geo
+    4300006: BridgeCrystal01_Geo
+    4300008: BridgeCrystal02_Geo
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
