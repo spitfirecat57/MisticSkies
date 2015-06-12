@@ -164,9 +164,19 @@ public class Player : MonoBehaviour
 		{
 			health = maxHealth;
 		}
-		if(health < 0.0f)
+		if(health <= 0.0f)
 		{
-			health = 0.0f;
+				
+				Animator anim = GetComponentInChildren<Animator>();
+				anim.CrossFade ("Dead", 0f);
+				//anim.SetBool("Dead", true);
+				health = 0.0f;
+				GameManager.LoadCurrentGameStatic();
+				//
+				//	Animator anim = GetComponentInChildren<Animator>();
+				//	anim.CrossFade ("Dead", 0f);
+				//	anim.SetBool("Dead", true);
+				//
 		}
 	}
 	
