@@ -42,7 +42,9 @@ public class Player : MonoBehaviour
 	private bool knockingBack = false;
 	
 	private PlayerController mc;
-	
+
+	Animator anim;
+
 	
 	void Start()
 	{
@@ -129,8 +131,17 @@ public class Player : MonoBehaviour
 		
 		if(health <= 0.0f)
 		{
+
+			Animator anim = GetComponentInChildren<Animator>();
+				anim.CrossFade ("Dead", 0f);
+			//anim.SetBool("Dead", true);
 			health = 0.0f;
 			GameManager.LoadCurrentGameStatic();
+			//
+		//	Animator anim = GetComponentInChildren<Animator>();
+		//	anim.CrossFade ("Dead", 0f);
+		//	anim.SetBool("Dead", true);
+			//
 		}
 	}
 	
