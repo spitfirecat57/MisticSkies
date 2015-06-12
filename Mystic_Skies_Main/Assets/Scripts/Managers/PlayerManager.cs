@@ -78,6 +78,28 @@ public class PlayerManager : MonoBehaviour
 		
 		if(playerObjectOther != null)
 		{
+<<<<<<< .mine
+			Debug.Log("[PlayerManager] Player already created. Grabbing it as reference: " + playerObjectOther.name + " " + playerObjectOther.tag);
+			
+			playerObject = playerObjectOther;
+			
+			playerObject.name = "Player";
+			DontDestroyOnLoad(playerObject);
+			playerScript = playerObject.GetComponent<Player>();
+			playerControllerScript = playerObject.GetComponent<PlayerController>();
+			playerSpellController = playerObject.GetComponent<SpellController>();
+			playerTransform = playerObject.transform;
+			
+			cameraObject = GameObject.FindGameObjectWithTag("MainCamera");
+			cameraScript = cameraObject.GetComponent<Camera>();
+			cameraControllerScript = cameraObject.GetComponent<CameraController>();
+			
+			DontDestroyOnLoad(playerObject);
+			DontDestroyOnLoad(cameraObject);
+			
+			playerObject.SetActive(false);
+			cameraObject.SetActive(false);
+=======
 			Debug.Log("[PlayerManager] Player already created. Grabbing it as reference: " + playerObjectOther.name + " " + playerObjectOther.tag);
 			
 			playerObject = playerObjectOther;
@@ -98,7 +120,38 @@ public class PlayerManager : MonoBehaviour
 			
 			playerObject.SetActive(true);
 			cameraObject.SetActive(true);
+>>>>>>> .r251
 		}
+<<<<<<< .mine
+		else if(playerPrefab && cameraPrefab)
+		{
+			Debug.Log("[PlayerManager] Instantiating player object.");
+			playerObject = GameObject.Instantiate(playerPrefab, Vector3.up * 2.0f, Quaternion.identity) as GameObject;
+			playerObject.name = "Player";
+			DontDestroyOnLoad(playerObject);
+			playerTransform = playerObject.transform;
+			
+			playerScript = playerObject.GetComponent<Player>();
+			playerControllerScript = playerObject.GetComponent<PlayerController>();
+			playerSpellController = playerObject.GetComponent<SpellController>();
+			
+			cameraObject = GameObject.Instantiate(cameraPrefab) as GameObject;
+			cameraObject.name = "PlayerCamera";
+			DontDestroyOnLoad(cameraObject);
+			cameraScript = cameraObject.GetComponent<Camera>();
+			cameraControllerScript = cameraObject.GetComponent<CameraController>();
+			
+			playerObject.SetActive(false);
+			cameraObject.SetActive(false);
+			
+			DontDestroyOnLoad(playerObject);
+			DontDestroyOnLoad(cameraObject);
+		}
+		else
+		{
+			Debug.Log("[PlayerManager] playerPrefab or cameraPrefab is null");
+		}
+=======
 		else if(playerPrefab && cameraPrefab)
 		{
 			Debug.Log("[PlayerManager] Instantiating player object.");
@@ -127,6 +180,7 @@ public class PlayerManager : MonoBehaviour
 		{
 			Debug.Log("[PlayerManager] playerPrefab or cameraPrefab is null");
 		}
+>>>>>>> .r251
 	}
 
 	void OnLevelWasLoaded(int level)

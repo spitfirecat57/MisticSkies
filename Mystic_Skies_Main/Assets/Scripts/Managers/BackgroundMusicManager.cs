@@ -6,12 +6,12 @@ public class BackgroundMusicManager : MonoBehaviour
 	private static BackgroundMusicManager instance;
 
 	public float fadeTime;
-	public SoundSource[] backgroundMusic;
-
-	private SoundSource currentSong;
-	private int currentSongIndex = 0;
-	private float currentSongLength;
-	private float currentTimeIntoSong;
+	public AudioSource[] backgroundMusic;
+	private static AudioSource[] backgroundMusicStatic;
+	
+	private static int currentSongIndex = 0;
+	private static float currentSongLength;
+	private static float currentTimeIntoSong;
 
 	private static bool isPlaying = false;
 	
@@ -21,18 +21,28 @@ public class BackgroundMusicManager : MonoBehaviour
 		{
 			instance = this;
 		}
+		else if(instance != this)
+		{
+			Destroy(gameObject);
+		}
 
 		isPlaying = false;
-		
+
+		currentSongIndex = 0;
+		currentSongLength = (backgroundMusic.Length > 0) ? backgroundMusic[0].clip.length : 0.0f;
+
+		backgroundMusicStatic = new AudioSource[backgroundMusic.Length];
+		for(int i = 0; i < backgroundMusic.Length; ++i)
+		{
+			backgroundMusicStatic[i] = backgroundMusic[i];
+			SoundSource ss = gameObject.AddComponent<SoundSource>();
+			ss.source = backgroundMusic[i];
+			ss.type = SoundManager.SoundType.Music;
+		}
+
 		if(backgroundMusic.Length > 0)
 		{
-			currentSong = backgroundMusic[0];
-			currentSongIndex = 0;
-			currentSongLength = currentSong.source.clip.length;
-		}
-		else
-		{
-			print ("[SoudnManager] There are no songs in the background music list");
+			StartPlaying();
 		}
 	}
 	
@@ -40,14 +50,14 @@ public class BackgroundMusicManager : MonoBehaviour
 	{
 		//print ("StartPlaying");
 		isPlaying = true;
-		instance.currentSong.source.Play ();
+		backgroundMusicStatic[currentSongIndex].Play();
 	}
 
 	public static void StopPlaying()
 	{
 		//print ("StopPlaying");
 		isPlaying = false;
-		instance.currentSong.source.Stop();
+		backgroundMusicStatic[currentSongIndex].Stop();
 	}
 
 	void Update()
@@ -63,7 +73,7 @@ public class BackgroundMusicManager : MonoBehaviour
 			// fade out
 			if(currentTimeIntoSong > startToFade)
 			{
-				currentSong.source.volume = (currentTimeIntoSong - startToFade) / (currentSongLength - startToFade);
+				backgroundMusicStatic[currentSongIndex].volume = (currentTimeIntoSong - startToFade) / (currentSongLength - startToFade);
 
 				// next song
 				if(currentTimeIntoSong >= currentSongLength)
@@ -75,7 +85,7 @@ public class BackgroundMusicManager : MonoBehaviour
 			// fade in
 			if(currentTimeIntoSong < fadeTime)
 			{
-				currentSong.source.volume = currentTimeIntoSong / fadeTime;
+				backgroundMusicStatic[currentSongIndex].volume = currentTimeIntoSong / fadeTime;
 			}
 		}
 
@@ -85,19 +95,18 @@ public class BackgroundMusicManager : MonoBehaviour
 			{
 				isPlaying = true;
 			}
-			currentSong.source.time = currentSongLength - fadeTime - 2.0f;
+			backgroundMusicStatic[currentSongIndex].time = currentSongLength - fadeTime - 2.0f;
 			currentTimeIntoSong = currentSongLength - fadeTime - 2.0f;
 		}
 	}
 
 	void NextSong()
 	{
-		currentSong.source.Stop ();
-		currentSongIndex = (currentSongIndex + 1) % backgroundMusic.Length;
-		currentSong = backgroundMusic [currentSongIndex];
-		currentSong.source.time = 0.0f;
-		currentSong.source.Play ();
-		currentSongLength = currentSong.source.clip.length;
+		backgroundMusicStatic[currentSongIndex].Stop ();
+		currentSongIndex = (currentSongIndex + 1) % backgroundMusicStatic.Length;
+		backgroundMusicStatic[currentSongIndex].time = 0.0f;
+		backgroundMusicStatic[currentSongIndex].Play ();
+		currentSongLength = backgroundMusicStatic[currentSongIndex].clip.length;
 		currentTimeIntoSong = 0.0f;
 	}
 	
