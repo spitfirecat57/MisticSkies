@@ -102,17 +102,17 @@ public class FireBoss : MonoBehaviour
 		//---------------MARCO WAS HERE
 
 		if(lookAtPlayer)
-		{
+		//{
 			//_________________________________________________________________________________________
 
 			transform.forward = Vector3.RotateTowards(transform.forward, (playerPos - transform.position), turnSpeedDegreesPerSecond * Mathf.Deg2Rad * Time.deltaTime, 0.0f);
-			if (!this.animator.GetCurrentAnimatorStateInfo(0).IsName("rotate"))
-			{
-				animator.SetTrigger("rotate");
-			}
+		//	if (!this.animator.GetCurrentAnimatorStateInfo(0).IsName("rotate"))
+		//	{
+		//		animator.SetTrigger("rotate");
+		//	}
 			//_________________________________________________________________________________________
 
-		}
+		//}
 		//---------------MARCO WAS HERE
 
 
